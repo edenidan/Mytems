@@ -1,5 +1,5 @@
 # Mytems
-online store
+Online store.
 
 ## Contributors
 - Idan Eden
