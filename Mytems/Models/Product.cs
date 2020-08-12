@@ -12,6 +12,7 @@ namespace Mytems.Models
         public int ProductID { get; set; }
 
         public string Name { get; set; }
+        public string Category { get; set; }
 
         [DataType(DataType.Currency)]
         public double Price { get; set; }
