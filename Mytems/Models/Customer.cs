@@ -8,7 +8,7 @@ namespace Mytems.Models
     public class Customer
     {
         public int CustomerID { get; set; }
-
+        public string CategoriesBuyingHistory { get; set; }//dictionary<string,int> as JSON
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
