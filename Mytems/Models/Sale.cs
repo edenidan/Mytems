@@ -8,7 +8,7 @@ namespace Mytems.Models
     public class Sale
     {
         public int SaleID { get; set; }
-        public DateTime time { get; set; }
+        public DateTime Time { get; set; }
 
         public int CustomerID { get; set; }
         public Customer Customer { get; set; }
