@@ -8,9 +8,9 @@ namespace Mytems.Models
 {
     public class MytemsDB: DbContext
     {
-        public DbSet<Customer> Customer { get; set; }
-        public DbSet<Seller> Seller { get; set; }
-        public DbSet<User> User { get; set; }
-        public DbSet<Product> Product { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Seller> Sellers { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }
