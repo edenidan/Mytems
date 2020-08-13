@@ -19,10 +19,6 @@ namespace Mytems.Models
 
         public string Description { get; set; }
 
-        //Location:
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }
-
         public bool Sold { get; set; }
 
         public int SellerID { get; set; }

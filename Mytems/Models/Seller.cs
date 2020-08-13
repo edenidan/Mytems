@@ -15,6 +15,10 @@ namespace Mytems.Models
         public double Rating { get; set; }
 
         public string PhoneNumber { get; set; }
-        
+
+        //Location:
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
+
     }
 }
