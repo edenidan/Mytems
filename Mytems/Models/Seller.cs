@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -9,16 +11,23 @@ namespace Mytems.Models
     {
         public int SellerID { get; set; }
 
+        public int UserID { get; set; }
+        public User User { get; set; }
+
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [NotMapped]
+        public string FullName => $"{FirstName} {LastName}";
 
-        public double Rating { get; set; }
-
+        [Required, DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
+        [Required]
+        public Location Location { get; set; }
 
-        //Location:
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }
+        public double? Rating { get; set; }
 
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

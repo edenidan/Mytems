@@ -11,16 +11,21 @@ namespace Mytems.Models
     {
         public int ProductID { get; set; }
 
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Category { get; set; }
 
-        [DataType(DataType.Currency)]
-        public double Price { get; set; }
+        [Required, DataType(DataType.Currency)]
+        public decimal Price { get; set; }
 
+        [Required(AllowEmptyStrings = true)]
         public string Description { get; set; }
 
+        [Required]
         public bool Sold { get; set; }
 
+        [Required]
         public int SellerID { get; set; }
         public Seller Seller { get; set; }
     }
