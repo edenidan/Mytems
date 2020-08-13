@@ -10,7 +10,6 @@ namespace Mytems.Models
     {
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Seller> Seller { get; set; }
-        public DbSet<Sale> Sale { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Product> Product { get; set; }
     }

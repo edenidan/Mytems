@@ -119,7 +119,6 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\MytemsDB.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\Seller.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
