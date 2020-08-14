@@ -12,7 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.User.UserName)
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JoinedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAdmin)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -29,7 +38,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.User.UserName)
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JoinedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsAdmin)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FirstName)
@@ -41,9 +59,9 @@
             @Html.DisplayFor(modelItem => item.CategoryViewsJson)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CustomerID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CustomerID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CustomerID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.UserID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.UserID })
         </td>
     </tr>
 }

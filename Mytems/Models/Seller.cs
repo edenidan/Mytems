@@ -7,26 +7,21 @@ using System.Web;
 
 namespace Mytems.Models
 {
-    public class Seller
+    public class Seller : User
     {
-        [ForeignKey("User"),Required]
-        public int SellerID { get; set; }
-
-        [Required]
-        public User User { get; set; }
-
-        [Required]
+        [Required, Display(Name = "First Name")]
         public string FirstName { get; set; }
-        [Required]
+        [Required, Display(Name = "Last Name")]
         public string LastName { get; set; }
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";
 
-        [Required, DataType(DataType.PhoneNumber)]
+        [Required, DataType(DataType.PhoneNumber), Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
         [Required]
         public Location Location { get; set; }
 
+        [ScaffoldColumn(false)]
         public double? Rating { get; set; }
 
         public ICollection<Product> Products { get; set; }

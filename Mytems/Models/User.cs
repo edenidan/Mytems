@@ -10,20 +10,15 @@ namespace Mytems.Models
     public class User
     {
         public int UserID { get; set; }
-        [Required, StringLength(50), Index(IsUnique = true)]
+        [Required, StringLength(50), Index(IsUnique = true), Display(Name = "Username")]
         public string UserName { get; set; }
         [Required, MinLength(8), DataType(DataType.Password)]
         public string Password { get; set; }
-        [EmailAddress, StringLength(400), Index(IsUnique = true)]
-        public string Email { get; set; }
 
-        [Required]
+        [Required, ScaffoldColumn(false)]
         public DateTime JoinedAt { get; set; }
-        [Required]
+        [Required, ScaffoldColumn(false)]
         public bool IsAdmin { get; set; }
 
-        // At least one will be null
-        public Seller Seller { get; set; }
-        public Customer Customer { get; set; }
     }
 }

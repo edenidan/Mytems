@@ -7,22 +7,17 @@ using System.Web;
 
 namespace Mytems.Models
 {
-    public class Customer
+    public class Customer : User
     {
-        [ForeignKey("User"),Required]
-        public int CustomerID { get; set; }
 
-        [Required]
-        public User User { get; set; }
-
-        [Required]
+        [Required, Display(Name = "First Name")]
         public string FirstName { get; set; }
-        [Required]
+        [Required, Display(Name = "Last Name")]
         public string LastName { get; set; }
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";
 
-        [Required]
+        [Required, ScaffoldColumn(false)]
         public string CategoryViewsJson { get; set; } // JSON representation of Dictionary<string, int>, from a caterory to the number of times the customer viewed it
         [NotMapped]
         public Dictionary<string, int> CategoryViews => null; // TODO use JsonConvert to deserialize CategoryViewsJson

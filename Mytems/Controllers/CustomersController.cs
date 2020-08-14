@@ -17,8 +17,7 @@ namespace Mytems.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var customers = db.Customers.Include(c => c.User);
-            return View(customers.ToList());
+            return View(db.Customers.ToList());
         }
 
         // GET: Customers/Details/5
@@ -28,7 +27,7 @@ namespace Mytems.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = db.Users.Find(id) as Customer;
             if (customer == null)
             {
                 return HttpNotFound();
@@ -39,7 +38,6 @@ namespace Mytems.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-            ViewBag.CustomerID = new SelectList(db.Users, "UserID", "UserName");
             return View();
         }
 
@@ -48,17 +46,26 @@ namespace Mytems.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerID,FirstName,LastName,CategoryViewsJson")] Customer customer)
+        public ActionResult Create([Bind(Include = "UserID,UserName,Password,JoinedAt,IsAdmin,FirstName,LastName,CategoryViewsJson")] Customer customer)
         {
-            if (ModelState.IsValid)
-            {
-                db.Customers.Add(customer);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            customer.CategoryViewsJson = "{}";
+            customer.IsAdmin = false;
+            customer.JoinedAt = DateTime.Now;
 
-            ViewBag.CustomerID = new SelectList(db.Users, "UserID", "UserName", customer.CustomerID);
-            return View(customer);
+            if (ModelState["UserName"].Errors.Any())
+                return View(customer);
+
+
+            db.Users.Add(customer);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e){
+                return View(customer);
+            }
+            return RedirectToAction("Index");
+
         }
 
         // GET: Customers/Edit/5
@@ -68,12 +75,11 @@ namespace Mytems.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = db.Users.Find(id) as Customer;
             if (customer == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerID = new SelectList(db.Users, "UserID", "UserName", customer.CustomerID);
             return View(customer);
         }
 
@@ -82,7 +88,7 @@ namespace Mytems.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerID,FirstName,LastName,CategoryViewsJson")] Customer customer)
+        public ActionResult Edit([Bind(Include = "UserID,UserName,Password,JoinedAt,IsAdmin,FirstName,LastName,CategoryViewsJson")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +96,6 @@ namespace Mytems.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerID = new SelectList(db.Users, "UserID", "UserName", customer.CustomerID);
             return View(customer);
         }
 
@@ -101,7 +106,7 @@ namespace Mytems.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = db.Users.Find(id) as Customer;
             if (customer == null)
             {
                 return HttpNotFound();
@@ -114,8 +119,8 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
+            Customer customer = db.Users.Find(id) as Customer;
+            db.Users.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
