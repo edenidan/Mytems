@@ -9,9 +9,10 @@ namespace Mytems.Models
 {
     public class Customer
     {
+        [ForeignKey("User"),Required]
         public int CustomerID { get; set; }
 
-        public int UserID { get; set; }
+        [Required]
         public User User { get; set; }
 
         [Required]

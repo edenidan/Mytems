@@ -10,11 +10,11 @@ namespace Mytems.Models
     public class User
     {
         public int UserID { get; set; }
-        [Required, Index(IsUnique = true)]
+        [Required, StringLength(50), Index(IsUnique = true)]
         public string UserName { get; set; }
         [Required, MinLength(8), DataType(DataType.Password)]
         public string Password { get; set; }
-        [Required, EmailAddress]
+        [EmailAddress, StringLength(400), Index(IsUnique = true)]
         public string Email { get; set; }
 
         [Required]
