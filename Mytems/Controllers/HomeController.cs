@@ -12,6 +12,7 @@ namespace Mytems.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            ViewData["username"] = Session["username"];
             return View();
         }
 
@@ -29,7 +30,7 @@ namespace Mytems.Controllers
             if(db.Users.Where(u=> u.Username == username && u.Password == password).Any())
             {
                 Session["username"] = username;
-                return View("Index");
+                return RedirectToAction("Index");
             }
 
             return View();//TODO: pass an error message
