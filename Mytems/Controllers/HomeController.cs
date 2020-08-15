@@ -8,10 +8,33 @@ namespace Mytems.Controllers
 {
     public class HomeController : Controller
     {
+        private Models.MytemsDB db = new Models.MytemsDB();
         // GET: Home
         public ActionResult Index()
         {
             return View();
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(string data)
+        {
+            string username = Request.Form["username"];
+            string password = Request.Form["password"];
+
+            if(db.Users.Where(u=> u.Username == username && u.Password == password).Any())
+            {
+                Session["username"] = username;
+                return View("Index");
+            }
+
+            return View();//TODO: pass an error message
+
+        }
+
     }
 }
