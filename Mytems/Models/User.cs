@@ -7,18 +7,15 @@ using System.Web;
 
 namespace Mytems.Models
 {
-    public class User
+    public abstract class User
     {
         public int UserID { get; set; }
-        [Required, StringLength(50), Index(IsUnique = true), Display(Name = "Username")]
-        public string UserName { get; set; }
-        [Required, MinLength(8), DataType(DataType.Password)]
+        [Required, StringLength(50), Index(IsUnique = true)]
+        public string Username { get; set; }
+        [Required, StringLength(400, MinimumLength = 8), DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required, ScaffoldColumn(false)]
         public DateTime JoinedAt { get; set; }
-        [Required, ScaffoldColumn(false)]
-        public bool IsAdmin { get; set; }
-
     }
 }

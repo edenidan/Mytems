@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -27,7 +28,7 @@ namespace Mytems.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Users.Find(id) as Customer;
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -46,26 +47,29 @@ namespace Mytems.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,UserName,Password,JoinedAt,IsAdmin,FirstName,LastName,CategoryViewsJson")] Customer customer)
+        public ActionResult Create([Bind(Include = "Username,Password,FirstName,LastName")] Customer customer)
         {
-            customer.CategoryViewsJson = "{}";
-            customer.IsAdmin = false;
-            customer.JoinedAt = DateTime.Now;
-
-            if (ModelState["UserName"].Errors.Any())
-                return View(customer);
-
-
-            db.Users.Add(customer);
+            ModelState.Remove("UserID");
+            ModelState.Remove("JoinedAt");
+            ModelState.Remove("CategoryViewsJson");
             try
             {
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    customer.UserID = 0;
+                    customer.JoinedAt = DateTime.Now;
+                    customer.CategoryViewsJson = "{}";
+                    db.Customers.Add(customer);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-            catch (Exception e){
-                return View(customer);
+            catch (DbEntityValidationException)
+            {
+                ModelState.AddModelError("Username", "This username is already taken.");
             }
-            return RedirectToAction("Index");
 
+            return View(customer);
         }
 
         // GET: Customers/Edit/5
@@ -75,7 +79,7 @@ namespace Mytems.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Users.Find(id) as Customer;
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -86,17 +90,28 @@ namespace Mytems.Controllers
         // POST: Customers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,UserName,Password,JoinedAt,IsAdmin,FirstName,LastName,CategoryViewsJson")] Customer customer)
+        public ActionResult EditCustomer(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(customer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(customer);
+            Customer customerToUpdate = db.Customers.Find(id);
+            if (TryUpdateModel(customerToUpdate, new[] { "Username", "Password", "FirstName", "LastName" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (DbEntityValidationException)
+                {
+                    ModelState.AddModelError("Username", "This username is already taken.");
+                }
+            }
+            return View(customerToUpdate);
         }
 
         // GET: Customers/Delete/5
@@ -106,7 +121,7 @@ namespace Mytems.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Users.Find(id) as Customer;
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -119,8 +134,12 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = db.Users.Find(id) as Customer;
-            db.Users.Remove(customer);
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            db.Customers.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

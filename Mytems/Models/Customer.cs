@@ -7,16 +7,8 @@ using System.Web;
 
 namespace Mytems.Models
 {
-    public class Customer : User
+    public class Customer : NonAdmin
     {
-
-        [Required, Display(Name = "First Name")]
-        public string FirstName { get; set; }
-        [Required, Display(Name = "Last Name")]
-        public string LastName { get; set; }
-        [NotMapped]
-        public string FullName => $"{FirstName} {LastName}";
-
         [Required, ScaffoldColumn(false)]
         public string CategoryViewsJson { get; set; } // JSON representation of Dictionary<string, int>, from a caterory to the number of times the customer viewed it
         [NotMapped]

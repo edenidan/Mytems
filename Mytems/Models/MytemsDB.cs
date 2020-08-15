@@ -6,11 +6,11 @@ using System.Web;
 
 namespace Mytems.Models
 {
-    public class MytemsDB: DbContext
+    public class MytemsDB : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Seller> Sellers { get; set; }
         public DbSet<Product> Products { get; set; }
-
-        public System.Data.Entity.DbSet<Mytems.Models.Customer> Customers { get; set; }
     }
 }

@@ -26,7 +26,6 @@ namespace Mytems.Models
         public bool Sold { get; set; }
 
         [Required]
-        public int SellerID { get; set; }
         public Seller Seller { get; set; }
     }
 }
