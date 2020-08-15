@@ -9,41 +9,43 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
+    
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    @Html.ActionLink("Mytems", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <ul class="nav navbar-nav navbar-right">
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                @Html.ActionLink("Mytems", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                    @if (Session["username"] != null)
+                    {
+                        @Html.ActionLink($"Hi {Session["username"]}", "Dashboard", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        <li><a href="/home/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+
+                    }
+                    else
+                    {
+                        <li><a href="/home"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="/home/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    }
+
+
+                </ul>
             </div>
-            <ul class="nav navbar-nav navbar-right">
+        </nav>
 
 
-                @if (ViewData["username"] != null)
-                {
-                    @Html.ActionLink($"Hi {ViewData["username"]}", "Dashboard", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                }
-                else
-                {
-                    <li><a href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="/home/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                }
 
-
-            </ul>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
         </div>
-    </nav>
 
-
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

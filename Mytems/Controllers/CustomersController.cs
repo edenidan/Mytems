@@ -60,9 +60,10 @@ namespace Mytems.Controllers
                     customer.UserID = 0;
                     customer.JoinedAt = DateTime.Now;
                     customer.CategoryViewsJson = "{}";
+
                     db.Customers.Add(customer);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Dashborad","Home");
                 }
             }
             catch (DbEntityValidationException)

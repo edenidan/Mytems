@@ -60,9 +60,10 @@ namespace Mytems.Controllers
                     seller.UserID = 0;
                     seller.JoinedAt = DateTime.Now;
                     seller.Rating = null;
+
                     db.Sellers.Add(seller);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Dashboard","Home");
                 }
             }
             catch (DbEntityValidationException)

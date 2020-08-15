@@ -12,7 +12,7 @@ namespace Mytems.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            ViewData["username"] = Session["username"];
+            //ViewData["username"] = Session["username"];
             return View();
         }
 
@@ -30,11 +30,24 @@ namespace Mytems.Controllers
             if(db.Users.Where(u=> u.Username == username && u.Password == password).Any())
             {
                 Session["username"] = username;
-                return RedirectToAction("Index");
+                return RedirectToAction("Dashboard");
             }
 
             return View();//TODO: pass an error message
 
+        }
+
+        [HttpGet]
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            Session["username"] = null;
+            return RedirectToAction("Index");
         }
 
     }
