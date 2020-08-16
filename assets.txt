@@ -1,0 +1,14 @@
+mobile: www.yad2.co.il/y2assets/images/pages/home/icons/Mobile_2ndhand.svg
+
+electronics: assets.yad2.co.il/yad2site/y2assets/images/pages/home/icons/Computers_2ndhand.svg
+
+furniture: www.yad2.co.il/y2assets/images/pages/home/icons/Furniture_2ndhand.svg
+
+sports: www.yad2.co.il/y2assets/images/pages/home/icons/Sport_2ndhand.svg
+
+games: assets.yad2.co.il/yad2site/y2assets/images/pages/home/icons/Consoles_2ndhand.svg
+
+cars: www.yad2.co.il/y2assets/images/pages/home/icons/Private_cars.svg
+
+misc: www.yad2.co.il/y2assets/images/pages/home/icons/Allproducts_2ndhand.svg
+
