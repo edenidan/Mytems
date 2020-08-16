@@ -14,6 +14,6 @@ namespace Mytems.Models
         games,
         phones,
         electronics,
-        misc
+        other
     }
 }
