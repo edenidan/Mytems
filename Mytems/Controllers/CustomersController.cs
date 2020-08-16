@@ -27,7 +27,7 @@ namespace Mytems.Controllers
             string username = Session["username"] as string;
             if (db.Customers.Where(c => c.Username == username).Any())
                 return View();
-            else return View("~/Views/Errors/Unauthorized");
+            else return View("~/Views/Errors/Unauthorized.cshtml");
         }
         
         // GET: Customers/Details/5

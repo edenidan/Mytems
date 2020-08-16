@@ -22,6 +22,13 @@ namespace Mytems.Controllers
             return View(db.Sellers.ToList());
         }
 
+        public ActionResult Dashboard()
+        {
+            string username = Session["username"] as string;
+            if (db.Sellers.Where(s => s.Username == username).Any())
+                return View();
+            else return View("~/Views/Errors/Unauthorized.cshtml");
+        }
         // GET: Sellers/Details/5
         public ActionResult Details(int? id)
         {

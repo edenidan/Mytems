@@ -157,8 +157,9 @@
     <Content Include="Views\Sellers\Edit.cshtml" />
     <Content Include="Views\Sellers\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Erros\Unauthorized.cshtml" />
+    <Content Include="Views\Errors\Unauthorized.cshtml" />
     <Content Include="Views\Customers\Dashboard.cshtml" />
+    <Content Include="Views\Sellers\Dashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

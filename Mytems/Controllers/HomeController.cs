@@ -47,6 +47,7 @@ namespace Mytems.Controllers
             if (db.Sellers.Where(s => s.Username == username).Any())
                 return RedirectToAction("Dashboard", "Sellers");
 
+            //TODO:
             //if (db.admins.Where(c => c.Username == Session["username"]).Any())
                 //return RedirectToAction("Dashboard", "Customer");
             return View();
