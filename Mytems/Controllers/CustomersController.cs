@@ -63,14 +63,14 @@ namespace Mytems.Controllers
 
                     db.Customers.Add(customer);
                     db.SaveChanges();
-                    return RedirectToAction("Dashborad","Home");
+                    return RedirectToAction("Dashboard", "Home");
                 }
             }
             catch (DbEntityValidationException)
             {
                 ModelState.AddModelError("Username", "This username is already taken.");
             }
-            catch(DbUpdateException)
+            catch (DbUpdateException)
             {
                 ModelState.AddModelError("Username", "This username is already taken.");
             }
@@ -98,7 +98,7 @@ namespace Mytems.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditCustomer(int? id)
+        public ActionResult EditPost(int? id)
         {
             if (id == null)
             {
