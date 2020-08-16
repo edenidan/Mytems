@@ -29,7 +29,7 @@ namespace Mytems.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Seller seller = db.Users.Find(id) as Seller;
+            Seller seller = db.Sellers.Find(id);
             if (seller == null)
             {
                 return HttpNotFound();
@@ -52,7 +52,7 @@ namespace Mytems.Controllers
         {
             ModelState.Remove("UserID");
             ModelState.Remove("JoinedAt");
-            ModelState.Remove("rating");
+            ModelState.Remove("Rating");
             try
             {
                 if (ModelState.IsValid)
@@ -63,7 +63,7 @@ namespace Mytems.Controllers
 
                     db.Sellers.Add(seller);
                     db.SaveChanges();
-                    return RedirectToAction("Dashboard","Home");
+                    return RedirectToAction("Dashboard", "Home");
                 }
             }
             catch (DbEntityValidationException)
@@ -85,7 +85,7 @@ namespace Mytems.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Seller seller = db.Users.Find(id) as Seller;
+            Seller seller = db.Sellers.Find(id);
             if (seller == null)
             {
                 return HttpNotFound();
@@ -96,17 +96,28 @@ namespace Mytems.Controllers
         // POST: Sellers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,Username,Password,JoinedAt,FirstName,LastName,PhoneNumber,Location,Rating")] Seller seller)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(seller).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(seller);
+            Seller sellerToUpdate = db.Sellers.Find(id);
+            if (TryUpdateModel(sellerToUpdate, new[] { "Username", "Password", "FirstName", "LastName", "PhoneNumber", "Location" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (DbEntityValidationException)
+                {
+                    ModelState.AddModelError("Username", "This username is already taken.");
+                }
+            }
+            return View(sellerToUpdate);
         }
 
         // GET: Sellers/Delete/5
@@ -116,7 +127,7 @@ namespace Mytems.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Seller seller = db.Users.Find(id) as Seller;
+            Seller seller = db.Sellers.Find(id);
             if (seller == null)
             {
                 return HttpNotFound();
@@ -129,7 +140,11 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Seller seller = db.Users.Find(id) as Seller;
+            Seller seller = db.Sellers.Find(id);
+            if (seller == null)
+            {
+                return HttpNotFound();
+            }
             db.Users.Remove(seller);
             db.SaveChanges();
             return RedirectToAction("Index");
