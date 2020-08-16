@@ -72,7 +72,7 @@ namespace Mytems.Controllers
             }
             catch (DbUpdateException)
             {
-                ModelState.AddModelError("Username", "This username is already taken.");
+                ModelState.AddModelError("", "An error occurred while updating the database.");
             }
 
             return View(customer);
@@ -115,6 +115,10 @@ namespace Mytems.Controllers
                 catch (DbEntityValidationException)
                 {
                     ModelState.AddModelError("Username", "This username is already taken.");
+                }
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("", "An error occurred while updating the database.");
                 }
             }
             return View(customerToUpdate);
