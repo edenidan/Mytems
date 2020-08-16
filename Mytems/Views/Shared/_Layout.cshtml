@@ -22,12 +22,21 @@
                     {
                         @Html.ActionLink($"Hi {Session["username"]}", "Dashboard", "Home", new { area = "" }, new { @class = "navbar-brand" })
                         <li><a href="/home/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-
                     }
                     else
                     {
                         <li><a href="/home/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        <li><a href="/home"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <span class="caret"></span>
+                                Signup
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/customers/create">Customer</a></li>
+                                <li><a href="/sellers/create">Seller</a></li>
+                            </ul>
+                        </li>
+                        <li>&nbsp;	&nbsp;	&nbsp;	</li>
                     }
 
 
