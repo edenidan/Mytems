@@ -142,8 +142,12 @@ namespace Mytems.Controllers
         // POST: Sellers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Seller seller = db.Sellers.Find(id);
             if (seller == null)
             {
