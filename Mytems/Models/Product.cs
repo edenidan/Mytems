@@ -22,13 +22,13 @@ namespace Mytems.Models
         [Required(AllowEmptyStrings = true)]
         public string Description { get; set; }
 
-        public byte[] Image { get; set; } 
+        public HttpPostedFileBase Image { get; set; } 
 
-        [Required]
-        public bool Sold { get; set; }
+        [Required, ScaffoldColumn(false)]
+        public bool? Sold { get; set; }
 
-        [Required]
-        public int NumberOfViews { get; set; }
+        [Required, ScaffoldColumn(false)]
+        public int? NumberOfViews { get; set; }
 
         [Required]
         public Seller Seller { get; set; }
