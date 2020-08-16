@@ -53,6 +53,7 @@ namespace Mytems.Controllers
             ModelState.Remove("UserID");
             ModelState.Remove("JoinedAt");
             ModelState.Remove("Rating");
+            ModelState.Remove("NumberOfRators");
             try
             {
                 if (ModelState.IsValid)
@@ -60,9 +61,11 @@ namespace Mytems.Controllers
                     seller.UserID = 0;
                     seller.JoinedAt = DateTime.Now;
                     seller.Rating = null;
+                    seller.NumberOfRators = 0;
 
                     db.Sellers.Add(seller);
                     db.SaveChanges();
+                    Session["username"] = seller.Username;
                     return RedirectToAction("Dashboard", "Home");
                 }
             }

@@ -22,10 +22,13 @@ namespace Mytems.Models
         [Required(AllowEmptyStrings = true)]
         public string Description { get; set; }
 
-        public byte[] image { get; set; } 
+        public byte[] Image { get; set; } 
 
         [Required]
         public bool Sold { get; set; }
+
+        [Required]
+        public int NumberOfViews { get; set; }
 
         [Required]
         public Seller Seller { get; set; }

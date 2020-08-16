@@ -17,6 +17,9 @@ namespace Mytems.Models
         [ScaffoldColumn(false)]
         public double? Rating { get; set; }
 
+        [ScaffoldColumn(false)]
+        public int NumberOfRators { get; set; }
+
         public ICollection<Product> Products { get; set; }
     }
 }
