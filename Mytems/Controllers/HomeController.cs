@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mytems.Models;
 
 namespace Mytems.Controllers
 {
@@ -28,7 +29,7 @@ namespace Mytems.Controllers
             string username = Request.Form["Username"];
             string password = Request.Form["Password"];
 
-            if(db.Users.Where(u=> u.Username == username && u.Password == password).Any())
+            if (db.Users.Where(u => u.Username == username && u.Password == password).Any())
             {
                 Session["username"] = username;
                 return RedirectToAction("Dashboard");
@@ -41,16 +42,16 @@ namespace Mytems.Controllers
         public ActionResult Dashboard()
         {
             string username = Session["username"] as string;
-            if (db.Customers.Where(c => c.Username == username).Any())
+            User user = db.Users.FirstOrDefault(u => u.Username == username);
+            if (user is Customer)
                 return RedirectToAction("Dashboard", "Customers");
-
-            if (db.Sellers.Where(s => s.Username == username).Any())
+            else if (user is Seller)
                 return RedirectToAction("Dashboard", "Sellers");
-
-            //TODO:
-            //if (db.admins.Where(c => c.Username == Session["username"]).Any())
-                //return RedirectToAction("Dashboard", "Customer");
-            return View("Index");
+            // TODO:
+            //else if (user is Admin)
+            //    return RedirectToAction("Dashboard", "Admin");
+            else
+                return View("Index");
         }
 
         [HttpGet]
