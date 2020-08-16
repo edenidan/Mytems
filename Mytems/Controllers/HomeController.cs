@@ -50,7 +50,7 @@ namespace Mytems.Controllers
             //TODO:
             //if (db.admins.Where(c => c.Username == Session["username"]).Any())
                 //return RedirectToAction("Dashboard", "Customer");
-            return View();
+            return View("Index");
         }
 
         [HttpGet]
