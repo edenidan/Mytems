@@ -16,9 +16,18 @@ namespace Mytems.Controllers
         private MytemsDB db = new MytemsDB();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string name, Category? category, int? minPrice, int? maxPrice, bool? sold, int? minNumberOfViews) // TODO: possibly search by seller
         {
-            return View(db.Products.ToList());
+            IQueryable<Product> query = db.Products;
+
+            if (name != null) query = query.Where(p => p.Name.StartsWith(name));
+            if (category != null) query = query.Where(p => p.Category == category);
+            if (minPrice != null) query = query.Where(p => p.Price >= minPrice);
+            if (maxPrice != null) query = query.Where(p => p.Price <= maxPrice);
+            if (sold != null) query = query.Where(p => p.Sold == sold);
+            if (minNumberOfViews != null) query = query.Where(p => p.NumberOfViews >= minNumberOfViews);
+
+            return View(query.ToList());
         }
 
         // GET: Products/Details/5
@@ -47,7 +56,7 @@ namespace Mytems.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Name,Category,Price,Description,Sold,NumberOfViews")] Product product,HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "ProductID,Name,Category,Price,Description,Sold,NumberOfViews")] Product product, HttpPostedFileBase file)
         {
             //TODO:
             if (ModelState.IsValid)
