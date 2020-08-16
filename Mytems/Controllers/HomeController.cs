@@ -21,11 +21,12 @@ namespace Mytems.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Login(string data)
+        [HttpPost, ActionName("Login")]
+        [ValidateAntiForgeryToken]
+        public ActionResult LoginPost()
         {
-            string username = Request.Form["username"];
-            string password = Request.Form["password"];
+            string username = Request.Form["Username"];
+            string password = Request.Form["Password"];
 
             if(db.Users.Where(u=> u.Username == username && u.Password == password).Any())
             {
@@ -34,7 +35,6 @@ namespace Mytems.Controllers
             }
 
             return View();//TODO: pass an error message
-
         }
 
         [HttpGet]
