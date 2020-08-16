@@ -33,8 +33,8 @@ namespace Mytems.Controllers
                 Session["username"] = username;
                 return RedirectToAction("Dashboard");
             }
-
-            return View();//TODO: pass an error message
+            ModelState.AddModelError("Username", "Incorrect username or password.");
+            return View();
         }
 
         [HttpGet]
