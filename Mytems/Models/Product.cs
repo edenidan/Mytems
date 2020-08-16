@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mytems.Models
 {
@@ -21,8 +21,6 @@ namespace Mytems.Models
 
         [Required(AllowEmptyStrings = true)]
         public string Description { get; set; }
-
-        public HttpPostedFileBase Image { get; set; } 
 
         [Required, ScaffoldColumn(false)]
         public bool? Sold { get; set; }
