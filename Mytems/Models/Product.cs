@@ -22,6 +22,9 @@ namespace Mytems.Models
         [Required(AllowEmptyStrings = true)]
         public string Description { get; set; }
 
+        [ScaffoldColumn(false)]
+        public string Image { get; set; }
+
         [Required, ScaffoldColumn(false)]
         public bool? Sold { get; set; }
 

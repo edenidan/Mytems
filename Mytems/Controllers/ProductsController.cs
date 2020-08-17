@@ -47,8 +47,27 @@ namespace Mytems.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Name,Category,Price,Description,Sold,NumberOfViews")] Product product,HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "ProductID,Name,Category,Price,Description")] Product product, HttpPostedFileBase file)
         {
+            ModelState.Remove("Sold");
+            ModelState.Remove("NumberOfViews");
+            ModelState.Remove("Seller");
+
+            product.Sold = false;
+            product.NumberOfViews = 0;
+
+            string sellerUSername = Session["username"] as string;
+            Seller seller = db.Sellers.FirstOrDefault(s => s.Username == sellerUSername);
+            product.Seller = seller;
+
+            product.Image = null;
+            if (file != null)
+            {
+                string imageName = Guid.NewGuid().ToString().Substring(0,10)+file.FileName;
+                product.Image = imageName;
+                file.SaveAs(Server.MapPath($"~/Static/{imageName}"));
+            }
+
             //TODO:
             if (ModelState.IsValid)
             {

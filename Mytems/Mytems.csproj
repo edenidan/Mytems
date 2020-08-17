@@ -175,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Static\" />
     <Folder Include="Utility\" />
   </ItemGroup>
   <PropertyGroup>
