@@ -23,10 +23,10 @@ namespace Mytems.Models
         public string Description { get; set; }
 
         [Required, ScaffoldColumn(false)]
-        public bool? Sold { get; set; }
+        public bool Sold { get; set; }
 
         [Required, ScaffoldColumn(false)]
-        public int? NumberOfViews { get; set; }
+        public int NumberOfViews { get; set; }
 
         [Required]
         public Seller Seller { get; set; }
