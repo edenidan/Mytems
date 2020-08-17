@@ -9,7 +9,7 @@ namespace Mytems.Controllers
 {
     public class HomeController : Controller
     {
-        private Models.MytemsDB db = new Models.MytemsDB();
+        private MytemsDB db = new MytemsDB();
         // GET: Home
         public ActionResult Index()
         {

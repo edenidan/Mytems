@@ -19,6 +19,7 @@ namespace Mytems.Controllers
         // GET: Customers
         public ActionResult Index()
         {
+            // TODO check for permission (admin)
             return View(db.Customers.ToList());
         }
 
@@ -33,6 +34,7 @@ namespace Mytems.Controllers
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {
+            // TODO check for permission (admin or possibly this customer)
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -90,6 +92,7 @@ namespace Mytems.Controllers
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
         {
+            // TODO check for permission (admin or this customer)
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +112,7 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
         {
+            // TODO check for permission (admin or this customer)
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -136,6 +140,7 @@ namespace Mytems.Controllers
         // GET: Customers/Delete/5
         public ActionResult Delete(int? id)
         {
+            // TODO check for permission (admin or this customer)
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -153,6 +158,7 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id)
         {
+            // TODO check for permission (admin or this customer)
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

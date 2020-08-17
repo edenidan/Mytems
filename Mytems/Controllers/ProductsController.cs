@@ -41,6 +41,7 @@ namespace Mytems.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
+            // TODO check for permission (admin or seller)
             return View();
         }
 
@@ -51,7 +52,9 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductID,Name,Category,Price,Description,Sold,NumberOfViews")] Product product, HttpPostedFileBase file)
         {
-            //TODO:
+            // TODO: do something with the image, also get the seller of the product somehow
+            // TODO: if the current user is a Seller, make them the product's seller
+            // if Admin, use the seller id received (should create a custom viewmodel to receive it, worse solution: add Product.SellerID and remove [Required] from Product.Seller)
             if (ModelState.IsValid)
             {
                 db.Products.Add(product);
@@ -65,6 +68,7 @@ namespace Mytems.Controllers
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
+            // TODO check for permission (admin or the product's seller)
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -84,6 +88,7 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProductID,Name,Category,Price,Description,Sold,NumberOfViews")] Product product)
         {
+            // TODO do this with a viewmodel and check for permission (admin or the product's seller)
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
@@ -96,6 +101,7 @@ namespace Mytems.Controllers
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
+            // TODO check for permission (admin or the product's seller)
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -111,9 +117,18 @@ namespace Mytems.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
+            // TODO check for permission (admin or the product's seller)
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
