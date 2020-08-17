@@ -7,13 +7,13 @@ namespace Mytems.Models
 {
     public enum Category
     {
-        cars,
-        sports,
-        furniture,
-        kids,
-        games,
-        phones,
-        electronics,
-        other
+        Cars,
+        Sports,
+        Furniture,
+        Kids,
+        Games,
+        Phones,
+        Electronics,
+        Other
     }
 }
