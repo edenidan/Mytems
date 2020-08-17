@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Mytems.Models;
+using Mytems.ViewModels;
 
 namespace Mytems.Controllers
 {
@@ -16,9 +17,10 @@ namespace Mytems.Controllers
         private MytemsDB db = new MytemsDB();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(ProductSearchOptions searchOptions) // TODO: possibly search by seller
         {
-            return View(db.Products.ToList());
+            ViewData["SearchOptions"] = searchOptions;
+            return View(searchOptions.ApplyOn(db.Products).ToList());
         }
 
         // GET: Products/Details/5
@@ -39,6 +41,7 @@ namespace Mytems.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
+            // TODO check for permission (admin or seller)
             return View();
         }
 
@@ -82,6 +85,7 @@ namespace Mytems.Controllers
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
+            // TODO check for permission (admin or the product's seller)
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -101,6 +105,7 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProductID,Name,Category,Price,Description,Sold,NumberOfViews")] Product product)
         {
+            // TODO do this with a viewmodel and check for permission (admin or the product's seller)
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
@@ -113,6 +118,7 @@ namespace Mytems.Controllers
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
+            // TODO check for permission (admin or the product's seller)
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -128,9 +134,18 @@ namespace Mytems.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
+            // TODO check for permission (admin or the product's seller)
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");

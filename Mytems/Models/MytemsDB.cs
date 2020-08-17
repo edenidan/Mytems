@@ -11,6 +11,7 @@ namespace Mytems.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Seller> Sellers { get; set; }
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<Product> Products { get; set; }
     }
 }
