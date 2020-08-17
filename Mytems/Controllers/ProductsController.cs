@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Mytems.Models;
+using Mytems.ViewModels;
 
 namespace Mytems.Controllers
 {
@@ -16,18 +17,10 @@ namespace Mytems.Controllers
         private MytemsDB db = new MytemsDB();
 
         // GET: Products
-        public ActionResult Index(string name, Category? category, int? minPrice, int? maxPrice, bool? sold, int? minNumberOfViews) // TODO: possibly search by seller
+        public ActionResult Index(ProductSearchOptions searchOptions) // TODO: possibly search by seller
         {
-            IQueryable<Product> query = db.Products;
-
-            if (name != null) query = query.Where(p => p.Name.StartsWith(name));
-            if (category != null) query = query.Where(p => p.Category == category);
-            if (minPrice != null) query = query.Where(p => p.Price >= minPrice);
-            if (maxPrice != null) query = query.Where(p => p.Price <= maxPrice);
-            if (sold != null) query = query.Where(p => p.Sold == sold);
-            if (minNumberOfViews != null) query = query.Where(p => p.NumberOfViews >= minNumberOfViews);
-
-            return View(query.ToList());
+            ViewData["SearchOptions"] = searchOptions;
+            return View(searchOptions.ApplyOn(db.Products).ToList());
         }
 
         // GET: Products/Details/5
