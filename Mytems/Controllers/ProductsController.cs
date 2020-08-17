@@ -55,9 +55,11 @@ namespace Mytems.Controllers
             ModelState.Remove("Sold");
             ModelState.Remove("NumberOfViews");
             ModelState.Remove("Seller");
+            ModelState.Remove("SoldAt");
 
             product.Sold = false;
             product.NumberOfViews = 0;
+            product.SoldAt = null;
 
             string sellerUSername = Session["username"] as string;
             Seller seller = db.Sellers.FirstOrDefault(s => s.Username == sellerUSername);
@@ -105,6 +107,10 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProductID,Name,Category,Price,Description,Sold,NumberOfViews")] Product product)
         {
+            var productInDB = db.Products.FirstOrDefault(p => p.ProductID == product.ProductID);
+            if (product.Sold && !productInDB.Sold)
+                product.SoldAt = DateTime.Now;
+
             // TODO do this with a viewmodel and check for permission (admin or the product's seller)
             if (ModelState.IsValid)
             {

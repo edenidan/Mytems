@@ -28,6 +28,9 @@ namespace Mytems.Models
         [Required, ScaffoldColumn(false)]
         public bool Sold { get; set; }
 
+        [ScaffoldColumn(false)]
+        public DateTime? SoldAt { get; set; }
+
         [Required, ScaffoldColumn(false)]
         public int NumberOfViews { get; set; }
 
