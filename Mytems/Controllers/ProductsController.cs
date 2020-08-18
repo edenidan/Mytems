@@ -20,7 +20,17 @@ namespace Mytems.Controllers
         public ActionResult Index(ProductSearchOptions searchOptions) // TODO: possibly search by seller
         {
             ViewData["SearchOptions"] = searchOptions;
-            return View(searchOptions.ApplyOn(db.Products.Include(p => p.Seller)).ToList());
+            var filteredData = searchOptions.ApplyOn(db.Products.Include(p => p.Seller));
+            var displayData = filteredData.Select(p => new DisplayProduct()
+            {
+                ProductID = p.ProductID,
+                SellerName = p.Seller.Username,
+                Name = p.Name,
+                Price = p.Price,
+                Description=p.Description,
+                Category=p.Category
+            });
+            return View(displayData);
         }
 
         // GET: Products/Details/5
