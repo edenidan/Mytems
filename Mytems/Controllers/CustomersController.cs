@@ -25,8 +25,8 @@ namespace Mytems.Controllers
 
         public ActionResult Dashboard()
         {
-            string username = Session["username"] as string;
-            if (db.Customers.Where(c => c.Username == username).Any())
+            User user = Session["User"] as User;
+            if (user is Customer)
                 return View();
             else return View("~/Views/Errors/Unauthorized.cshtml");
         }
@@ -73,7 +73,7 @@ namespace Mytems.Controllers
 
                     db.Customers.Add(customer);
                     db.SaveChanges();
-                    Session["username"] = customer.Username;
+                    Session["User"] = customer;
                     return RedirectToAction("Dashboard", "Home");
                 }
             }

@@ -13,7 +13,6 @@ namespace Mytems.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            //ViewData["username"] = Session["username"];
             return View();
         }
 
@@ -29,9 +28,10 @@ namespace Mytems.Controllers
             string username = Request.Form["Username"];
             string password = Request.Form["Password"];
 
-            if (db.Users.Where(u => u.Username == username && u.Password == password).Any())
+            User user = db.Users.Where(u => u.Username == username && u.Password == password).FirstOrDefault();
+            if (user != null)
             {
-                Session["username"] = username;
+                Session["User"] = user;
                 return RedirectToAction("Dashboard");
             }
             ModelState.AddModelError("Password", "Incorrect username or password.");
@@ -41,8 +41,7 @@ namespace Mytems.Controllers
         [HttpGet]
         public ActionResult Dashboard()
         {
-            string username = Session["username"] as string;
-            User user = db.Users.FirstOrDefault(u => u.Username == username);
+            User user = Session["User"] as User;
             if (user is Customer)
                 return RedirectToAction("Dashboard", "Customers");
             else if (user is Seller)
@@ -57,7 +56,7 @@ namespace Mytems.Controllers
         [HttpGet]
         public ActionResult Logout()
         {
-            Session["username"] = null;
+            Session.Remove("User");
             return RedirectToAction("Index");
         }
 

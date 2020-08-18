@@ -52,30 +52,28 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductID,Name,Category,Price,Description")] Product product, HttpPostedFileBase file)
         {
+            ModelState.Remove("Image");
             ModelState.Remove("Sold");
+            ModelState.Remove("SoldAt");
             ModelState.Remove("NumberOfViews");
             ModelState.Remove("Seller");
-            ModelState.Remove("SoldAt");
 
-            product.Sold = false;
-            product.NumberOfViews = 0;
-            product.SoldAt = null;
-
-            string sellerUSername = Session["username"] as string;
-            Seller seller = db.Sellers.FirstOrDefault(s => s.Username == sellerUSername);
-            product.Seller = seller;
-
-            product.Image = null;
-            if (file != null)
+            User user = Session["User"] as User;
+            if (ModelState.IsValid && user is Seller seller) // TODO: check for Admin and then receive the seller to use
             {
-                string imageName = Guid.NewGuid().ToString().Substring(0,10)+file.FileName;
-                product.Image = imageName;
-                file.SaveAs(Server.MapPath($"~/Static/{imageName}"));
-            }
+                product.Sold = false;
+                product.NumberOfViews = 0;
+                product.SoldAt = null;
+                product.Seller = seller;
 
-            //TODO:
-            if (ModelState.IsValid)
-            {
+                product.Image = null;
+                if (file != null)
+                {
+                    string imageName = Guid.NewGuid().ToString().Substring(0, 10) + file.FileName;
+                    product.Image = imageName;
+                    file.SaveAs(Server.MapPath($"~/Static/{imageName}"));
+                }
+
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -105,7 +103,7 @@ namespace Mytems.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,Name,Category,Price,Description,Sold,NumberOfViews")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,Name,Category,Price,Description,Sold")] Product product)
         {
             var productInDB = db.Products.FirstOrDefault(p => p.ProductID == product.ProductID);
             if (product.Sold && !productInDB.Sold)

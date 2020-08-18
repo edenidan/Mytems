@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Mytems.Models
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -17,10 +19,12 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
 
-
-                    @if (Session["username"] != null)
+                    @{ 
+                        User user = Session["User"] as User;
+                    }
+                    @if (user != null)
                     {
-                        @Html.ActionLink($"Hi {Session["username"]}", "Dashboard", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink($"Hi {user.Username}", "Dashboard", "Home", new { area = "" }, new { @class = "navbar-brand" })
                         <li><a href="/home/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     }
                     else
