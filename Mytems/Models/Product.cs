@@ -34,7 +34,9 @@ namespace Mytems.Models
         [Required, ScaffoldColumn(false)]
         public int NumberOfViews { get; set; }
 
-        [Required]
+        [Required,ForeignKey("Seller")]
+        public int SellerID { get; set; }
+        //[Required]
         public Seller Seller { get; set; }
     }
 }

@@ -17,9 +17,8 @@ namespace Mytems.ViewModels
         public bool? Sold { get; set; }
         public int? MinNumberOfViews { get; set; }
 
-        public IEnumerable<Product> ApplyOn(IEnumerable<Product> products)
+        public IQueryable<Product> ApplyOn(IQueryable<Product> products)
         {
-
             if (Name != null) products = products.Where(p => p.Name.StartsWith(Name));
             if (SellerName != null) products = products.Where(p => p.Seller.Username.StartsWith(SellerName));
             if (Category != null) products = products.Where(p => p.Category == Category);

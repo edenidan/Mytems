@@ -30,7 +30,7 @@ namespace Mytems.Controllers
                 Description=p.Description,
                 Category=p.Category
             });
-            return View(displayData);
+            return View(displayData.ToList());
         }
 
         // GET: Products/Details/5
@@ -74,7 +74,8 @@ namespace Mytems.Controllers
                 product.Sold = false;
                 product.NumberOfViews = 0;
                 product.SoldAt = null;
-                product.Seller = seller;
+                product.SellerID = seller.UserID;
+                //product.Seller = seller;
 
                 product.Image = null;
                 if (file != null)
