@@ -239,6 +239,9 @@
             "Euro": "€"
         };
 
+        currency = getCookie("currency")
+        $("main-header span.current").text(currency + " - " + currencySymbols[currency])
+
         if (getCookie("currency") === null)
             setCookie("currency", "Dollar");
         else if (getCookie("currency") !== "Dollar")
@@ -254,9 +257,13 @@
         function updatePrices(oldCurrency, newCurrency) {
             var factor = 2; // TODO: get the factor with ajax
             $(".price-display").text(function (index, oldPrice) {
-                oldPrice = Number(oldPrice.trim().substring(1));
-                return currencySymbols[newCurrency] + (oldPrice * factor).toFixed(2);
+                oldPrice = Number(oldPrice.trim().replace(",","").substring(1));
+                return currencySymbols[newCurrency] + numberWithCommas((oldPrice * factor).toFixed(2));
             });
+        }
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
         function setCookie(name, value, days) {

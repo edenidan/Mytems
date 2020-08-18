@@ -123,7 +123,13 @@ namespace Mytems.Controllers
             // TODO do this with a viewmodel and check for permission (admin or the product's seller)
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                //db.Entry(product).State = EntityState.Modified;
+                productInDB.Name = product.Name;
+                productInDB.Price = product.Price;
+                productInDB.Category = product.Category;
+                productInDB.Description = product.Description;
+                productInDB.Sold = product.Sold;
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
