@@ -1,6 +1,6 @@
 ﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -50,6 +50,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -90,11 +93,325 @@
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\all.css" />
+    <Content Include="assets\css\animate.min.css" />
+    <Content Include="assets\css\aos.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\flaticon.css" />
+    <Content Include="assets\css\fontawesome-all.min.css" />
+    <Content Include="assets\css\lightslider.min.css" />
+    <Content Include="assets\css\magnific-popup.css" />
+    <Content Include="assets\css\nice-select.css" />
+    <Content Include="assets\css\owl.carousel.min.css" />
+    <Content Include="assets\css\price_rangs.css" />
+    <Content Include="assets\css\slick-theme.min.css" />
+    <Content Include="assets\css\slick.css" />
+    <Content Include="assets\css\slick.min.css" />
+    <Content Include="assets\css\slicknav.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\css\swiper.min.css" />
+    <Content Include="assets\css\themify-icons.css" />
+    <Content Include="assets\fonts\fa-brands-400.svg" />
+    <Content Include="assets\fonts\fa-regular-400.svg" />
+    <Content Include="assets\fonts\fa-solid-900.svg" />
+    <Content Include="assets\fonts\flaticon.html" />
+    <Content Include="assets\fonts\Flaticon.svg" />
+    <Content Include="assets\fonts\themify.svg" />
+    <Content Include="assets\img\about\about_lft.png" />
+    <Content Include="assets\img\about\about_right.png" />
+    <Content Include="assets\img\about\pet_care.png" />
+    <Content Include="assets\img\about_img_1.png" />
+    <Content Include="assets\img\about_img_2.png" />
+    <Content Include="assets\img\about_us_video.png" />
+    <Content Include="assets\img\adapt_icon\1.png" />
+    <Content Include="assets\img\adapt_icon\1.svg" />
+    <Content Include="assets\img\adapt_icon\2.png" />
+    <Content Include="assets\img\adapt_icon\3.png" />
+    <Content Include="assets\img\arrivel\arrivel_1.png" />
+    <Content Include="assets\img\arrivel\arrivel_2.png" />
+    <Content Include="assets\img\arrivel\arrivel_3.png" />
+    <Content Include="assets\img\arrivel\arrivel_4.png" />
+    <Content Include="assets\img\arrivel\arrivel_5.png" />
+    <Content Include="assets\img\arrivel\arrivel_6.png" />
+    <Content Include="assets\img\author\author_1.png" />
+    <Content Include="assets\img\author\author_2.png" />
+    <Content Include="assets\img\author\author_3.png" />
+    <Content Include="assets\img\b1.jpg" />
+    <Content Include="assets\img\b2.jpg" />
+    <Content Include="assets\img\b3.jpg" />
+    <Content Include="assets\img\banner.png" />
+    <Content Include="assets\img\banner\banner.png" />
+    <Content Include="assets\img\banner\contact_bg.png" />
+    <Content Include="assets\img\banner\dog.png" />
+    <Content Include="assets\img\banner\img.png" />
+    <Content Include="assets\img\banner_img.png" />
+    <Content Include="assets\img\banner_pattern.png" />
+    <Content Include="assets\img\banner_shape.png" />
+    <Content Include="assets\img\blog\add.jpg" />
+    <Content Include="assets\img\blog\author.png" />
+    <Content Include="assets\img\blog\blog1.png" />
+    <Content Include="assets\img\blog\blog2.png" />
+    <Content Include="assets\img\blog\blog3.png" />
+    <Content Include="assets\img\blog\blog_1.png" />
+    <Content Include="assets\img\blog\blog_2.png" />
+    <Content Include="assets\img\blog\blog_3.png" />
+    <Content Include="assets\img\blog\blog_4.png" />
+    <Content Include="assets\img\blog\c1.png" />
+    <Content Include="assets\img\blog\c2.png" />
+    <Content Include="assets\img\blog\c3.png" />
+    <Content Include="assets\img\blog\cat-post\cat-post-1.jpg" />
+    <Content Include="assets\img\blog\cat-post\cat-post-2.jpg" />
+    <Content Include="assets\img\blog\cat-post\cat-post-3.jpg" />
+    <Content Include="assets\img\blog\causes\causes-1.jpg" />
+    <Content Include="assets\img\blog\causes\causes-2.jpg" />
+    <Content Include="assets\img\blog\causes\causes-3.jpg" />
+    <Content Include="assets\img\blog\feature-img1.jpg" />
+    <Content Include="assets\img\blog\learn_about_bg.png" />
+    <Content Include="assets\img\blog\main-blog\m-blog-1.jpg" />
+    <Content Include="assets\img\blog\main-blog\m-blog-2.jpg" />
+    <Content Include="assets\img\blog\main-blog\m-blog-3.jpg" />
+    <Content Include="assets\img\blog\main-blog\m-blog-4.jpg" />
+    <Content Include="assets\img\blog\main-blog\m-blog-5.jpg" />
+    <Content Include="assets\img\blog\next.jpg" />
+    <Content Include="assets\img\blog\popular-post\post1.jpg" />
+    <Content Include="assets\img\blog\popular-post\post2.jpg" />
+    <Content Include="assets\img\blog\popular-post\post3.jpg" />
+    <Content Include="assets\img\blog\popular-post\post4.jpg" />
+    <Content Include="assets\img\blog\post-img1.jpg" />
+    <Content Include="assets\img\blog\post-img2.jpg" />
+    <Content Include="assets\img\blog\prev.jpg" />
+    <Content Include="assets\img\blog\single_blog_1.png" />
+    <Content Include="assets\img\blog\single_blog_2.png" />
+    <Content Include="assets\img\blog\single_blog_3.png" />
+    <Content Include="assets\img\blog\single_blog_4.png" />
+    <Content Include="assets\img\blog\single_blog_5.png" />
+    <Content Include="assets\img\blog\slide_thumb_1.png" />
+    <Content Include="assets\img\categori\card-man.png" />
+    <Content Include="assets\img\categori\card-shape.png" />
+    <Content Include="assets\img\categori\card.png" />
+    <Content Include="assets\img\categori\cat1.jpg" />
+    <Content Include="assets\img\categori\cat2.jpg" />
+    <Content Include="assets\img\categori\cat3.jpg" />
+    <Content Include="assets\img\categori\category_1.png" />
+    <Content Include="assets\img\categori\category_10.png" />
+    <Content Include="assets\img\categori\category_11.png" />
+    <Content Include="assets\img\categori\category_12.png" />
+    <Content Include="assets\img\categori\category_2.png" />
+    <Content Include="assets\img\categori\category_3.png" />
+    <Content Include="assets\img\categori\category_4.png" />
+    <Content Include="assets\img\categori\category_5.png" />
+    <Content Include="assets\img\categori\category_6.png" />
+    <Content Include="assets\img\categori\category_7.png" />
+    <Content Include="assets\img\categori\category_8.png" />
+    <Content Include="assets\img\categori\category_9.png" />
+    <Content Include="assets\img\categori\product1.png" />
+    <Content Include="assets\img\categori\product2.png" />
+    <Content Include="assets\img\categori\product3.png" />
+    <Content Include="assets\img\categori\product4.png" />
+    <Content Include="assets\img\categori\product5.png" />
+    <Content Include="assets\img\categori\product6.png" />
+    <Content Include="assets\img\client.png" />
+    <Content Include="assets\img\client_1.png" />
+    <Content Include="assets\img\client_2.png" />
+    <Content Include="assets\img\collection\collection1.png" />
+    <Content Include="assets\img\collection\collection2.png" />
+    <Content Include="assets\img\collection\collection3.png" />
+    <Content Include="assets\img\collection\collection4.png" />
+    <Content Include="assets\img\collection\collection5.png" />
+    <Content Include="assets\img\collection\latest-man.png" />
+    <Content Include="assets\img\collection\latest-offer.png" />
+    <Content Include="assets\img\comment\comment_1.png" />
+    <Content Include="assets\img\comment\comment_2.png" />
+    <Content Include="assets\img\comment\comment_3.png" />
+    <Content Include="assets\img\elements\a.jpg" />
+    <Content Include="assets\img\elements\a2.jpg" />
+    <Content Include="assets\img\elements\d.jpg" />
+    <Content Include="assets\img\elements\disabled-check.png" />
+    <Content Include="assets\img\elements\disabled-radio.png" />
+    <Content Include="assets\img\elements\f1.jpg" />
+    <Content Include="assets\img\elements\f2.jpg" />
+    <Content Include="assets\img\elements\f3.jpg" />
+    <Content Include="assets\img\elements\f4.jpg" />
+    <Content Include="assets\img\elements\f5.jpg" />
+    <Content Include="assets\img\elements\f6.jpg" />
+    <Content Include="assets\img\elements\f7.jpg" />
+    <Content Include="assets\img\elements\f8.jpg" />
+    <Content Include="assets\img\elements\g1.jpg" />
+    <Content Include="assets\img\elements\g2.jpg" />
+    <Content Include="assets\img\elements\g3.jpg" />
+    <Content Include="assets\img\elements\g4.jpg" />
+    <Content Include="assets\img\elements\g5.jpg" />
+    <Content Include="assets\img\elements\g6.jpg" />
+    <Content Include="assets\img\elements\g7.jpg" />
+    <Content Include="assets\img\elements\g8.jpg" />
+    <Content Include="assets\img\elements\primary-check.png" />
+    <Content Include="assets\img\elements\primary-radio.png" />
+    <Content Include="assets\img\elements\success-check.png" />
+    <Content Include="assets\img\elements\success-radio.png" />
+    <Content Include="assets\img\elements\user1.png" />
+    <Content Include="assets\img\elements\user2.png" />
+    <Content Include="assets\img\favicon.ico" />
+    <Content Include="assets\img\favicon.png" />
+    <Content Include="assets\img\feature_1.png" />
+    <Content Include="assets\img\feature_2.png" />
+    <Content Include="assets\img\feature_3.png" />
+    <Content Include="assets\img\gallery\1.png" />
+    <Content Include="assets\img\gallery\2.png" />
+    <Content Include="assets\img\gallery\3.png" />
+    <Content Include="assets\img\gallery\gallery1.jpg" />
+    <Content Include="assets\img\gallery\gallery2.jpg" />
+    <Content Include="assets\img\gallery\gallery3.jpg" />
+    <Content Include="assets\img\gallery\gallery4.jpg" />
+    <Content Include="assets\img\gallery\gallery5.jpg" />
+    <Content Include="assets\img\hero\about_hero.jpg" />
+    <Content Include="assets\img\hero\category.jpg" />
+    <Content Include="assets\img\hero\contact_hero.jpg" />
+    <Content Include="assets\img\hero\gallery_hero.jpg" />
+    <Content Include="assets\img\hero\h1_hero.jpg" />
+    <Content Include="assets\img\hero\hero_man.png" />
+    <Content Include="assets\img\hero\Industries_hero.jpg" />
+    <Content Include="assets\img\hero\services_hero.jpg" />
+    <Content Include="assets\img\icon\arrow-left.png" />
+    <Content Include="assets\img\icon\arrow-right.png" />
+    <Content Include="assets\img\icon\color_star.svg" />
+    <Content Include="assets\img\icon\feature_icon_1.png" />
+    <Content Include="assets\img\icon\feature_icon_1.svg" />
+    <Content Include="assets\img\icon\feature_icon_2.png" />
+    <Content Include="assets\img\icon\feature_icon_2.svg" />
+    <Content Include="assets\img\icon\feature_icon_3.png" />
+    <Content Include="assets\img\icon\feature_icon_3.svg" />
+    <Content Include="assets\img\icon\feature_icon_4.svg" />
+    <Content Include="assets\img\icon\header_icon.jpg" />
+    <Content Include="assets\img\icon\header_icon.png" />
+    <Content Include="assets\img\icon\icon_1.png" />
+    <Content Include="assets\img\icon\icon_2.png" />
+    <Content Include="assets\img\icon\icon_3.png" />
+    <Content Include="assets\img\icon\icon_4.png" />
+    <Content Include="assets\img\icon\left-white.png" />
+    <Content Include="assets\img\icon\left.svg" />
+    <Content Include="assets\img\icon\phone_icon.jpg" />
+    <Content Include="assets\img\icon\play.svg" />
+    <Content Include="assets\img\icon\quate.svg" />
+    <Content Include="assets\img\icon\right-arrow.svg" />
+    <Content Include="assets\img\icon\right-white.png" />
+    <Content Include="assets\img\icon\right.svg" />
+    <Content Include="assets\img\icon\star.svg" />
+    <Content Include="assets\img\login.jpg" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\logo\date-picker-icon.png" />
+    <Content Include="assets\img\logo\form-iocn.jpg" />
+    <Content Include="assets\img\logo\logo.png" />
+    <Content Include="assets\img\logo\logo2_footer.png" />
+    <Content Include="assets\img\logo\select-items-icon.jpg" />
+    <Content Include="assets\img\logo\testimonial.png" />
+    <Content Include="assets\img\offer-bg.png" />
+    <Content Include="assets\img\offers\1.png" />
+    <Content Include="assets\img\offers\2.png" />
+    <Content Include="assets\img\offers\3.png" />
+    <Content Include="assets\img\our_blog\blog-img1.jpg" />
+    <Content Include="assets\img\post\next.png" />
+    <Content Include="assets\img\post\post_1.png" />
+    <Content Include="assets\img\post\post_10.png" />
+    <Content Include="assets\img\post\post_2.png" />
+    <Content Include="assets\img\post\post_3.png" />
+    <Content Include="assets\img\post\post_4.png" />
+    <Content Include="assets\img\post\post_5.png" />
+    <Content Include="assets\img\post\post_6.png" />
+    <Content Include="assets\img\post\post_7.png" />
+    <Content Include="assets\img\post\post_8.png" />
+    <Content Include="assets\img\post\post_9.png" />
+    <Content Include="assets\img\post\preview.png" />
+    <Content Include="assets\img\prising\1.png" />
+    <Content Include="assets\img\prising\10.png" />
+    <Content Include="assets\img\prising\2.png" />
+    <Content Include="assets\img\prising\3.png" />
+    <Content Include="assets\img\prising\4.png" />
+    <Content Include="assets\img\prising\5.png" />
+    <Content Include="assets\img\prising\6.png" />
+    <Content Include="assets\img\prising\7.png" />
+    <Content Include="assets\img\prising\8.png" />
+    <Content Include="assets\img\prising\9.png" />
+    <Content Include="assets\img\product\product_list_1.png" />
+    <Content Include="assets\img\product\product_list_10.png" />
+    <Content Include="assets\img\product\product_list_2.png" />
+    <Content Include="assets\img\product\product_list_3.png" />
+    <Content Include="assets\img\product\product_list_4.png" />
+    <Content Include="assets\img\product\product_list_5.png" />
+    <Content Include="assets\img\product\product_list_6.png" />
+    <Content Include="assets\img\product\product_list_7.png" />
+    <Content Include="assets\img\product\product_list_8.png" />
+    <Content Include="assets\img\product\product_list_9.png" />
+    <Content Include="assets\img\product\single_product.png" />
+    <Content Include="assets\img\product_details\prodect_details_1.png" />
+    <Content Include="assets\img\product_details\prodect_details_2.png" />
+    <Content Include="assets\img\product_details\prodect_details_3.png" />
+    <Content Include="assets\img\product_details\prodect_details_4.png" />
+    <Content Include="assets\img\product_overlay.png" />
+    <Content Include="assets\img\service\1.png" />
+    <Content Include="assets\img\service\2.png" />
+    <Content Include="assets\img\service\3.png" />
+    <Content Include="assets\img\service\service_icon_1.png" />
+    <Content Include="assets\img\service\service_icon_2.png" />
+    <Content Include="assets\img\service\service_icon_3.png" />
+    <Content Include="assets\img\service\service_icon_bg_1.png" />
+    <Content Include="assets\img\single_product_1.png" />
+    <Content Include="assets\img\single_product_2.png" />
+    <Content Include="assets\img\single_product_3.png" />
+    <Content Include="assets\img\team\1.png" />
+    <Content Include="assets\img\team\2.png" />
+    <Content Include="assets\img\team\3.png" />
+    <Content Include="assets\img\testmonial\1.png" />
+    <Content Include="assets\img\testmonial\Homepage_testi.png" />
+    <Content Include="assets\img\time_line_1.png" />
+    <Content Include="assets\img\tranding_item\tranding_item_1.png" />
+    <Content Include="assets\img\tranding_item\tranding_item_2.png" />
+    <Content Include="assets\img\tranding_item\tranding_item_3.png" />
+    <Content Include="assets\img\tranding_item\tranding_item_4.png" />
+    <Content Include="assets\img\tranding_item\tranding_item_5.png" />
+    <Content Include="assets\img\tranding_item\tranding_item_6.png" />
+    <Content Include="assets\js\animated.headline.js" />
+    <Content Include="assets\js\aos.js" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\cells-by-column.js" />
+    <Content Include="assets\js\contact.js" />
+    <Content Include="assets\js\gmaps.min.js" />
+    <Content Include="assets\js\jquery-1.12.1.min.js" />
+    <Content Include="assets\js\jquery.ajaxchimp.min.js" />
+    <Content Include="assets\js\jquery.counterup.min.js" />
+    <Content Include="assets\js\jquery.downCount.js" />
+    <Content Include="assets\js\jquery.easing.min.js" />
+    <Content Include="assets\js\jquery.form.js" />
+    <Content Include="assets\js\jquery.magnific-popup.js" />
+    <Content Include="assets\js\jquery.nice-select.min.js" />
+    <Content Include="assets\js\jquery.paroller.min.js" />
+    <Content Include="assets\js\jquery.scrollUp.min.js" />
+    <Content Include="assets\js\jquery.slicknav.min.js" />
+    <Content Include="assets\js\jquery.sticky.js" />
+    <Content Include="assets\js\jquery.validate.min.js" />
+    <Content Include="assets\js\lightslider.min.js" />
+    <Content Include="assets\js\mail-script.js" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\mixitup.min.js" />
+    <Content Include="assets\js\one-page-nav-min.js" />
+    <Content Include="assets\js\owl.carousel.min.js" />
+    <Content Include="assets\js\plugins.js" />
+    <Content Include="assets\js\popper.min.js" />
+    <Content Include="assets\js\price_rangs.js" />
+    <Content Include="assets\js\slick.min.js" />
+    <Content Include="assets\js\stellar.js" />
+    <Content Include="assets\js\swiper.jquery.js" />
+    <Content Include="assets\js\swiper.min.js" />
+    <Content Include="assets\js\swiper_custom.js" />
+    <Content Include="assets\js\theme.js" />
+    <Content Include="assets\js\vendor\jquery-1.12.4.min.js" />
+    <Content Include="assets\js\vendor\modernizr-3.5.0.min.js" />
+    <Content Include="assets\js\waypoints.min.js" />
+    <Content Include="assets\js\wow.min.js" />
+    <Content Include="assets\webfonts\fa-brands-400.svg" />
+    <Content Include="assets\webfonts\fa-regular-400.svg" />
+    <Content Include="assets\webfonts\fa-solid-900.svg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -104,6 +421,86 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="assets\css\style.map" />
+    <Content Include="assets\fonts\fa-brands-400.eot" />
+    <Content Include="assets\fonts\fa-brands-400.ttf" />
+    <Content Include="assets\fonts\fa-brands-400.woff" />
+    <Content Include="assets\fonts\fa-brands-400.woff2" />
+    <Content Include="assets\fonts\fa-regular-400.eot" />
+    <Content Include="assets\fonts\fa-regular-400.ttf" />
+    <Content Include="assets\fonts\fa-regular-400.woff" />
+    <Content Include="assets\fonts\fa-regular-400.woff2" />
+    <Content Include="assets\fonts\fa-solid-900.eot" />
+    <Content Include="assets\fonts\fa-solid-900.ttf" />
+    <Content Include="assets\fonts\fa-solid-900.woff" />
+    <Content Include="assets\fonts\fa-solid-900.woff2" />
+    <Content Include="assets\fonts\Flaticon.eot" />
+    <Content Include="assets\fonts\Flaticon.ttf" />
+    <Content Include="assets\fonts\Flaticon.woff" />
+    <Content Include="assets\fonts\Flaticon.woff2" />
+    <Content Include="assets\fonts\themify.eot" />
+    <Content Include="assets\fonts\themify.ttf" />
+    <Content Include="assets\fonts\themify.woff" />
+    <Content Include="assets\img\elements\_DS_Store" />
+    <Content Include="assets\scss\style.scss" />
+    <Content Include="assets\scss\_about_us.scss" />
+    <Content Include="assets\scss\_banner.scss" />
+    <Content Include="assets\scss\_best-product.scss" />
+    <Content Include="assets\scss\_best_seller.scss" />
+    <Content Include="assets\scss\_blog.scss" />
+    <Content Include="assets\scss\_blog_page.scss" />
+    <Content Include="assets\scss\_blog_part.scss" />
+    <Content Include="assets\scss\_bradcam.scss" />
+    <Content Include="assets\scss\_breadcrumb.scss" />
+    <Content Include="assets\scss\_button.scss" />
+    <Content Include="assets\scss\_category.scss" />
+    <Content Include="assets\scss\_client_logo.scss" />
+    <Content Include="assets\scss\_client_review.scss" />
+    <Content Include="assets\scss\_color.scss" />
+    <Content Include="assets\scss\_common.scss" />
+    <Content Include="assets\scss\_confirmation_part.scss" />
+    <Content Include="assets\scss\_contact.scss" />
+    <Content Include="assets\scss\_copyright_part.scss" />
+    <Content Include="assets\scss\_cource_details.scss" />
+    <Content Include="assets\scss\_cta_part.scss" />
+    <Content Include="assets\scss\_elements.scss" />
+    <Content Include="assets\scss\_extend.scss" />
+    <Content Include="assets\scss\_feature_part.scss" />
+    <Content Include="assets\scss\_footer.scss" />
+    <Content Include="assets\scss\_h1-hero.scss" />
+    <Content Include="assets\scss\_headerMenu.scss" />
+    <Content Include="assets\scss\_instagram_photo.scss" />
+    <Content Include="assets\scss\_latest_products.scss" />
+    <Content Include="assets\scss\_mixins.scss" />
+    <Content Include="assets\scss\_new_arrival.scss" />
+    <Content Include="assets\scss\_our_offer.scss" />
+    <Content Include="assets\scss\_overlay.scss" />
+    <Content Include="assets\scss\_product.scss" />
+    <Content Include="assets\scss\_product_list.scss" />
+    <Content Include="assets\scss\_recent.scss" />
+    <Content Include="assets\scss\_review.scss" />
+    <Content Include="assets\scss\_services.scss" />
+    <Content Include="assets\scss\_shipping_details.scss" />
+    <Content Include="assets\scss\_single_blog.scss" />
+    <Content Include="assets\scss\_single_product.scss" />
+    <Content Include="assets\scss\_special_cource.scss" />
+    <Content Include="assets\scss\_subscribe_part.scss" />
+    <Content Include="assets\scss\_team.scss" />
+    <Content Include="assets\scss\_testimonial.scss" />
+    <Content Include="assets\scss\_trending_items.scss" />
+    <Content Include="assets\scss\_variables.scss" />
+    <Content Include="assets\webfonts\fa-brands-400.eot" />
+    <Content Include="assets\webfonts\fa-brands-400.ttf" />
+    <Content Include="assets\webfonts\fa-brands-400.woff" />
+    <Content Include="assets\webfonts\fa-brands-400.woff2" />
+    <Content Include="assets\webfonts\fa-regular-400.eot" />
+    <Content Include="assets\webfonts\fa-regular-400.ttf" />
+    <Content Include="assets\webfonts\fa-regular-400.woff" />
+    <Content Include="assets\webfonts\fa-regular-400.woff2" />
+    <Content Include="assets\webfonts\fa-solid-900.eot" />
+    <Content Include="assets\webfonts\fa-solid-900.ttf" />
+    <Content Include="assets\webfonts\fa-solid-900.woff" />
+    <Content Include="assets\webfonts\fa-solid-900.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -113,7 +510,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -128,7 +527,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\MytemsDB.cs" />
+    <Compile Include="App_Data\MytemsDB.cs" />
     <Compile Include="Models\NonAdmin.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Seller.cs" />
@@ -146,7 +545,6 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Customers\Create.cshtml" />
@@ -169,6 +567,7 @@
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\_Search.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -177,7 +576,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="assets\img\blog\latest-post\" />
     <Folder Include="Static\" />
     <Folder Include="Utility\" />
   </ItemGroup>
@@ -210,9 +609,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
