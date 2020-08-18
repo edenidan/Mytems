@@ -527,7 +527,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Location.cs" />
-    <Compile Include="App_Data\MytemsDB.cs" />
+    <Compile Include="Models\MytemsDB.cs" />
     <Compile Include="Models\NonAdmin.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Seller.cs" />
@@ -576,6 +576,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="assets\img\blog\latest-post\" />
     <Folder Include="Static\" />
     <Folder Include="Utility\" />
