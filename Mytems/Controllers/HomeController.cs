@@ -34,7 +34,7 @@ namespace Mytems.Controllers
                 Session["username"] = username;
                 return RedirectToAction("Dashboard");
             }
-            ModelState.AddModelError("Username", "Incorrect username or password.");
+            ModelState.AddModelError("Password", "Incorrect username or password.");
             return View();
         }
 
