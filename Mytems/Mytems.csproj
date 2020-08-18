@@ -134,6 +134,7 @@
     <Compile Include="Models\Seller.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DisplayProduct.cs" />
     <Compile Include="ViewModels\ProductSearchOptions.cs" />
   </ItemGroup>
   <ItemGroup>

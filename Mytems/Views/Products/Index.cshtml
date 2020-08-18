@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Mytems.Models.Product>
+﻿@model IEnumerable<Mytems.ViewModels.DisplayProduct>
 
 @{
     ViewBag.Title = "Index";
@@ -11,6 +11,9 @@
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SellerName)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -29,6 +32,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.SellerName)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
@@ -41,9 +47,9 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
         </td>
     </tr>
 }
