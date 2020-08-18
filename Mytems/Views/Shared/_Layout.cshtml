@@ -17,9 +17,19 @@
                 <div class="navbar-header">
                     @Html.ActionLink("Mytems", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Currency <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="currency">Shekel - ₪</a></li>
+                            <li><a class="currency">Dollar - $</a></li>
+                            <li><a class="currency">Euro - €</a></li>
+                        </ul>
+                    </li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
 
-                    @{ 
+                    @{
                         User user = Session["User"] as User;
                     }
                     @if (user != null)
@@ -60,5 +70,55 @@
 
         <script src="~/Scripts/jquery-1.10.2.min.js"></script>
         <script src="~/Scripts/bootstrap.min.js"></script>
+        <script>
+            var currencySymbols = {
+                "Shekel": "₪",
+                "Dollar": "$",
+                "Euro": "€"
+            };
+
+            if (getCookie("currency") === null)
+                setCookie("currency", "Dollar");
+            else if (getCookie("currency") !== "Dollar")
+                updatePrices("Dollar", getCookie("currency"));
+
+            $(".currency").click(function () {
+                var oldCurrency = getCookie("currency");
+                var newCurrency = this.innerText.split(" - ")[0];
+                setCookie("currency", newCurrency);
+                updatePrices(oldCurrency, newCurrency);
+            });
+
+            function updatePrices(oldCurrency, newCurrency) {
+                var factor = 2; // TODO: get the factor with ajax
+                $(".price-display").text(function (index, oldPrice) {
+                    oldPrice = Number(oldPrice.trim().substring(1));
+                    return currencySymbols[newCurrency] + (oldPrice * factor).toFixed(2);
+                });
+            }
+
+            function setCookie(name, value, days) {
+                var expires = "";
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            }
+            function getCookie(name) {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
+            function eraseCookie(name) {
+                document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            }
+        </script>
 </body>
 </html>

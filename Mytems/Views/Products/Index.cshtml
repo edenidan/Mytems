@@ -46,7 +46,9 @@
                 @Html.DisplayFor(modelItem => item.Category)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                <div class="price-display">
+                    @Html.DisplayFor(modelItem => item.Price)
+                </div>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
