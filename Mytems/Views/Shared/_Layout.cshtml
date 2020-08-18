@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="header-info-right">
                                     <ul>
-                                        @if (Session["username"] != null)
+                                        @if (Session["User"] != null)
                                         {
                                             <li><a href="/Customers/Dashboard">My Account</a></li>
                                             <li><a href="/Home/Logout">Log out</a></li>
@@ -123,7 +123,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    @if (Session["username"] == null)
+                                    @if (Session["User"] == null)
                                     {
                                         <li class="d-none d-lg-block"> <a href="/home/login" class="btn header-btn">Sign in</a></li>
                                     }
