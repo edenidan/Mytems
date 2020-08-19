@@ -22,8 +22,8 @@ namespace Mytems.Controllers
             var searchedProducts = searchOptions
                 .ApplyOn(db.Products)
                 .Include(p => p.Seller)
-                .Select(p => new IndexProduct().From(p))
-                .ToList();
+                .ToList()
+                .Select(p => new IndexProduct(p));
             ViewData["SearchOptions"] = searchOptions;
             return View(searchedProducts);
         }
@@ -40,7 +40,7 @@ namespace Mytems.Controllers
             {
                 return HttpNotFound();
             }
-            return View(new DetailsProduct().From(product));
+            return View(new DetailsProduct(product));
         }
 
         // GET: Products/Create
@@ -101,6 +101,7 @@ namespace Mytems.Controllers
         {
             User user = Session["User"] as User;
 
+            // check for permission
             if (!(user is Admin) && !(user is Seller))
                 return View("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
@@ -110,6 +111,7 @@ namespace Mytems.Controllers
 
             if (product == null)
                 return HttpNotFound();
+            // check for permission
             if (!user.CanEditAndDelete(product))
                 return View("~/Views/Errors/Unauthorized.cshtml");
 

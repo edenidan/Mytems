@@ -14,13 +14,10 @@ namespace Mytems.ViewModels.Products
         [Display(Name = "Sold At")]
         public DateTime? SoldAt { get; set; }
 
-        public new DetailsProduct From(Product product)
+        public DetailsProduct(Product product) : base(product)
         {
-            base.From(product);
             ImagePath = product.ImagePath;
             SoldAt = product.SoldAt;
-
-            return this;
         }
     }
 }
