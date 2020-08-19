@@ -22,6 +22,14 @@ namespace Mytems.Controllers
             return View(db.Admins.ToList());
         }
 
+        public ActionResult Dashboard()
+        {
+            if ((Session["User"] as User) is Admin)
+                return View();
+            else
+                return View("~/Views/Errors/Unauthorized.cshtml");
+        }
+
         // GET: Admins/Details/5
         public ActionResult Details(int? id)
         {

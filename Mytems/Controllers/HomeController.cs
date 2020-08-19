@@ -46,11 +46,10 @@ namespace Mytems.Controllers
                 return RedirectToAction("Dashboard", "Customers");
             else if (user is Seller)
                 return RedirectToAction("Dashboard", "Sellers");
-            // TODO:
-            //else if (user is Admin)
-            //    return RedirectToAction("Dashboard", "Admin");
-            else
-                return View("Index");
+            else if (user is Admin)
+                return RedirectToAction("Dashboard", "Admins");
+            
+            return View("Index");
         }
 
         [HttpGet]
