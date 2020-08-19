@@ -121,6 +121,7 @@
     <Content Include="assets\fonts\themify.svg" />
     <Content Include="assets\img\banner_pattern.png" />
     <Content Include="assets\img\banner_shape.png" />
+    <Content Include="assets\img\default_image.png" />
     <Content Include="assets\img\elements\disabled-check.png" />
     <Content Include="assets\img\elements\disabled-radio.png" />
     <Content Include="assets\img\elements\f1.jpg" />
@@ -332,6 +333,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Products\CreateProduct.cs" />
     <Compile Include="ViewModels\Products\DetailsProduct.cs" />
+    <Compile Include="ViewModels\Products\EditProduct.cs" />
     <Compile Include="ViewModels\Products\IndexProduct.cs" />
     <Compile Include="ViewModels\Products\ProductSearchOptions.cs" />
   </ItemGroup>

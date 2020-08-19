@@ -8,7 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Mytems.Models;
-using Mytems.ViewModels;
+using Mytems.ViewModels.Products;
 
 namespace Mytems.Controllers
 {
@@ -19,18 +19,13 @@ namespace Mytems.Controllers
         // GET: Products
         public ActionResult Index(ProductSearchOptions searchOptions) // TODO: possibly search by seller
         {
+            var searchedProducts = searchOptions
+                .ApplyOn(db.Products)
+                .Include(p => p.Seller)
+                .Select(p => new IndexProduct().From(p))
+                .ToList();
             ViewData["SearchOptions"] = searchOptions;
-            var filteredData = searchOptions.ApplyOn(db.Products.Include(p => p.Seller));
-            var displayData = filteredData.Select(p => new DisplayProduct()
-            {
-                ProductID = p.ProductID,
-                SellerName = p.Seller.Username,
-                Name = p.Name,
-                Price = p.Price,
-                Description=p.Description,
-                Category=p.Category
-            });
-            return View(displayData.ToList());
+            return View(searchedProducts);
         }
 
         // GET: Products/Details/5
@@ -45,13 +40,18 @@ namespace Mytems.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(new DetailsProduct().From(product));
         }
 
         // GET: Products/Create
         public ActionResult Create()
         {
-            // TODO check for permission (admin or seller)
+            User user = Session["User"] as User;
+
+            // check for permission
+            if (!(user is Admin || user is Seller))
+                return View("~/Views/Errors/Unauthorized.cshtml");
+
             return View();
         }
 
@@ -60,52 +60,59 @@ namespace Mytems.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Name,Category,Price,Description")] Product product, HttpPostedFileBase file)
+        public ActionResult Create(CreateProduct createProduct, HttpPostedFileBase file)
         {
-            ModelState.Remove("Image");
-            ModelState.Remove("Sold");
-            ModelState.Remove("SoldAt");
-            ModelState.Remove("NumberOfViews");
-            ModelState.Remove("Seller");
-
             User user = Session["User"] as User;
-            if (ModelState.IsValid && user is Seller seller) // TODO: check for Admin and then receive the seller to use
+
+            // check for permission
+            if (!(user is Admin || user is Seller))
+                return View("~/Views/Errors/Unauthorized.cshtml");
+
+            if (user is Seller) // remove validation for seller id field
+                ModelState.Remove("SellerID");
+
+            try
             {
-                product.Sold = false;
-                product.NumberOfViews = 0;
-                product.SoldAt = null;
-                product.SellerID = seller.UserID;
-                //product.Seller = seller;
-
-                product.Image = null;
-                if (file != null)
+                if (ModelState.IsValid)
                 {
-                    string imageName = Guid.NewGuid().ToString().Substring(0, 10) + file.FileName;
-                    product.Image = imageName;
-                    file.SaveAs(Server.MapPath($"~/Static/{imageName}"));
-                }
+                    Product product = createProduct.ToProduct();
+                    if (file != null)
+                    {
+                        string imagePath = "~/Static/" + Guid.NewGuid().ToString().Substring(0, 16) + Path.GetExtension(file.FileName);
+                        file.SaveAs(Server.MapPath(imagePath));
+                        product.ImagePath = imagePath;
+                    }
 
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "An error occurred while adding the product, please contact an administrator if the problem persists.");
             }
 
-            return View(product);
+            return View(createProduct);
         }
 
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
-            // TODO check for permission (admin or the product's seller)
+            User user = Session["User"] as User;
+
+            if (!(user is Admin) && !(user is Seller))
+                return View("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             Product product = db.Products.Find(id);
+
             if (product == null)
-            {
                 return HttpNotFound();
-            }
+            if (!user.CanEditAndDelete(product))
+                return View("~/Views/Errors/Unauthorized.cshtml");
+
             return View(product);
         }
 

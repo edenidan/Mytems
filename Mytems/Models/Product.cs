@@ -13,30 +13,29 @@ namespace Mytems.Models
 
         [Required]
         public string Name { get; set; }
+
+        [Required]
+        public decimal Price { get; set; }
+
+        [Required]
+        public bool Sold { get; set; }
+
+        public DateTime? SoldAt { get; set; }
+
         [Required]
         public Category Category { get; set; }
 
-        [Required, DataType(DataType.Currency)]
-        public decimal Price { get; set; }
-
-        [Required(AllowEmptyStrings = true)]
+        [Required]
         public string Description { get; set; }
 
-        [ScaffoldColumn(false)]
-        public string Image { get; set; }
+        [Required] 
+        public string ImagePath { get; set; }
 
-        [Required, ScaffoldColumn(false)]
-        public bool Sold { get; set; }
-
-        [ScaffoldColumn(false)]
-        public DateTime? SoldAt { get; set; }
-
-        [Required, ScaffoldColumn(false)]
+        [Required]
         public int NumberOfViews { get; set; }
 
-        [Required,ForeignKey("Seller")]
+        [Required, ForeignKey("Seller")]
         public int SellerID { get; set; }
-        //[Required]
         public Seller Seller { get; set; }
     }
 }

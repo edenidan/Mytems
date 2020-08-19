@@ -1,14 +1,17 @@
-﻿@model IEnumerable<Mytems.ViewModels.DisplayProduct>
+﻿@model IEnumerable<Mytems.ViewModels.Products.IndexProduct>
 @using Mytems.Models
 
 @{
     ViewBag.Title = "Index";
+    User user = Session["User"] as User;
 }
 
 <h2>Index</h2>
+
 @{Html.RenderPartial("_Search", ViewData["SearchOptions"]);}
+
 <p>
-    @if (Session["User"] is Seller || Session["User"] is Admin)
+    @if (user is Seller || user is Admin)
     {
         @Html.ActionLink("Create New", "Create")
     }
@@ -16,16 +19,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.SellerName)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category)
+            @Html.DisplayNameFor(model => model.Sold)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SellerUsername)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
@@ -37,13 +43,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.SellerName)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category)
+                @Html.DisplayFor(modelItem => item.Sold)
             </td>
             <td>
                 <div class="price-display">
@@ -51,12 +54,25 @@
                 </div>
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.SellerUsername)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                @if (item.CanBeEditedBy(user))
+                {
+                    @:@Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                    @:@Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                }
+                else
+                {
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductID })
+                }
             </td>
         </tr>
     }

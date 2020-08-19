@@ -1,4 +1,4 @@
-﻿@model Mytems.Models.Product
+﻿@model Mytems.ViewModels.Products.DetailsProduct
 
 @{
     ViewBag.Title = "Details";
@@ -11,7 +11,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            <img src="~/Static/@Model.Image" style="height:100px;width:100px;" />
+            <img src="@Model.ImagePath" style="height:100px;width:100px;" />
         </dt>
 
         <dt>
@@ -23,19 +23,48 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Category)
+            @Html.DisplayNameFor(model => model.Sold)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Category)
+            @Html.DisplayFor(model => model.Sold)
         </dd>
+
+        @if (Model.SoldAt != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.SoldAt)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SoldAt)
+            </dd>
+        }
 
         <dt>
             @Html.DisplayNameFor(model => model.Price)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price)
+            <div class="price-display">
+                @Html.DisplayFor(model => model.Price)
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SellerUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SellerUsername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)
         </dd>
 
         <dt>
