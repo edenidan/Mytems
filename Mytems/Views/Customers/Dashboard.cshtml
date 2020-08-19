@@ -1,20 +1,25 @@
-﻿
+﻿@using Mytems.Models
 @{
-    ViewBag.Title = "Dashboard";
+                /**/
+
+                ViewBag.Title = "Dashboard";
+
 }
 
 <h2>Dashboard Customer</h2>
 
 <style>
 
-    img{
+    img {
         object-fit: contain;
     }
+
     img {
         border: 1px solid;
         border-color: black;
         box-shadow: 2px 5px 10px grey;
     }
+
     td {
         margin: 15px;
     }
@@ -76,3 +81,20 @@
         </tr>
     </table>
 </div>
+
+
+
+<h2>Suggested for you</h2>
+
+
+@foreach (Product p in ViewBag.SuggestedProducts)
+{
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="@p.ImagePath" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">@p.Name</h5>
+            <p class="card-text">@p.Description</p>
+            <a href="/Products/Details/@p.ProductID" class="btn btn-primary">View</a>
+        </div>
+    </div>
+}

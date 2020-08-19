@@ -22,12 +22,16 @@ namespace Mytems.Controllers
             // TODO check for permission (admin)
             return View(db.Customers.ToList());
         }
-
+        
         public ActionResult Dashboard()
         {
+            //TODO pass real suggested for you products list (as SuggestedProducts in the viewbag)
             User user = Session["User"] as User;
             if (user is Customer)
+            {
+                ViewBag.SuggestedProducts = new Product[0];
                 return View();
+            }
             else return View("~/Views/Errors/Unauthorized.cshtml");
         }
         
