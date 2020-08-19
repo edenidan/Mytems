@@ -18,7 +18,7 @@ namespace Mytems.Controllers
         private MytemsDB db = new MytemsDB();
 
         // GET: Products
-        public ActionResult Index(ProductSearchOptions searchOptions) // TODO: possibly search by seller
+        public ActionResult Index(ProductSearchOptions searchOptions)
         {
             var searchedProducts = searchOptions
                 .ApplyOn(db.Products)
