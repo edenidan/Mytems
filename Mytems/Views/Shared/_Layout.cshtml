@@ -60,7 +60,7 @@
                                 <div class="header-info-left d-flex">
                                     <div class="flag">
                                         <img src="@Url.Content("/assets/img/icon/phone_icon.jpg")" alt="" style="display: block; max-width: 27px; height: auto;">
-                                        <a href="/Home/Index"><img src="@Url.Content("/assets/img/logo/logo_black.png")" alt="" style="display: block; max-width: 100px; height: auto;"></a>
+                                        <a href="/Home/Index" class="navbar-left"><img src="@Url.Content("/assets/img/logo/logo_black.png")" alt="" style="display: block; max-width: 100px; height: auto;"></a>
 
                                     </div>
                                     <div class="select-this" id="currencies">
@@ -129,12 +129,14 @@
                             <div class="col-xl-5 col-lg-3 col-md-3 col-sm-3 fix-card">
                                 <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
                                     <li class="d-none d-xl-block">
-                                        <div class="form-box f-right ">
-                                            <input type="text" name="Search" placeholder="Search products">
-                                            <div class="search-icon">
-                                                <i class="fas fa-search special-tag"></i>
+                                        <form action="/products/index" method="get">
+                                            <div class="form-box f-right ">
+                                                <input type="text" name="Name" placeholder="Search products">
+                                                <div class="search-icon">
+                                                    <i class="fas fa-search special-tag"></i>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </li>
                                     @if (Session["User"] == null)
                                     {
@@ -241,8 +243,14 @@
             "Euro": "€"
         };
 
+        var currencyTickers = {
+            "Shekel": "ILS",
+            "Dollar": "USD",
+            "Euro": "EUR"
+        };
+
         currency = getCookie("currency")
-        $("main-header span.current").text(currency + " - " + currencySymbols[currency])
+        $("#currencies span.current").text(currency + " - " + currencySymbols[currency])
 
         if (getCookie("currency") === null)
             setCookie("currency", "Dollar");
@@ -257,12 +265,18 @@
         });
 
         function updatePrices(oldCurrency, newCurrency) {
-            var factor = 2; // TODO: get the factor with ajax
-            $(".price-display").text(function (index, oldPrice) {
-                oldPrice = Number(oldPrice.trim().replace(",", "").substring(1));
-                return currencySymbols[newCurrency] + numberWithCommas((oldPrice * factor).toFixed(2));
+            var oldTicker = currencyTickers[oldCurrency];
+            var newTicker = currencyTickers[newCurrency];
+
+            $.ajax(`https://api.exchangeratesapi.io/latest?symbols=${newTicker}&base=${oldTicker}`).done(function (data) {
+                var factor = data["rates"][newTicker];
+                $(".price-display").text(function (index, oldPrice) {
+                    oldPrice = Number(oldPrice.trim().replace(",", "").substring(1));
+                    return currencySymbols[newCurrency] + numberWithCommas((oldPrice * factor).toFixed(2));
+                });
             });
         }
+
 
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
