@@ -48,12 +48,21 @@ namespace Mytems.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Username,Password")] Admin admin)
+        public ActionResult Create([Bind(Include = "Username,Password")] Admin admin)
         {
+            ModelState.Remove("UserID");
             ModelState.Remove("JoinedAt");
             if (ModelState.IsValid)
             {
+                admin.UserID = 0;
                 admin.JoinedAt = DateTime.Now;
+
+                if (db.Users.Where(a => a.Username == admin.Username).Any())
+                {
+                    ModelState.AddModelError("Username", "This username is already taken.");
+                    return View(admin);
+                }
+
                 db.Admins.Add(admin);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -89,10 +98,9 @@ namespace Mytems.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             Admin adminToUpdate = db.Admins.Find(id);
-
             if (TryUpdateModel(adminToUpdate, new[] { "Username", "Password" }))
+            {
                 if (db.Users.Where(a => a.UserID != adminToUpdate.UserID && a.Username == adminToUpdate.Username).Any())
                 {
                     ModelState.AddModelError("Username", "This username is already taken.");
@@ -108,17 +116,8 @@ namespace Mytems.Controllers
                     ModelState.AddModelError("", "An error occurred while updating the database.");
                     return View(adminToUpdate);
                 }
-            
-            return View(adminToUpdate);
-
-            /*ModelState.Remove("JoinedAt");
-            if (ModelState.IsValid)
-            {
-                db.Entry(admin).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            return View(admin)*/
+            return View(adminToUpdate);
         }
 
         // GET: Admins/Delete/5

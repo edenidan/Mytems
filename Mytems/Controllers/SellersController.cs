@@ -71,15 +71,17 @@ namespace Mytems.Controllers
                     seller.Rating = null;
                     seller.NumberOfRators = 0;
 
+                    if (db.Users.Where(a => a.Username == seller.Username).Any())
+                    {
+                        ModelState.AddModelError("Username", "This username is already taken.");
+                        return View(seller);
+                    }
+
                     db.Sellers.Add(seller);
                     db.SaveChanges();
                     Session["User"] = seller;
                     return RedirectToAction("Dashboard", "Home");
                 }
-            }
-            catch (DbEntityValidationException)
-            {
-                ModelState.AddModelError("Username", "This username is already taken.");
             }
             catch (DbUpdateException)
             {
@@ -120,18 +122,20 @@ namespace Mytems.Controllers
             Seller sellerToUpdate = db.Sellers.Find(id);
             if (TryUpdateModel(sellerToUpdate, new[] { "Username", "Password", "FirstName", "LastName", "PhoneNumber", "Location" }))
             {
+                if (db.Users.Where(a => a.UserID != sellerToUpdate.UserID && a.Username == sellerToUpdate.Username).Any())
+                {
+                    ModelState.AddModelError("Username", "This username is already taken.");
+                    return View(sellerToUpdate);
+                }
                 try
                 {
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                catch (DbEntityValidationException)
-                {
-                    ModelState.AddModelError("Username", "This username is already taken.");
-                }
                 catch (DbUpdateException)
                 {
                     ModelState.AddModelError("", "An error occurred while updating the database.");
+                    return View(sellerToUpdate);
                 }
             }
             return View(sellerToUpdate);

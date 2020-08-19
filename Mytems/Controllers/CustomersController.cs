@@ -71,6 +71,12 @@ namespace Mytems.Controllers
                     customer.JoinedAt = DateTime.Now;
                     customer.CategoryViewsJson = "{}";
 
+                    if (db.Users.Where(a => a.Username == customer.Username).Any())
+                    {
+                        ModelState.AddModelError("Username", "This username is already taken.");
+                        return View(customer);
+                    }
+
                     db.Customers.Add(customer);
                     db.SaveChanges();
                     Session["User"] = customer;
@@ -120,18 +126,20 @@ namespace Mytems.Controllers
             Customer customerToUpdate = db.Customers.Find(id);
             if (TryUpdateModel(customerToUpdate, new[] { "Username", "Password", "FirstName", "LastName" }))
             {
+                if (db.Users.Where(a => a.UserID != customerToUpdate.UserID && a.Username == customerToUpdate.Username).Any())
+                {
+                    ModelState.AddModelError("Username", "This username is already taken.");
+                    return View(customerToUpdate);
+                }
                 try
                 {
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                catch (DbEntityValidationException)
-                {
-                    ModelState.AddModelError("Username", "This username is already taken.");
-                }
                 catch (DbUpdateException)
                 {
                     ModelState.AddModelError("", "An error occurred while updating the database.");
+                    return View(customerToUpdate);
                 }
             }
             return View(customerToUpdate);
