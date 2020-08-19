@@ -18,6 +18,6 @@ namespace Mytems.Models
         [Required, ScaffoldColumn(false)]
         public DateTime JoinedAt { get; set; }
 
-        public bool CanEditAndDelete(Product product) => this is Admin || (this is Seller && UserID == product.SellerID);
+        public bool CanEditAndDeleteProduct(Product product) => this is Admin || (this is Seller && UserID == product.SellerID);
     }
 }

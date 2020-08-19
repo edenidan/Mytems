@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -17,7 +18,7 @@ namespace Mytems.Controllers
         private MytemsDB db = new MytemsDB();
 
         // GET: Products
-        public ActionResult Index(ProductSearchOptions searchOptions) // TODO: possibly search by seller
+        public ActionResult Index(ProductSearchOptions searchOptions)
         {
             var searchedProducts = searchOptions
                 .ApplyOn(db.Products)
@@ -32,14 +33,12 @@ namespace Mytems.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
+
+            Product product = db.Products.Where(p => p.ProductID == id).Include(p => p.Seller).FirstOrDefault();
             if (product == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(new DetailsProduct(product));
         }
 
@@ -76,9 +75,12 @@ namespace Mytems.Controllers
                 if (ModelState.IsValid)
                 {
                     Product product = createProduct.ToProduct();
+                    if (user is Seller)
+                        product.SellerID = user.UserID;
+
                     if (file != null)
                     {
-                        string imagePath = "~/Static/" + Guid.NewGuid().ToString().Substring(0, 16) + Path.GetExtension(file.FileName);
+                        string imagePath = "/Static/" + Guid.NewGuid().ToString().Substring(0, 16) + Path.GetExtension(file.FileName);
                         file.SaveAs(Server.MapPath(imagePath));
                         product.ImagePath = imagePath;
                     }
@@ -112,10 +114,12 @@ namespace Mytems.Controllers
             if (product == null)
                 return HttpNotFound();
             // check for permission
-            if (!user.CanEditAndDelete(product))
+            if (!user.CanEditAndDeleteProduct(product))
                 return View("~/Views/Errors/Unauthorized.cshtml");
 
-            return View(product);
+            ViewBag.ImagePath = product.ImagePath;
+            ViewBag.SellerID = new SelectList(db.Sellers, "UserID", "Username");
+            return View(new EditProduct(product));
         }
 
         // POST: Products/Edit/5
@@ -123,42 +127,76 @@ namespace Mytems.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,Name,Category,Price,Description,Sold")] Product product)
+        public ActionResult Edit(EditProduct editProduct, HttpPostedFileBase file)
         {
-            var productInDB = db.Products.FirstOrDefault(p => p.ProductID == product.ProductID);
-            if (product.Sold && !productInDB.Sold)
-                product.SoldAt = DateTime.Now;
+            User user = Session["User"] as User;
 
-            // TODO do this with a viewmodel and check for permission (admin or the product's seller)
-            if (ModelState.IsValid)
+            var productInDB = db.Products.Find(editProduct.ProductID);
+            if (productInDB == null)
+                return HttpNotFound();
+
+            // check for permission
+            if (!user.CanEditAndDeleteProduct(productInDB))
+                return View("~/Views/Errors/Unauthorized.cshtml");
+
+            if (user is Seller) // remove validation for seller id field
+                ModelState.Remove("SellerID");
+
+            try
             {
-                //db.Entry(product).State = EntityState.Modified;
-                productInDB.Name = product.Name;
-                productInDB.Price = product.Price;
-                productInDB.Category = product.Category;
-                productInDB.Description = product.Description;
-                productInDB.Sold = product.Sold;
+                if (ModelState.IsValid)
+                {
+                    productInDB.Name = editProduct.Name;
+                    productInDB.Price = editProduct.Price;
+                    productInDB.Category = editProduct.Category;
+                    productInDB.Description = editProduct.Description;
+                    if (editProduct.Sold && !productInDB.Sold)
+                        productInDB.SoldAt = DateTime.Now;
+                    else if (!editProduct.Sold && productInDB.Sold)
+                        productInDB.SoldAt = null;
+                    productInDB.Sold = editProduct.Sold;
 
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    // TODO: Delete old image
+                    if (file != null)
+                    {
+                        string imagePath = "/Static/" + Guid.NewGuid().ToString().Substring(0, 16) + Path.GetExtension(file.FileName);
+                        file.SaveAs(Server.MapPath(imagePath));
+                        productInDB.ImagePath = imagePath;
+                    }
+
+                    if (user is Admin)
+                        productInDB.SellerID = editProduct.SellerID.Value;
+
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-            return View(product);
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "An error occurred while adding the product, please contact an administrator if the problem persists.");
+            }
+
+            ViewBag.ImagePath = productInDB.ImagePath;
+            ViewBag.SellerID = new SelectList(db.Sellers, "UserID", "Username");
+            return View(editProduct);
         }
 
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
-            // TODO check for permission (admin or the product's seller)
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
+
+            Product product = db.Products.Where(p => p.ProductID == id).Include(p => p.Seller).FirstOrDefault();
             if (product == null)
-            {
                 return HttpNotFound();
-            }
-            return View(product);
+            
+            User user = Session["User"] as User;
+            // check for permission
+            if (!user.CanEditAndDeleteProduct(product))
+                return View("~/Views/Errors/Unauthorized.cshtml");
+
+            return View(new DetailsProduct(product));
         }
 
         // POST: Products/Delete/5
@@ -166,16 +204,19 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id)
         {
-            // TODO check for permission (admin or the product's seller)
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             Product product = db.Products.Find(id);
             if (product == null)
-            {
                 return HttpNotFound();
-            }
+
+            User user = Session["User"] as User;
+            // check for permission
+            if (!user.CanEditAndDeleteProduct(product))
+                return View("~/Views/Errors/Unauthorized.cshtml");
+
+            // TODO: Delete image
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -184,9 +225,8 @@ namespace Mytems.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 db.Dispose();
-            }
+
             base.Dispose(disposing);
         }
     }
