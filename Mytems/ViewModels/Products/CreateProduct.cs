@@ -32,7 +32,7 @@ namespace Mytems.ViewModels.Products
             SoldAt = null,
             Category = Category,
             Description = Description,
-            ImagePath = "~/assets/img/default_image.png",
+            ImagePath = "/assets/img/default_image.png",
             NumberOfViews = 0,
             SellerID = SellerID.GetValueOrDefault(0),
         };
