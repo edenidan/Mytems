@@ -26,11 +26,11 @@
             color: #4D90FE;
         }
 
-        a:hover {
-            color: #4D90FE;
-            background-color: transparent;
-            text-decoration: underline;
-        }
+            a:hover {
+                color: #4D90FE;
+                background-color: transparent;
+                text-decoration: underline;
+            }
     </style>
 </head>
 
@@ -60,6 +60,8 @@
                                 <div class="header-info-left d-flex">
                                     <div class="flag">
                                         <img src="@Url.Content("/assets/img/icon/phone_icon.jpg")" alt="" style="display: block; max-width: 27px; height: auto;">
+                                        <a href="/Home/Index"><img src="@Url.Content("/assets/img/logo/logo_black.png")" alt="" style="display: block; max-width: 100px; height: auto;"></a>
+
                                     </div>
                                     <div class="select-this" id="currencies">
                                         <form action="#">
@@ -107,7 +109,7 @@
                             <!-- Logo -->
                             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
                                 <div class="logo">
-                                    <a href="/Home/Index"><img src="@Url.Content("/assets/img/logo/logo.png")" alt="" style="display: block; max-width: 170px; height: auto;"></a>
+                                    @*<a href="/Home/Index"><img src="@Url.Content("/assets/img/logo/logo.png")" alt="" style="display: block; max-width: 170px; height: auto;"></a>*@
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
@@ -257,7 +259,7 @@
         function updatePrices(oldCurrency, newCurrency) {
             var factor = 2; // TODO: get the factor with ajax
             $(".price-display").text(function (index, oldPrice) {
-                oldPrice = Number(oldPrice.trim().replace(",","").substring(1));
+                oldPrice = Number(oldPrice.trim().replace(",", "").substring(1));
                 return currencySymbols[newCurrency] + numberWithCommas((oldPrice * factor).toFixed(2));
             });
         }
