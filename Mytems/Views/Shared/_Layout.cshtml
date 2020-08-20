@@ -270,12 +270,15 @@
             $.ajax(`https://api.exchangeratesapi.io/latest?symbols=${newTicker}&base=${oldTicker}`).done(function (data) {
                 var factor = data["rates"][newTicker];
                 $(".price-display").text(function (index, oldPrice) {
-                    oldPrice = Number(oldPrice.trim().replace(",", "").substring(1));
+                    oldPrice = Number(oldPrice.trim().replaceAll(",", "").substring(1));
                     return currencySymbols[newCurrency] + numberWithCommas((oldPrice * factor).toFixed(2));
                 });
             });
         }
 
+        String.prototype.replaceAll = function (str1, str2, ignore) {
+            return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof (str2) == "string") ? str2.replace(/\$/g, "$$$$") : str2);
+        } 
 
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

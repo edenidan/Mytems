@@ -29,7 +29,7 @@ namespace Mytems.Controllers
             User user = Session["User"] as User;
             if (user is Customer)
             {
-                ViewBag.SuggestedProducts = new Product[0];
+                ViewBag.SuggestedProducts = db.Products.ToList();
                 return View();
             }
             else return View("~/Views/Errors/Unauthorized.cshtml");
