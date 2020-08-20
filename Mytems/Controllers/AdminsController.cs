@@ -19,20 +19,23 @@ namespace Mytems.Controllers
         // GET: Admins
         public ActionResult Index()
         {
+            if (Session["User"] == null || !(Session["User"] is Admin))
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             return View(db.Admins.ToList());
         }
 
         public ActionResult Dashboard()
         {
-            if ((Session["User"] as User) is Admin)
-                return View();
-            else
-                return View("~/Views/Errors/Unauthorized.cshtml");
+            if (Session["User"] == null || !(Session["User"] is Admin))
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
+            return View();
         }
 
         // GET: Admins/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["User"] == null || !(Session["User"] is Admin))
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -48,6 +51,8 @@ namespace Mytems.Controllers
         // GET: Admins/Create
         public ActionResult Create()
         {
+            if (Session["User"] == null || !(Session["User"] is Admin))
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             return View();
         }
 
@@ -58,6 +63,8 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Username,Password")] Admin admin)
         {
+            if (Session["User"] == null || !(Session["User"] is Admin))
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             ModelState.Remove("UserID");
             ModelState.Remove("JoinedAt");
             if (ModelState.IsValid)
@@ -82,6 +89,8 @@ namespace Mytems.Controllers
         // GET: Admins/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["User"] == null || !(Session["User"] is Admin))
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -102,7 +111,9 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
         {
-            if(id == null)
+            if (Session["User"] == null || !(Session["User"] is Admin))
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -131,6 +142,8 @@ namespace Mytems.Controllers
         // GET: Admins/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["User"] == null || !(Session["User"] is Admin))
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -148,6 +161,8 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["User"] == null || !(Session["User"] is Admin))
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             Admin admin = db.Admins.Find(id);
             db.Admins.Remove(admin);
             db.SaveChanges();

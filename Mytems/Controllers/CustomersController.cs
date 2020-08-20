@@ -19,26 +19,26 @@ namespace Mytems.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            // TODO check for permission (admin)
+            if (Session["User"] == null || !(Session["User"] is Admin))
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             return View(db.Customers.ToList());
         }
         
         public ActionResult Dashboard()
         {
-            //TODO pass real suggested for you products list (as SuggestedProducts in the viewbag)
-            User user = Session["User"] as User;
-            if (user is Customer)
-            {
-                ViewBag.SuggestedProducts = db.Products.ToList();
-                return View();
-            }
-            else return View("~/Views/Errors/Unauthorized.cshtml");
+            if (Session["User"] == null || !(Session["User"] is Admin) && !(Session["User"] is Customer))
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
+            //TODO pass real suggested for you products list (as SuggestedProducts in the viewbag) 
+            //Can admin access this function without bugs related to suggested products?
+            ViewBag.SuggestedProducts = db.Products.ToList();
+            return View();
         }
         
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {
-            // TODO check for permission (admin or possibly this customer)
+            if (Session["User"] == null || !(Session["User"] is Admin) && (Session["User"] as User).UserID != id)
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -102,7 +102,8 @@ namespace Mytems.Controllers
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
         {
-            // TODO check for permission (admin or this customer)
+            if (Session["User"] == null || !(Session["User"] is Admin) && (Session["User"] as User).UserID != id)
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -122,7 +123,8 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
         {
-            // TODO check for permission (admin or this customer)
+            if (Session["User"] == null || !(Session["User"] is Admin) && (Session["User"] as User).UserID != id)
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -152,7 +154,8 @@ namespace Mytems.Controllers
         // GET: Customers/Delete/5
         public ActionResult Delete(int? id)
         {
-            // TODO check for permission (admin or this customer)
+            if (Session["User"] == null || !(Session["User"] is Admin) && (Session["User"] as User).UserID != id)
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -170,7 +173,8 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id)
         {
-            // TODO check for permission (admin or this customer)
+            if (Session["User"] == null || !(Session["User"] is Admin) && (Session["User"] as User).UserID != id)
+                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
