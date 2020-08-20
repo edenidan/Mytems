@@ -35,9 +35,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                <input id="DemiPrice" class="form-control text-box single-line" />
+
+                <div style="visibility:hidden;height:0px;width:0px;">
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
+
         </div>
 
         <div class="form-group">
@@ -59,10 +64,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" id="submitCreateForm" style="visibility:hidden" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
+
+    <input type="button" onclick="ConvertNSubmit()" value="Create" />
 }
 
 
@@ -74,3 +81,21 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    function ConvertNSubmit() {
+        if ($("#DemiPrice").val() === "") {
+            $("form").submit()
+            return;
+        }
+        let newTicker = currencyTickers[getCookie("currency")]
+        $.ajax(`https://api.exchangeratesapi.io/latest?symbols=USD&base=${newTicker}`).done(function (data) {
+            let factor = data["rates"]["USD"];
+            console.log(factor)
+            let oldPrice = Number($("#DemiPrice").val().replace(",", ""));
+
+            $("#Price").val((factor * oldPrice).toString())
+            $("form").submit()
+        });
+    }
+</script>

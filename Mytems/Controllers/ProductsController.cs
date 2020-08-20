@@ -95,7 +95,7 @@ namespace Mytems.Controllers
                 ModelState.AddModelError("", "An error occurred while adding the product, please contact an administrator if the problem persists.");
             }
 
-            return View(createProduct);
+            return View(createProduct.ToProduct());
         }
 
         // GET: Products/Edit/5
