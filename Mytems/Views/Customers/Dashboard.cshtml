@@ -1,8 +1,8 @@
 ﻿@using Mytems.Models
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Dashboard";
+    ViewBag.Title = "Dashboard";
 
 }
 
@@ -87,14 +87,153 @@
 <h2>Suggested for you</h2>
 
 
-@foreach (Product p in ViewBag.SuggestedProducts)
+<table style="margin-left:auto;margin-right:auto;">
+    <tr>
+        @{var p = ViewBag.SuggestedProducts[0];}
+        <td>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@p.ImagePath" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@p.Name</h5>
+                    <p class="card-text">
+                        Price: <div class="price-display">$@p.Price</div>
+                        <br />
+                        Description: @p.Description
+                    </p>
+                    <a href="/Products/Details/@p.ProductID" class="btn btn-primary">View</a>
+                </div>
+            </div>
+
+        </td>
+        @{p = ViewBag.SuggestedProducts[1];}
+        <td>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@p.ImagePath" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@p.Name</h5>
+                    <p class="card-text">
+                        Price: <div class="price-display">$@p.Price</div>
+                        <br />
+                        Description: @p.Description
+                    </p>
+                    <a href="/Products/Details/@p.ProductID" class="btn btn-primary">View</a>
+                </div>
+            </div>
+
+        </td>
+        @{p = ViewBag.SuggestedProducts[2];}
+        <td>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@p.ImagePath" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@p.Name</h5>
+                    <p class="card-text">
+                        Price: <div class="price-display">$@p.Price</div>
+                        <br />
+                        Description: @p.Description
+                    </p>
+                    <a href="/Products/Details/@p.ProductID" class="btn btn-primary">View</a>
+                </div>
+            </div>
+
+        </td>
+        @{p = ViewBag.SuggestedProducts[3];}
+        <td>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@p.ImagePath" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@p.Name</h5>
+                    <p class="card-text">
+                        Price: <div class="price-display">$@p.Price</div>
+                        <br />
+                        Description: @p.Description
+                    </p>
+                    <a href="/Products/Details/@p.ProductID" class="btn btn-primary">View</a>
+                </div>
+            </div>
+
+        </td>
+    </tr>
+    <tr>
+        @{p = ViewBag.SuggestedProducts[4];}
+        <td>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@p.ImagePath" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@p.Name</h5>
+                    <p class="card-text">
+                        Price: <div class="price-display">$@p.Price</div>
+                        <br />
+                        Description: @p.Description
+                    </p>
+                    <a href="/Products/Details/@p.ProductID" class="btn btn-primary">View</a>
+                </div>
+            </div>
+
+        </td>
+        @{p = ViewBag.SuggestedProducts[5];}
+        <td>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@p.ImagePath" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@p.Name</h5>
+                    <p class="card-text">
+                        Price: <div class="price-display">$@p.Price</div>
+                        <br />
+                        Description: @p.Description
+                    </p>
+                    <a href="/Products/Details/@p.ProductID" class="btn btn-primary">View</a>
+                </div>
+            </div>
+
+        </td>
+        @{p = ViewBag.SuggestedProducts[6];}
+        <td>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@p.ImagePath" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@p.Name</h5>
+                    <p class="card-text">
+                        Price: <div class="price-display">$@p.Price</div>
+                        <br />
+                        Description: @p.Description
+                    </p>
+                    <a href="/Products/Details/@p.ProductID" class="btn btn-primary">View</a>
+                </div>
+            </div>
+
+        </td>
+        @{p = ViewBag.SuggestedProducts[7];}
+        <td>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@p.ImagePath" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@p.Name</h5>
+                    <p class="card-text">
+                        Price: <div class="price-display">$@p.Price</div>
+                        <br />
+                        Description: @p.Description
+                    </p>
+                    <a href="/Products/Details/@p.ProductID" class="btn btn-primary">View</a>
+                </div>
+            </div>
+
+        </td>
+    </tr>
+</table>
+
+@*@foreach (Product p in ViewBag.SuggestedProducts)
 {
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="@p.ImagePath" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">@p.Name</h5>
-            <p class="card-text">@p.Description</p>
+            <p class="card-text">
+                Price: <div class="price-display">$@p.Price</div>
+                <br />
+                Description: @p.Description
+            </p>
             <a href="/Products/Details/@p.ProductID" class="btn btn-primary">View</a>
         </div>
     </div>
-}
+}*@
