@@ -83,11 +83,14 @@
                                         @if (Session["User"] != null)
                                         {
                                             if (Session["User"] is Mytems.Models.Customer)
-                                            { <li><a href="/Customers/Dashboard">My Dashboard</a></li>}
+                                            {
+                                                <li><a href="/Customers/Dashboard">My Dashboard</a></li>}
                                             else if (Session["User"] is Mytems.Models.Seller)
-                                            { <li><a href="/Sellers/Dashboard">My Dashboard</a></li>}
+                                            {
+                                                <li><a href="/Sellers/Dashboard">My Dashboard</a></li>}
                                             else if (Session["User"] is Mytems.Models.Admin)
-                                            { <li><a href="/Admins/Dashboard">My Dashboard</a></li>}
+                                            {
+                                                <li><a href="/Admins/Dashboard">My Dashboard</a></li>}
                                             <li><a href="/Home/Logout">Log out</a></li>
                                         }
                                         else
@@ -176,14 +179,6 @@
                 </div>
                 <!-- Footer bottom -->
                 <div class="row">
-                    <div class="col-xl-7 col-lg-7 col-md-7">
-                        <div class="footer-copy-right">
-                            <p>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </p>
-                        </div>
-                    </div>
                     <div class="col-xl-5 col-lg-5 col-md-5">
                         <div class="footer-copy-right f-right">
                             <!-- social -->
@@ -251,13 +246,14 @@
             "Dollar": "USD",
             "Euro": "EUR"
         };
+       
+        if (getCookie("currency") === null)
+            setCookie("currency", "Dollar");
 
         currency = getCookie("currency")
         $("#currencies span.current").text(currency + " - " + currencySymbols[currency])
 
-        if (getCookie("currency") === null)
-            setCookie("currency", "Dollar");
-        else if (getCookie("currency") !== "Dollar")
+        if (getCookie("currency") !== "Dollar")
             updatePrices("Dollar", getCookie("currency"));
 
         $("#currencies li").click(function () {
