@@ -19,31 +19,29 @@ namespace Mytems.Controllers
         // GET: Sellers
         public ActionResult Index()
         {
-            if (Session["User"] == null || !(Session["User"] is Admin))
-                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
+            if (!(Session["User"] is Admin))
+                return View("~/Views/Errors/Unauthorized.cshtml");
+
             return View(db.Sellers.ToList());
         }
 
         public ActionResult Dashboard()
         {
-            if (Session["User"] == null || !(Session["User"] is Admin) && !(Session["User"] is Seller))
-                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
+            if (!(Session["User"] is Seller))
+                return View("~/Views/Errors/Unauthorized.cshtml");
+
             return View();
         }
         // GET: Sellers/Details/5
         public ActionResult Details(int? id)
         {
-            if (Session["User"] == null || !(Session["User"] is Admin) && (Session["User"] as User).UserID != id)
-                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             Seller seller = db.Sellers.Find(id);
             if (seller == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(seller);
         }
 
@@ -73,7 +71,7 @@ namespace Mytems.Controllers
                     seller.Rating = null;
                     seller.NumberOfRators = 0;
 
-                    if (db.Users.Where(a => a.Username == seller.Username).Any())
+                    if (db.Users.Any(u => u.Username == seller.Username))
                     {
                         ModelState.AddModelError("Username", "This username is already taken.");
                         return View(seller);
@@ -96,17 +94,16 @@ namespace Mytems.Controllers
         // GET: Sellers/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (Session["User"] == null || !(Session["User"] is Admin) && (Session["User"] as User).UserID != id)
-                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
+            User user = Session["User"] as User;
+            if (!(user is Admin) && user?.UserID != id)
+                return View("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             Seller seller = db.Sellers.Find(id);
             if (seller == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(seller);
         }
 
@@ -117,16 +114,16 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
         {
-            if (Session["User"] == null || !(Session["User"] is Admin) && (Session["User"] as User).UserID != id)
-                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
+            User user = Session["User"] as User;
+            if (!(user is Admin) && user?.UserID != id)
+                return View("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             Seller sellerToUpdate = db.Sellers.Find(id);
             if (TryUpdateModel(sellerToUpdate, new[] { "Username", "Password", "FirstName", "LastName", "PhoneNumber", "Location" }))
             {
-                if (db.Users.Where(a => a.UserID != sellerToUpdate.UserID && a.Username == sellerToUpdate.Username).Any())
+                if (db.Users.Where(u => u.UserID != sellerToUpdate.UserID).Any(u => u.Username == sellerToUpdate.Username))
                 {
                     ModelState.AddModelError("Username", "This username is already taken.");
                     return View(sellerToUpdate);
@@ -148,17 +145,16 @@ namespace Mytems.Controllers
         // GET: Sellers/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (Session["User"] == null || !(Session["User"] is Admin) && (Session["User"] as User).UserID != id)
-                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
+            User user = Session["User"] as User;
+            if (!(user is Admin) && user?.UserID != id)
+                return View("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             Seller seller = db.Sellers.Find(id);
             if (seller == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(seller);
         }
 
@@ -167,17 +163,16 @@ namespace Mytems.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id)
         {
-            if (Session["User"] == null || !(Session["User"] is Admin) && (Session["User"] as User).UserID != id)
-                return RedirectToAction("~/Views/Errors/Unauthorized.cshtml");
+            User user = Session["User"] as User;
+            if (!(user is Admin) && user?.UserID != id)
+                return View("~/Views/Errors/Unauthorized.cshtml");
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             Seller seller = db.Sellers.Find(id);
             if (seller == null)
-            {
                 return HttpNotFound();
-            }
+
             db.Users.Remove(seller);
             db.SaveChanges();
             return RedirectToAction("Index");
