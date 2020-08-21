@@ -5,8 +5,12 @@
     ViewBag.Title = "Dashboard";
 
 }
+<div class="jumbotron">
+<h1 class="display-1 text-center" style="margin-left:0%;font-family:Bahnschrift;">Dashboard</h1>
+</div>
 
-<h2>Dashboard Customer</h2>
+
+<h1 class="display-4 text-center" style="font-family:Bahnschrift;">Categories</h1>
 
 <style>
 
@@ -82,12 +86,17 @@
     </table>
 </div>
 
+<hr />
 
+<h1 class="display-4 text-center" style="font-family:Bahnschrift;">Suggested for you</h1>
 
-<h2>Suggested for you</h2>
+<style>
+    .forUTable tr td div {
+        margin: 20px;
+    }
+</style>
 
-
-<table style="margin-left:auto;margin-right:auto;">
+<table class="forUTable" style="margin-left:auto;margin-right:auto;">
     <tr>
         @{var p = ViewBag.SuggestedProducts[0];}
         <td>
@@ -221,19 +230,20 @@
         </td>
     </tr>
 </table>
+<hr />
 
 @*@foreach (Product p in ViewBag.SuggestedProducts)
-{
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="@p.ImagePath" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">@p.Name</h5>
-            <p class="card-text">
-                Price: <div class="price-display">$@p.Price</div>
-                <br />
-                Description: @p.Description
-            </p>
-            <a href="/Products/Details/@p.ProductID" class="btn btn-primary">View</a>
+    {
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="@p.ImagePath" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@p.Name</h5>
+                <p class="card-text">
+                    Price: <div class="price-display">$@p.Price</div>
+                    <br />
+                    Description: @p.Description
+                </p>
+                <a href="/Products/Details/@p.ProductID" class="btn btn-primary">View</a>
+            </div>
         </div>
-    </div>
-}*@
+    }*@
