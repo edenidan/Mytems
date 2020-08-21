@@ -136,7 +136,7 @@ namespace Mytems.Controllers
                 return HttpNotFound();
 
             // check for permission
-            if (!user.CanEditAndDeleteProduct(productInDB))
+            if (user == null || !user.CanEditAndDeleteProduct(productInDB))
                 return View("~/Views/Errors/Unauthorized.cshtml");
 
             if (user is Seller) // remove validation for seller id field
@@ -193,7 +193,7 @@ namespace Mytems.Controllers
             
             User user = Session["User"] as User;
             // check for permission
-            if (!user.CanEditAndDeleteProduct(product))
+            if (user == null || !user.CanEditAndDeleteProduct(product))
                 return View("~/Views/Errors/Unauthorized.cshtml");
 
             return View(new DetailsProduct(product));
@@ -213,7 +213,7 @@ namespace Mytems.Controllers
 
             User user = Session["User"] as User;
             // check for permission
-            if (!user.CanEditAndDeleteProduct(product))
+            if (user == null || !user.CanEditAndDeleteProduct(product))
                 return View("~/Views/Errors/Unauthorized.cshtml");
 
             // TODO: Delete image
