@@ -27,12 +27,37 @@ namespace Mytems.Controllers
 
         public ActionResult Dashboard()
         {
-            if (!(Session["User"] is Customer))
+            User user = Session["User"] as User;
+            if (!(user is Customer))
                 return View("~/Views/Errors/Unauthorized.cshtml");
 
             // TODO pass real suggested for you products list
-            ViewBag.SuggestedProducts = db.Products.Take(8).ToList();
+            ViewBag.SuggestedProducts = GetSuggestions(user as Customer, 8);
             return View();
+        }
+
+        //AI
+        private List<Product> GetSuggestions(Customer c, int count)
+        {
+            var categoryViews = c.CategoryViews;
+
+
+
+            int done = 0;
+            List<Product> result = new List<Product>();
+            while (done < 8)
+            {
+                if (categoryViews.Count == 0)
+                    return result.Concat(db.Products.OrderByDescending(p => p.NumberOfViews).Take(count-done)).ToList();
+
+                int maxVal = categoryViews.Values.Max();
+                string favoriteCategory = categoryViews.Keys.Where(k => categoryViews[k] == maxVal).FirstOrDefault();
+                categoryViews.Remove(favoriteCategory);
+
+                result = result.Concat(db.Products.Where(p => p.Category.ToString() == favoriteCategory).OrderByDescending(p => p.NumberOfViews).Take(count - done)).ToList();
+            }
+            return result;
+
         }
 
         // GET: Customers/Details/5
