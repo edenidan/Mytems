@@ -72,28 +72,28 @@
                                     <ul>
                                         @if (Session["User"] != null)
                                         {
-                                            if (Session["User"] is Mytems.Models.Customer)
-                                            {
-                                                <li><a href="/Customers/Dashboard">My Dashboard</a></li>}
-                                            else if (Session["User"] is Mytems.Models.Seller)
-                                            {
-                                                <li><a href="/Sellers/Dashboard">My Dashboard</a></li>}
-                                            else if (Session["User"] is Mytems.Models.Admin)
-                                            {
-                                                <li><a href="/Admins/Dashboard">My Dashboard</a></li>}
-                                            <li><a href="/Home/Logout">Log out</a></li>
+                                        if (Session["User"] is Mytems.Models.Customer)
+                                        {
+                                        <li><a href="/Customers/Dashboard">My Dashboard</a></li>}
+                                        else if (Session["User"] is Mytems.Models.Seller)
+                                        {
+                                        <li><a href="/Sellers/Dashboard">My Dashboard</a></li>}
+                                        else if (Session["User"] is Mytems.Models.Admin)
+                                        {
+                                        <li><a href="/Admins/Dashboard">My Dashboard</a></li>}
+                                        <li><a href="/Home/Logout">Log out</a></li>
                                         }
                                         else
                                         {
-                                            <div class="dropdown">
-                                                <button style="height : 10px;" class="btn btn-secondary btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Sign Up
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="/customers/create">Customer</a>
-                                                    <a class="dropdown-item" href="/sellers/create">Seller</a>
-                                                </div>
+                                        <div class="dropdown">
+                                            <button style="height : 10px;" class="btn btn-secondary btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Sign Up
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="/customers/create">Customer</a>
+                                                <a class="dropdown-item" href="/sellers/create">Seller</a>
                                             </div>
+                                        </div>
                                         }
                                     </ul>
                                 </div>
@@ -138,7 +138,7 @@
                                     </li>
                                     @if (Session["User"] == null)
                                     {
-                                        <li class="d-none d-lg-block"> <a href="/home/login" class="btn header-btn">Sign in</a></li>
+                                    <li class="d-none d-lg-block"> <a href="/home/login" class="btn header-btn">Sign in</a></li>
                                     }
                                 </ul>
                             </div>
@@ -236,7 +236,7 @@
             "Dollar": "USD",
             "Euro": "EUR"
         };
-       
+
         if (getCookie("currency") === null)
             setCookie("currency", "Dollar");
 
@@ -268,7 +268,7 @@
 
         String.prototype.replaceAll = function (str1, str2, ignore) {
             return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof (str2) == "string") ? str2.replace(/\$/g, "$$$$") : str2);
-        } 
+        }
 
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
