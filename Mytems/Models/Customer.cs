@@ -11,17 +11,15 @@ namespace Mytems.Models
     public class Customer : NonAdmin
     {
         [Required, ScaffoldColumn(false)]
-        public string CategoryViewsJson { get; set; } // JSON representation of Dictionary<string, int>, from a caterory to the number of times the customer viewed it
+        public string CategoryViewsJson { get; set; } // JSON representation of Dictionary<Category, int>, from a category to the number of times the customer viewed it
         [NotMapped]
-        public Dictionary<string, int> CategoryViews => JsonConvert.DeserializeObject<Dictionary<string, int>>(CategoryViewsJson); // TODO use JsonConvert to deserialize CategoryViewsJson
+        public Dictionary<Category, int> CategoryViews => JsonConvert.DeserializeObject<Dictionary<Category, int>>(CategoryViewsJson);
 
-        public void IncreaseCategory(string category)
+        public void IncrementViewsFor(Category category)
         {
-            var d = this.CategoryViews;
-            if (d.ContainsKey(category))
-                d[category] = d[category] + 1;
-            this.CategoryViewsJson = JsonConvert.SerializeObject(d);
-            return;
+            var dict = CategoryViews;
+            dict[category] = dict.ContainsKey(category) ? dict[category] + 1 : 1;
+            CategoryViewsJson = JsonConvert.SerializeObject(dict);
         }
     }
 }

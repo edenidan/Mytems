@@ -16,3 +16,20 @@ textarea {
     max-width: 280px;
 }
 
+a {
+    color: #4D90FE;
+}
+
+a:hover {
+    color: #4D90FE;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.categories-wrapper img {
+    object-fit: contain;
+    border: 1px solid;
+    border-color: black;
+    box-shadow: 2px 5px 10px grey;
+    width: 200px;
+}

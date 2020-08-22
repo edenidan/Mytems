@@ -27,38 +27,47 @@ namespace Mytems.Controllers
 
         public ActionResult Dashboard()
         {
-            User user = Session["User"] as User;
-            if (!(user is Customer))
+            Customer customer = Session["User"] as Customer;
+            if (customer == null)
                 return View("~/Views/Errors/Unauthorized.cshtml");
 
-            // TODO pass real suggested for you products list
-            ViewBag.SuggestedProducts = GetSuggestions(user as Customer, 8);
+            ViewBag.SuggestedProducts = GetSuggestions(customer, 8);
             return View();
         }
 
         //AI
-        private List<Product> GetSuggestions(Customer c, int count)
+        private List<Product> GetSuggestions(Customer customer, int count)
         {
-            var categoryViews = c.CategoryViews;
-
-
-
-            int done = 0;
             List<Product> result = new List<Product>();
-            while (done < 8)
+            var categoryViews = customer.CategoryViews;
+
+            // All the categories ordered by views
+            var orderedCategories = ((Category[])Enum.GetValues(typeof(Category)))
+                .GroupBy(c => categoryViews.ContainsKey(c) ? categoryViews[c] : 0)
+                .OrderByDescending(group => group.Key)
+                .SelectMany(group => group);
+
+            foreach (Category category in orderedCategories)
             {
-                if (categoryViews.Count == 0)
-                    return result.Concat(db.Products.OrderByDescending(p => p.NumberOfViews).Take(count-done)).ToList();
+                if (result.Count >= count)
+                    break;
 
-                int maxVal = categoryViews.Values.Max();
-                string favoriteCategory = categoryViews.Keys.Where(k => categoryViews[k] == maxVal).FirstOrDefault();
-                categoryViews.Remove(favoriteCategory);
-
-                result = result.Concat(db.Products.Where(p => p.Category.ToString() == favoriteCategory).OrderByDescending(p => p.NumberOfViews).Take(count - done)).ToList();
+                var mostViewedProductsInCategory = db.Products
+                    .Where(p => p.Category == category)
+                    .OrderByDescending(p => p.NumberOfViews)
+                    .Take(count - result.Count)
+                    .ToList();
+                result.AddRange(mostViewedProductsInCategory);
             }
+
+            if (result.Count < count) // fill with fake products if we there aren't enough
+                result.AddRange(Enumerable.Repeat(new ViewModels.Products.CreateProduct
+                {
+                    Name = "Fake product",
+                    Description = "Fake Description"
+                }.ToProduct(), count - result.Count));
+
             return result;
-
-
         }
 
         // GET: Customers/Details/5
