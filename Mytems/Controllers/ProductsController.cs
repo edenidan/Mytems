@@ -35,15 +35,12 @@ namespace Mytems.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-           
-
             Product product = db.Products.Where(p => p.ProductID == id).Include(p => p.Seller).FirstOrDefault();
             if (product == null)
                 return HttpNotFound();
 
-            Customer c = Session["User"] as Customer;
-            if (c != null)
-                c.IncreaseCategory(product.Category.ToString());
+            if (Session["User"] is Customer customer)
+                customer.IncrementViewsFor(product.Category);
             product.NumberOfViews++;
 
             return View(new DetailsProduct(product));
