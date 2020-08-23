@@ -60,12 +60,12 @@ namespace Mytems.Controllers
                 result.AddRange(mostViewedProductsInCategory);
             }
 
-            if (result.Count < count) // fill with fake products if we there aren't enough
-                result.AddRange(Enumerable.Repeat(new ViewModels.Products.CreateProduct
-                {
-                    Name = "Fake product",
-                    Description = "Fake Description"
-                }.ToProduct(), count - result.Count));
+            //if (result.Count < count) // fill with fake products if there aren't enough
+            //    result.AddRange(Enumerable.Repeat(new ViewModels.Products.CreateProduct
+            //    {
+            //        Name = "Fake product",
+            //        Description = "Fake Description"
+            //    }.ToProduct(), count - result.Count));
 
             return result;
         }
