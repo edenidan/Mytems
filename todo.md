@@ -11,9 +11,9 @@
 - [ ] HTML5
     - [ ] canvas
     - [ ] video
-    - [ ] aside, footer, header, nav, section
+    - [x] aside, footer, header, nav, section
 - [ ] CSS3
-    - [ ] text-shadow
+    - [x] text-shadow
     - [x] transition
     - [ ] multiple-columns
     - [x] font-face
@@ -22,7 +22,7 @@
     - [x] Product suggestions by statistics
     - [ ] 2 graphs with d3.js (in Admin Dashboard)
     - [x] Web service (currency conversion of prices)
-    - [ ] Map (show seller's address on a map)
+    - [x] Map (show seller's address on a map)
     - [ ] Facebook or Twitter API
 
 ## Optional
