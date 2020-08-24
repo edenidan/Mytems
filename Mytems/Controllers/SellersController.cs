@@ -9,6 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Mytems.Models;
+using Mytems.ViewModels.Sellers;
 
 namespace Mytems.Controllers
 {
@@ -17,12 +18,17 @@ namespace Mytems.Controllers
         private MytemsDB db = new MytemsDB();
 
         // GET: Sellers
-        public ActionResult Index()
+        public ActionResult Index(SellerSearchOptions searchOptions)
         {
             if (!(Session["User"] is Admin))
                 return View("~/Views/Errors/Unauthorized.cshtml");
 
-            return View(db.Sellers.ToList());
+            var searchedSellers = searchOptions
+                .ApplyOn(db.Sellers)
+                .ToList();
+
+            ViewData["SearchOptions"] = searchOptions;
+            return View(searchedSellers);
         }
 
         public ActionResult Dashboard()
