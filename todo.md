@@ -8,11 +8,11 @@
 - [ ] 1 query that uses group by
 - [x] Login system + admin has higher permissions
 - [x] use JQuery and Ajax
-- [ ] HTML5
+- [x] HTML5
     - [x] canvas
     - [x] video
     - [x] aside, footer, header, nav, section
-- [ ] CSS3
+- [x] CSS3
     - [x] text-shadow
     - [x] transition
     - [x] multiple-columns
@@ -27,4 +27,3 @@
 
 ## Optional
 - [ ] Ratings table
-- [x] Search in sellers and customers (for admins)
