@@ -3,5 +3,89 @@
     ViewBag.Title = "Dashboard";
 }
 
-<h2>Dashboard</h2>
+<style>
+    
+    
+</style>
 
+<h2 style="text-align: center;">Dashboard</h2>
+
+<!-- a div where the graph will take place -->
+<!--<div id="my_dataviz"></div>-->
+<canvas id="myChart" style="height: 250%; width: 50%; display: inline-block"></canvas>
+<canvas id="second" style="height: 100%; width: 50%; display: inline-block"></canvas>
+
+@section scripts{
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <!--<script src="~/Scripts/columnGraph.js" asp-append-version="true"></script>--> <!-- Load d3.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+        $(document).ready(function () {
+            var ctx = $("#myChart").get(0).getContext('2d');
+            var chart = new Chart(ctx, {
+                // The type of chart to create
+                type: 'bar',
+
+                // The data for the dataset
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                    datasets: [{
+                        label: 'My First dataset',
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: @ViewBag.columnGraphData
+                    }]
+                },
+
+                // Configuration options
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    responsive: false,
+                    maintainAspectRatio: false
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var ctx = $("#second").get(0).getContext('2d');
+            var chart = new Chart(ctx, {
+                // The type of chart to create
+                type: 'line',
+
+                // The data for the dataset
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                    datasets: [{
+                        label: 'My First dataset',
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: @ViewBag.columnGraphData
+                    }]
+                },
+
+                // Configuration options
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    responsive: false,
+                    maintainAspectRatio: false
+                }
+            });
+        });
+    </script>
+}
+
+<!--<script src="https://d3js.org/d3.v4.js"></script>-->

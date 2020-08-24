@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Mytems.Models;
@@ -29,8 +30,19 @@ namespace Mytems.Controllers
         {
             if (!(Session["User"] is Admin))
                 return View("~/Views/Errors/Unauthorized.cshtml");
-
+            ViewBag.columnGraphData = numberOfSalesPerDay(5);
             return View();
+        }
+
+        public string numberOfSalesPerDay(int days)
+        {
+            StringBuilder sb = new StringBuilder().Append("[");
+            for (int i = 0; i <= days; i++) {
+                sb.Append((from prod in db.Products.ToList()
+                           where prod.SoldAt.HasValue && (DateTime.Now - prod.SoldAt).Value.Days == i
+                           select prod.ProductID).Count().ToString() + ",");
+            }
+            return sb.Remove(sb.Length - 1, 1).Append("]").ToString();
         }
 
         // GET: Admins/Details/5
