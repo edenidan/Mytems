@@ -3,13 +3,13 @@
 - [x] At least 3 models
 - [x] For each model, support Create, Update, Delete, List, Search
 - [x] Only use Entity Framework for accessing the database (no SQL)
-- [ ] 2 search queries with each at least 3 parameters and UI for it
+- [x] 2 search queries with each at least 3 parameters and UI for it
 - [ ] 2 queries that use join
 - [ ] 1 query that uses group by
 - [x] Login system + admin has higher permissions
 - [x] use JQuery and Ajax
 - [ ] HTML5
-    - [ ] canvas
+    - [x] canvas
     - [ ] video
     - [x] aside, footer, header, nav, section
 - [ ] CSS3
