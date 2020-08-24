@@ -55,6 +55,7 @@ namespace Mytems.Controllers
             if (!(user is Admin || user is Seller))
                 return View("~/Views/Errors/Unauthorized.cshtml");
 
+            ViewBag.SellerID = new SelectList(db.Sellers, "UserID", "Username");
             return View();
         }
 
@@ -99,6 +100,7 @@ namespace Mytems.Controllers
                 ModelState.AddModelError("", "An error occurred while adding the product, please contact an administrator if the problem persists.");
             }
 
+            ViewBag.SellerID = new SelectList(db.Sellers, "UserID", "Username");
             return View(createProduct.ToProduct());
         }
 

@@ -1,4 +1,9 @@
 ﻿
+#sig-canvas {
+    border: 2px dotted #CCCCCC;
+    border-radius: 15px;
+    cursor: crosshair;
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {

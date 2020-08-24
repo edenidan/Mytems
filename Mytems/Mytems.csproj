@@ -303,6 +303,7 @@
     <Content Include="assets\webfonts\fa-solid-900.woff" />
     <Content Include="assets\webfonts\fa-solid-900.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\canvas_Signature.js" />
     <Content Include="Scripts\columnGraph.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -336,11 +337,14 @@
     <Compile Include="Models\Seller.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Admins\AdminSearchOptions.cs" />
+    <Compile Include="ViewModels\Customers\CustomerSearchOptions.cs" />
     <Compile Include="ViewModels\Products\CreateProduct.cs" />
     <Compile Include="ViewModels\Products\DetailsProduct.cs" />
     <Compile Include="ViewModels\Products\EditProduct.cs" />
     <Compile Include="ViewModels\Products\IndexProduct.cs" />
     <Compile Include="ViewModels\Products\ProductSearchOptions.cs" />
+    <Compile Include="ViewModels\Sellers\SellerSearchOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -380,6 +384,9 @@
     <Content Include="Views\Admins\Edit.cshtml" />
     <Content Include="Views\Admins\Index.cshtml" />
     <Content Include="Views\Admins\Dashboard.cshtml" />
+    <Content Include="Views\Admins\_Search.cshtml" />
+    <Content Include="Views\Customers\_Search.cshtml" />
+    <Content Include="Views\Sellers\_Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

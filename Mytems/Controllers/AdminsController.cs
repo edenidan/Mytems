@@ -10,6 +10,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Mytems.Models;
+using Mytems.ViewModels.Admins;
 
 namespace Mytems.Controllers
 {
@@ -18,12 +19,17 @@ namespace Mytems.Controllers
         private MytemsDB db = new MytemsDB();
 
         // GET: Admins
-        public ActionResult Index()
+        public ActionResult Index(AdminSearchOptions searchOptions)
         {
             if (!(Session["User"] is Admin))
                 return View("~/Views/Errors/Unauthorized.cshtml");
 
-            return View(db.Admins.ToList());
+            var searchedAdmins = searchOptions
+                .ApplyOn(db.Admins)
+                .ToList();
+
+            ViewData["SearchOptions"] = searchOptions;
+            return View(searchedAdmins);
         }
 
         public ActionResult Dashboard()
