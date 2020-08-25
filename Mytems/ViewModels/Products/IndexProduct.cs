@@ -20,6 +20,9 @@ namespace Mytems.ViewModels.Products
         public Category Category { get; set; }
         public string Description { get; set; }
 
+        [Display(Name = "Image")]
+        public string ImagePath { get; set; }
+
         public IndexProduct(Product product)
         {
             ProductID = product.ProductID;
@@ -29,6 +32,7 @@ namespace Mytems.ViewModels.Products
             SellerUsername = product.Seller.Username;
             Category = product.Category;
             Description = product.Description;
+            ImagePath = product.ImagePath;
         }
 
         public bool CanBeEditedBy(User user) => user is Admin || (user is Seller && user.Username == SellerUsername);

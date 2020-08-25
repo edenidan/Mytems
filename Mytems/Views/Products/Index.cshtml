@@ -6,42 +6,48 @@
     User user = Session["User"] as User;
 }
 
+<div style="margin-left:5%;">
 <h2>Index</h2>
+    @{Html.RenderPartial("_Search", ViewData["SearchOptions"]);}
 
-@{Html.RenderPartial("_Search", ViewData["SearchOptions"]);}
-
-<p>
-    @if (user is Seller || user is Admin)
-    {
-        @Html.ActionLink("Create New", "Create")
-    }
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sold)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SellerUsername)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <p>
+        @if (user is Seller || user is Admin)
+        {
+            @Html.ActionLink("Create New", "Create")
+        }
+    </p>
+    <table class="table">
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sold)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SellerUsername)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <img src="@item.ImagePath" />
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -75,6 +81,7 @@
                 }
             </td>
         </tr>
-    }
+        }
+</div>
 
 </table>
