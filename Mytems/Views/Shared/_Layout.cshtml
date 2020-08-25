@@ -53,17 +53,11 @@
                                         <a href="/Home/Index" class="navbar-left"><img src="@Url.Content("/assets/img/logo/logo_black.png")" alt="" style="display: block; max-width: 100px; height: auto;"></a>
 
                                     </div>
-                                    <div class="select-this" id="currencies">
-                                        <form action="#">
-                                            <div class="select-itms">
-                                                <select name="select">
-                                                    <option>Shekel - ₪</option>
-                                                    <option>Dollar - $</option>
-                                                    <option>Euro - €</option>
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </div>
+                                    <select id="currencies">
+                                        <option value="ILS">Shekel - ₪</option>
+                                        <option value="USD">Dollar - $</option>
+                                        <option value="EUR">Euro - €</option>
+                                    </select>
                                     <ul class="contact-now">
                                         <li>+000 1234 5678</li>
                                     </ul>
@@ -199,7 +193,7 @@
 
     <!-- Scrollup, nice-select, sticky -->
     <script src="@Url.Content("/assets/js/jquery.scrollUp.min.js")"></script>
-    <script src="@Url.Content("/assets/js/jquery.nice-select.min.js")"></script>
+    @*<script src="@Url.Content("/assets/js/jquery.nice-select.min.js")"></script>*@
     <script src="@Url.Content("/assets/js/jquery.sticky.js")"></script>
 
     <!-- contact js -->
@@ -219,44 +213,42 @@
 
     <script>
         var currencySymbols = {
-            "Shekel": "₪",
-            "Dollar": "$",
-            "Euro": "€"
+            "ILS": "₪",
+            "USD": "$",
+            "EUR": "€",
         };
 
-        var currencyTickers = {
-            "Shekel": "ILS",
-            "Dollar": "USD",
-            "Euro": "EUR"
+        var currencyNames = {
+            "ILS": "Shekel",
+            "USD": "Dollar",
+            "EUR": "Euro",
         };
 
-        if (getCookie("currency") === null)
-            setCookie("currency", "Dollar");
+        if (getCookie("currencyTicker") === null)
+            setCookie("currencyTicker", "USD");
 
-        currency = getCookie("currency")
-        $("#currencies span.current").text(currency + " - " + currencySymbols[currency])
+        currencyTicker = getCookie("currencyTicker");
+        $("#currencies").val(currencyTicker);
 
-        if (getCookie("currency") !== "Dollar")
-            updatePrices("Dollar", getCookie("currency"));
+        if (getCookie("currencyTicker") !== "USD")
+            updatePrices("USD", getCookie("currencyTicker"));
 
-        $("#currencies li").click(function () {
-            var oldCurrency = getCookie("currency");
-            var newCurrency = this.innerText.split(" - ")[0];
-            setCookie("currency", newCurrency);
-            updatePrices(oldCurrency, newCurrency);
+        $("#currencies").change(function (event) {
+            var oldTicker = getCookie("currencyTicker");
+            var newTicker = event.target.value;
+            setCookie("currencyTicker", newTicker);
+            updatePrices(oldTicker, newTicker);
         });
 
-        function updatePrices(oldCurrency, newCurrency) {
-            var oldTicker = currencyTickers[oldCurrency];
-            var newTicker = currencyTickers[newCurrency];
-
-            $.ajax(`https://api.exchangeratesapi.io/latest?symbols=${newTicker}&base=${oldTicker}`).done(function (data) {
-                var factor = data["rates"][newTicker];
-                $(".price-display").text(function (index, oldPrice) {
-                    oldPrice = Number(oldPrice.trim().replaceAll(",", "").substring(1));
-                    return currencySymbols[newCurrency] + numberWithCommas((oldPrice * factor).toFixed(2));
+        function updatePrices(oldTicker, newTicker) {
+            $.ajax(`https://api.exchangeratesapi.io/latest?symbols=${newTicker}&base=${oldTicker}`)
+                .done(function (data) {
+                    var factor = data["rates"][newTicker];
+                    $(".price-display").text(function (index, oldPrice) {
+                        oldPrice = Number(oldPrice.trim().replaceAll(",", "").substring(1));
+                        return currencySymbols[newTicker] + numberWithCommas((oldPrice * factor).toFixed(2));
+                    });
                 });
-            });
         }
 
         String.prototype.replaceAll = function (str1, str2, ignore) {
