@@ -8,10 +8,11 @@
 <h2 style="margin-left: 30px">Seller Details</h2>
 
 <style>
-    .card-body{
+    .card-body {
         text-align: center;
     }
-    .card{
+
+    .card {
         display: block;
         margin: 5px auto;
     }
@@ -82,15 +83,15 @@
     User user = Session["User"] as User;
     if (user is Admin)
     {
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
-            @Html.ActionLink("Back to List", "Index")
-        </p>
+        <div style="display: block; margin:30px auto; padding-left: 40%; padding-right: 40%">
+            <a style="display: block; margin:0 auto;" class="btn btn-primary" href="/Sellers/edit/@Model.UserID">Edit</a>
+            <a style="display: block; margin:0 auto;" class="btn btn-danger" href="/Sellers/index">Edit</a>
+        </div>
     }
     else if (user?.UserID == Model.UserID)
     {
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.UserID })
-        </p>
+        <div style="display: block; margin:30px auto; padding-left: 40%; padding-right: 40%">
+            <a style="display: block; margin:0 auto;" class="btn btn-primary" href="/Sellers/edit/@Model.UserID">Edit</a>
+        </div>
     }
 }
