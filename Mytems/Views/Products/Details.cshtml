@@ -1,5 +1,5 @@
 ﻿@model Mytems.ViewModels.Products.DetailsProduct
-
+@using Mytems.Models
 @{
     ViewBag.Title = "Details";
 }
@@ -27,16 +27,14 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-work">
-                    <p>Seller Name: @Html.DisplayFor(model => model.SellerUsername)</p>
-                    @*<a href="">Website Link</a><br />
-                        <a href="">Bootsnipp Profile</a><br />
-                        <a href="">Bootply Profile</a>
-                        <p>SKILLS</p>
-                        <a href="">Web Designer</a><br />
-                        <a href="">Web Developer</a><br />
-                        <a href="">WordPress</a><br />
-                        <a href="">WooCommerce</a><br />
-                        <a href="">PHP, .Net</a><br />*@
+                    <p>Seller Name: &nbsp; &nbsp; @Html.DisplayFor(model => model.SellerUsername)</p>
+                    @if (Model.CanBeEditedBy((Session["User"] as User)))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID })
+                    }
+                    @Html.ActionLink("Back to List", "Index")
+                    <br />
+                    <a href="/sellers/details/@ViewData["sellerID"]">Go to seller</a>
                 </div>
             </div>
             <div class="col-md-8">
@@ -50,10 +48,10 @@
                             <div class="col-md-6">
                                 <p>
                                     <div class="price-display">
-                                        @Html.DisplayFor(model=>model.Price)
-                                </div>
+                                        @Html.DisplayFor(model => model.Price)
+                                    </div>
                                 </p>
-                        </div>
+                            </div>
                         </div>
 
                         <div class="row">
@@ -99,6 +97,5 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
-    @Html.ActionLink("Back to List", "Index")
+
 </p>

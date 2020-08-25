@@ -387,6 +387,7 @@
     <Content Include="Views\Admins\_Search.cshtml" />
     <Content Include="Views\Customers\_Search.cshtml" />
     <Content Include="Views\Sellers\_Search.cshtml" />
+    <Content Include="Views\Home\contact.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

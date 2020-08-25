@@ -59,5 +59,10 @@ namespace Mytems.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult contact()
+        {
+            return View();
+        }
+
     }
 }

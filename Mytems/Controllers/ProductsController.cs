@@ -43,6 +43,12 @@ namespace Mytems.Controllers
                 customer.IncrementViewsFor(product.Category);
             product.NumberOfViews++;
 
+            if(product.NumberOfViews == 100)
+            {
+                //facebook post
+            }
+
+            ViewData["sellerID"] = product.SellerID;
             return View(new DetailsProduct(product));
         }
 
