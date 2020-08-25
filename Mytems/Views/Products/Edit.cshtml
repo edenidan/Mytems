@@ -103,7 +103,7 @@
 
 <script>
     $(document).ready(function () {
-        let newTicker = currencyTickers[getCookie("currency")];
+        let newTicker = getCookie("currencyTicker");
         $.ajax(`https://api.exchangeratesapi.io/latest?symbols=${newTicker}&base=USD`).done(function (data) {
             let factor = data["rates"][newTicker];
             $("#DemiPrice").val($("#Price").val() * factor);
@@ -114,7 +114,7 @@
             $("form").submit()
             return;
         }
-        let newTicker = currencyTickers[getCookie("currency")]
+        let newTicker = getCookie("currencyTicker")
         $.ajax(`https://api.exchangeratesapi.io/latest?symbols=USD&base=${newTicker}`).done(function (data) {
             let factor = data["rates"]["USD"];
             console.log(factor)

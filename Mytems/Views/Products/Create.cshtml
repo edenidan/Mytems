@@ -100,7 +100,7 @@
             $("form").submit()
             return;
         }
-        let newTicker = currencyTickers[getCookie("currency")]
+        let newTicker = getCookie("currencyTicker")
         $.ajax(`https://api.exchangeratesapi.io/latest?symbols=USD&base=${newTicker}`).done(function (data) {
             let factor = data["rates"]["USD"];
             console.log(factor)
