@@ -5,64 +5,78 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 style="margin-left: 30px">Seller Details</h2>
+
+<style>
+    .card-body{
+        text-align: center;
+    }
+    .card{
+        display: block;
+        margin: 5px auto;
+    }
+</style>
 
 <div>
-    <h4>Seller</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Location.Address)
-        </dt>
-
-        <dd>
-            <iframe width="600" height="500"
-                    src="https://maps.google.com/maps?q=@Url.Encode(Model.Location.Address)&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                    frameborder="0" scrolling="no"
-                    marginheight="0" marginwidth="0"></iframe>
-        </dd>
-    </dl>
+    <div class="card w-50">
+        <div class="card-body">
+            <h5 class="card-title">Username</h5>
+            <hr />
+            <p class="card-text">@Html.DisplayFor(model => model.Username)</p>
+        </div>
+    </div>
+    @{
+        User us = Session["User"] as User;
+        if (us is Admin || us?.UserID == Model.UserID)
+        {
+            <div class="card w-50">
+                <div class="card-body">
+                    <h5 class="card-title">Password</h5>
+                    <hr />
+                    <p class="card-text">@Html.DisplayFor(model => model.Password)</p>
+                </div>
+            </div>
+        }
+    }
+    <div class="card w-50">
+        <div class="card-body">
+            <h5 class="card-title">First Name</h5>
+            <hr />
+            <p class="card-text">@Html.DisplayFor(model => model.FirstName)</p>
+        </div>
+    </div>
+    <div class="card w-50">
+        <div class="card-body">
+            <h5 class="card-title">Last Name</h5>
+            <hr />
+            <p class="card-text">@Html.DisplayFor(model => model.LastName)</p>
+        </div>
+    </div>
+    <div class="card w-50">
+        <div class="card-body">
+            <h5 class="card-title">Phone Number</h5>
+            <hr />
+            <p class="card-text">@Html.DisplayFor(model => model.PhoneNumber)</p>
+        </div>
+    </div>
+    <div class="card w-50">
+        <div class="card-body">
+            <h5 class="card-title">Location</h5>
+            <hr />
+            <p class="card-text">
+                <iframe width="600" height="500"
+                        src="https://maps.google.com/maps?q=@Url.Encode(Model.Location.Address)&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        frameborder="0" scrolling="no"
+                        marginheight="0" marginwidth="0"></iframe>
+            </p>
+        </div>
+    </div>
 </div>
+
+
+
+
 
 @{
     User user = Session["User"] as User;
