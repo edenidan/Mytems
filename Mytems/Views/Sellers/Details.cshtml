@@ -28,8 +28,8 @@
         </div>
     </div>
     @{
-        User us = Session["User"] as User;
-        if (us is Admin || us?.UserID == Model.UserID)
+        User user = Session["User"] as User;
+        if (user is Admin || user?.UserID == Model.UserID)
         {
             <div class="card w-50">
                 <div class="card-body">
@@ -84,8 +84,8 @@
     if (user is Admin)
     {
         <div style="display: block; margin:30px auto; padding-left: 40%; padding-right: 40%">
-            <a style="display: block; margin:0 auto;" class="btn btn-primary" href="/Sellers/edit/@Model.UserID">Edit</a>
-            <a style="display: block; margin:0 auto;" class="btn btn-danger" href="/Sellers/index">Edit</a>
+            <a style="display: block; margin:10px auto;" class="btn btn-primary" href="/Sellers/edit/@Model.UserID">Edit</a>
+            <a style="display: block; margin:0 auto;" class="btn btn-primary" href="/Sellers/index">Back to List</a>
         </div>
     }
     else if (user?.UserID == Model.UserID)
