@@ -1,4 +1,5 @@
-﻿function salesPerDayAdminGraph() {
+﻿// sales per day graph
+function salesPerDayAdminGraph() {
     var jsonObject = JSON.parse($('#salesPerDayScript').attr('data-graph-data'));
     var labelsContent = jsonObject.label;
     var dataContent = jsonObject.data;
@@ -33,6 +34,9 @@
     });
 }
 
+
+
+// sells per day graph tabs
 function salesPerDayAdminGraphTabs() {
     $('.salesPerDayAdminTab').click(function () {
         $.ajax({
@@ -45,6 +49,11 @@ function salesPerDayAdminGraphTabs() {
     });
 }
 
+
+
+
+
+// Painting charts
 $(document).ready(function () {
     salesPerDayAdminGraph();
     salesPerDayAdminGraphTabs();

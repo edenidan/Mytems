@@ -24,53 +24,56 @@
 </style>
 
 
-<div class="container"><h4>Choose the number of days in the graph</h4></div>
-<div class="container optTabs">
-    <ul class="nav nav-pills">
-        <li class="active">
-            <a class="salesPerDayAdminTab" data-value="7" href="#1b" data-toggle="tab">7 days</a>
-        </li>
-        <li>
-            <a class="salesPerDayAdminTab" data-value="14" href="#2b" data-toggle="tab">14 days</a>
-        </li>
-        <li>
-            <a class="salesPerDayAdminTab" data-value="21" href="#3b" data-toggle="tab">21 days</a>
-        </li>
-        <li>
-            <a class="salesPerDayAdminTab" data-value="28" href="#4b" data-toggle="tab">28 days</a>
-        </li>
-    </ul>
+<!-- Sales per day graph -->
+<div>
+    <div class="container"><h4>Choose the number of days in the graph</h4></div>
+    <div class="container optTabs">
+        <ul class="nav nav-pills">
+            <li class="active">
+                <a class="salesPerDayAdminTab" data-value="7" href="#1b" data-toggle="tab">7 days</a>
+            </li>
+            <li>
+                <a class="salesPerDayAdminTab" data-value="14" href="#2b" data-toggle="tab">14 days</a>
+            </li>
+            <li>
+                <a class="salesPerDayAdminTab" data-value="21" href="#3b" data-toggle="tab">21 days</a>
+            </li>
+            <li>
+                <a class="salesPerDayAdminTab" data-value="28" href="#4b" data-toggle="tab">28 days</a>
+            </li>
+        </ul>
+    </div>
+    <canvas id="salesPerDayCanvas" style="height: 100%; width: 50%; display: inline-block"></canvas>
+</div>
 
-    <!--<div class="tab-content clearfix">
-        <div class="tab-pane active" id="1b">
-            <h3>Same as example 1 but we have now styled the tab's corner</h3>
-        </div>
-        <div class="tab-pane" id="2b">
-            <h3>We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab</h3>
-        </div>
-        <div class="tab-pane" id="3b">
-            <h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>
-        </div>
-        <div class="tab-pane" id="4b">
-            <h3>We use css to change the background color of the content to be equal to the tab</h3>
-        </div>
-    </div>-->
+<!-- category money value pie chart -->
+<div>
+    <div class="container"><h4>Choose the number of days in the graph</h4></div>
+    <div class="container optTabs">
+        <ul class="nav nav-pills">
+            <li class="active">
+                <a class="categoryMoneyValueTab" data-value="7" href="#1b" data-toggle="tab">7 days</a>
+            </li>
+            <li>
+                <a class="categoryMoneyValueTab" data-value="14" href="#2b" data-toggle="tab">14 days</a>
+            </li>
+            <li>
+                <a class="categoryMoneyValueTab" data-value="21" href="#3b" data-toggle="tab">21 days</a>
+            </li>
+            <li>
+                <a class="categoryMoneyValueTab" data-value="28" href="#4b" data-toggle="tab">28 days</a>
+            </li>
+        </ul>
+    </div>
+    <canvas id="categoryMoneyValueCanvas" style="height: 100%; width: 50%; display: inline-block"></canvas>
 </div>
 
 
-
-<canvas id="salesPerDayCanvas" style="height: 250%; width: 50%; display: inline-block"></canvas>
-<canvas id="second" style="height: 100%; width: 50%; display: inline-block"></canvas>
 
 
 
 
 @section scripts{
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-    
-
     <script id="salesPerDayScript" src="~/Scripts/AdminCharts.js" data-graph-data="@ViewBag.columnGraphData"></script>
-    <!--<script src="~/Scripts/adminGraphUpdators.js"></script>-->
-
 }
