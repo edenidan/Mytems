@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Mytems.Models;
 
-namespace Mytems.ViewModels.Admins
+namespace Mytems.PresentationModels.Admins
 {
     public class AdminSearchOptions
     {

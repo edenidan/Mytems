@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Mytems.Models;
 
-namespace Mytems.ViewModels.Customers
+namespace Mytems.PresentationModels.Customers
 {
     public class CustomerSearchOptions
     {
