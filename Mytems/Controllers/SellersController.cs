@@ -9,7 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Mytems.Models;
-using Mytems.ViewModels.Sellers;
+using Mytems.PresentationModels.Sellers;
 
 namespace Mytems.Controllers
 {

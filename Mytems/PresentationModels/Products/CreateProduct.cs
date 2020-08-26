@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Mytems.Models;
 
-namespace Mytems.ViewModels.Products
+namespace Mytems.PresentationModels.Products
 {
     public class CreateProduct
     {

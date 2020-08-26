@@ -9,7 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Mytems.Models;
-using Mytems.ViewModels.Customers;
+using Mytems.PresentationModels.Customers;
 
 namespace Mytems.Controllers
 {
@@ -67,7 +67,7 @@ namespace Mytems.Controllers
             }
 
             //if (result.Count < count) // fill with fake products if there aren't enough
-            //    result.AddRange(Enumerable.Repeat(new ViewModels.Products.CreateProduct
+            //    result.AddRange(Enumerable.Repeat(new PresentationModels.Products.CreateProduct
             //    {
             //        Name = "Fake product",
             //        Description = "Fake Description"

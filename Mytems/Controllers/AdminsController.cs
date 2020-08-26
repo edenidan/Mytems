@@ -10,7 +10,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Mytems.Models;
-using Mytems.ViewModels.Admins;
+using Mytems.PresentationModels.Admins;
 
 namespace Mytems.Controllers
 {
