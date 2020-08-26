@@ -36,19 +36,35 @@ namespace Mytems.Controllers
         {
             if (!(Session["User"] is Admin))
                 return View("~/Views/Errors/Unauthorized.cshtml");
-            ViewBag.columnGraphData = numberOfSalesPerDay(5);
+            ViewBag.columnGraphData = numberOfSalesPerDay(30);
             return View();
         }
 
-        public string numberOfSalesPerDay(int days)
+        public string[] numberOfSalesPerDay(int days)
         {
-            StringBuilder sb = new StringBuilder().Append("[");
-            for (int i = 0; i <= days; i++) {
+            if (days > 30 || days < 0) days = 30;
+
+            string[] retVal = new string[2];
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("[");
+            for (int i = days - 1; i >= 0; i--)
+            {
+                sb.Append(DateTime.Today.AddDays(-i).Day + "." + DateTime.Today.AddDays(-i).Month + ",");
+            }
+            retVal[0] = sb.Remove(sb.Length - 1, 1).Append("]").ToString();
+
+            sb.Clear();
+
+            sb.Append("[");
+            for (int i = days - 1; i >= 0; i--) {
                 sb.Append((from prod in db.Products.ToList()
                            where prod.SoldAt.HasValue && (DateTime.Now - prod.SoldAt).Value.Days == i
                            select prod.ProductID).Count().ToString() + ",");
             }
-            return sb.Remove(sb.Length - 1, 1).Append("]").ToString();
+            retVal[1] = sb.Remove(sb.Length - 1, 1).Append("]").ToString();
+
+            return retVal;
         }
 
         // GET: Admins/Details/5
