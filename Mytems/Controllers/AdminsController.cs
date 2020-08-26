@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using Mytems.Models;
 using Mytems.PresentationModels.Admins;
+using Newtonsoft.Json.Linq;
 
 namespace Mytems.Controllers
 {
@@ -36,35 +37,34 @@ namespace Mytems.Controllers
         {
             if (!(Session["User"] is Admin))
                 return View("~/Views/Errors/Unauthorized.cshtml");
-            ViewBag.columnGraphData = numberOfSalesPerDay(30);
+            ViewBag.columnGraphData = numberOfSalesPerDay(7);
             return View();
         }
 
-        public string[] numberOfSalesPerDay(int days)
+        public string numberOfSalesPerDay(int days)
         {
-            if (days > 30 || days < 0) days = 30;
+            if (days < 0) days = 7;
 
-            string[] retVal = new string[2];
-            StringBuilder sb = new StringBuilder();
+            JObject jobj = new JObject();
+            JArray jarr = new JArray();
 
-            sb.Append("[");
+            
             for (int i = days - 1; i >= 0; i--)
             {
-                sb.Append(DateTime.Today.AddDays(-i).Day + "." + DateTime.Today.AddDays(-i).Month + ",");
+                jarr.Add(DateTime.Today.AddDays(-i).Day + "." + DateTime.Today.AddDays(-i).Month);
             }
-            retVal[0] = sb.Remove(sb.Length - 1, 1).Append("]").ToString();
+            jobj.Add("label", jarr);
 
-            sb.Clear();
+            jarr = new JArray();
 
-            sb.Append("[");
             for (int i = days - 1; i >= 0; i--) {
-                sb.Append((from prod in db.Products.ToList()
+                jarr.Add((from prod in db.Products.ToList()
                            where prod.SoldAt.HasValue && (DateTime.Now - prod.SoldAt).Value.Days == i
-                           select prod.ProductID).Count().ToString() + ",");
+                           select prod.ProductID).Count().ToString());
             }
-            retVal[1] = sb.Remove(sb.Length - 1, 1).Append("]").ToString();
+            jobj.Add("data", jarr);
 
-            return retVal;
+            return jobj.ToString();
         }
 
         // GET: Admins/Details/5
