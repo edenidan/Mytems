@@ -25,7 +25,7 @@ namespace Mytems.PresentationModels.Products
         public IQueryable<Product> ApplyOn(IQueryable<Product> products)
         {
             if (Name != null) products = products.Where(p => p.Name.StartsWith(Name));
-            if (SellerUsername != null) products = products.Where(p => p.Seller.Username.StartsWith(SellerUsername));
+            if (SellerUsername != null) products = products.Where(p => p.Seller.Username == SellerUsername);
             if (Category != null) products = products.Where(p => p.Category == Category);
             if (MinPrice != null) products = products.Where(p => p.Price >= MinPrice);
             if (MaxPrice != null) products = products.Where(p => p.Price <= MaxPrice);
