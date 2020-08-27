@@ -39,7 +39,7 @@ namespace Mytems.Controllers
                 return View("~/Views/Errors/Unauthorized.cshtml");
             ViewBag.salesPerDayData = NumberOfSalesPerDay(7);
             ViewBag.categoryMoneyValueData = CategoryMoneyValue();
-            ViewBag.bestSellersByTotalSalesMoney = BestSellersByTotalSalesMoney(5);
+            ViewBag.bestSellersByTotalSalesMoney = BestSellersByTotalSalesMoney(3);
             return View();
         }
 
@@ -107,12 +107,13 @@ namespace Mytems.Controllers
 
         public string BestSellersByTotalSalesMoney(int numOfSellers)
         {
-            if (numOfSellers < 0) numOfSellers = 5;
+            if (numOfSellers < 0) numOfSellers = 3;
 
             JObject jobj = new JObject();
             JArray jsonArrSellerNames = new JArray();
             JArray jsonArrSellerTotalSalesMoney = new JArray();
 
+            int i = 0;
             foreach (var element in
                 from prod in db.Products
                 where prod.Sold == true
@@ -121,8 +122,10 @@ namespace Mytems.Controllers
                 orderby g.Key
                 select new { sellerName = g.Select(e => e.seller.Username).Distinct(), sum = g.Sum(e => e.prod.Price) })
             {
+                if (i >= numOfSellers) break;
                 jsonArrSellerNames.Add(element.sellerName);
                 jsonArrSellerTotalSalesMoney.Add(element.sum);
+                i++;
             }
 
             jobj.Add("labels", jsonArrSellerNames);

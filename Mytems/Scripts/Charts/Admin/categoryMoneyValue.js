@@ -1,4 +1,4 @@
-﻿// sales per day graph
+﻿// money value of each category doughnut chart
 function categoryMoneyValueAdminGraph() {
     var jsonObject = JSON.parse($('#categoryMoneyValueScript').attr('data-chart-data'));
     var labelsContent = jsonObject.labels;
@@ -9,7 +9,6 @@ function categoryMoneyValueAdminGraph() {
         data: {
             labels: labelsContent,
             datasets: [{
-                label: '# of Tomatoes',
                 data: dataContent,
                 backgroundColor: [
                     'rgba(255, 236, 33, 0.5)',

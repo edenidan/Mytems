@@ -32,6 +32,7 @@ function bestSellersByTotalSalesMoney() {
 
         // Configuration options
         options: {
+            legend: { display: false },
             scales: {
                 yAxes: [{
                     ticks: {
@@ -46,12 +47,11 @@ function bestSellersByTotalSalesMoney() {
 }
 
 
-
 // sells per day graph tabs
 function bestSellersByTotalSalesMoneyTabs() {
     $('.bestSellersByTotalSalesMoneyTab').click(function () {
         $.ajax({
-            url: "/Admins/BestSellersByTotalSalesMoney?sellers=" + $(this).attr('data-value'),
+            url: "/Admins/BestSellersByTotalSalesMoney?numOfSellers=" + $(this).attr('data-value'),
             success: function (data) {
                 $('#bestSellersByTotalSalesMoneyScript').attr('data-chart-data', data);
                 let canvasParent = $('#bestSellersByTotalSalesMoneyCanvas').parent();
