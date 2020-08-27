@@ -110,7 +110,7 @@ namespace Mytems.Controllers
 
             return jsonObj.ToString();
         }
-
+    
         public string BestSellersByTotalSalesMoney(int numOfSellers)
         {
             if (!(Session["User"] is Admin))
