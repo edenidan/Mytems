@@ -304,7 +304,7 @@
     <Content Include="assets\webfonts\fa-solid-900.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\canvas_Signature.js" />
-    <Content Include="Scripts\columnGraph.js" />
+    <Content Include="Scripts\Charts\Admin\categoryMoneyValue.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -313,7 +313,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\AdminCharts.js" />
+    <Content Include="Scripts\Charts\Admin\salesPerDay.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
