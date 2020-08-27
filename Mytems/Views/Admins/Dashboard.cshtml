@@ -18,35 +18,71 @@
 </style>
 
 
-<!-- Sales per day graph -->
-<div>
-    <div class="container"><h4>Choose the number of days in the graph</h4></div>
-    <div class="container optTabs">
-        <ul class="nav nav-pills">
-            <li class="active">
-                <a class="salesPerDayAdminTab" data-value="7" href="#1b" data-toggle="tab">7 days</a>
-            </li>
-            <li>
-                <a class="salesPerDayAdminTab" data-value="14" href="#2b" data-toggle="tab">14 days</a>
-            </li>
-            <li>
-                <a class="salesPerDayAdminTab" data-value="21" href="#3b" data-toggle="tab">21 days</a>
-            </li>
-            <li>
-                <a class="salesPerDayAdminTab" data-value="28" href="#4b" data-toggle="tab">28 days</a>
-            </li>
-        </ul>
-    </div>
-    <div>
-        <canvas id="salesPerDayCanvas" style="height: 100%; width: 50%; display: inline-block"></canvas>
-    </div>
-</div>
-
-<!-- Category by money value pie chart -->
-<div>
-    <canvas id="categoryMoneyValueCanvas" style="height: 100%; width: 50%; display: inline-block"></canvas>
-</div>
-
+<table style="height: 100%; width: 100%;">
+    <tr>
+        <td>
+            <!-- Sales per day graph -->
+            <div>
+                <div class="container"><h4>Sales Per Day</h4></div>
+                <div class="container optTabs">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a class="salesPerDayAdminTab" data-value="7" href="#1b" data-toggle="tab">7 days</a>
+                        </li>
+                        <li>
+                            <a class="salesPerDayAdminTab" data-value="14" href="#2b" data-toggle="tab">14 days</a>
+                        </li>
+                        <li>
+                            <a class="salesPerDayAdminTab" data-value="21" href="#3b" data-toggle="tab">21 days</a>
+                        </li>
+                        <li>
+                            <a class="salesPerDayAdminTab" data-value="28" href="#4b" data-toggle="tab">28 days</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <canvas id="salesPerDayCanvas" style="height: 100%; width: 80%; display: inline-block"></canvas>
+                </div>
+            </div>
+        </td>
+        <td>
+            <!-- Category by money value pie chart -->
+            <div>
+                <canvas id="categoryMoneyValueCanvas" style="height: 100%; width: 100%; display: inline-block"></canvas>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <canvas id="categoryMoneyValueCanvas" style="height: 100%; width: 100%; display: inline-block"></canvas>
+        </td>
+        <td>
+            <!-- Best sellers by total sales money bar chart -->
+            <div>
+                <div class="container"><h4>Best Sellers By Total Sales Money</h4></div>
+                <div class="container optTabs">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a class="bestSellersByTotalSalesMoneyTab" data-value="3" href="#1b" data-toggle="tab">3 sellers</a>
+                        </li>
+                        <li>
+                            <a class="bestSellersByTotalSalesMoneyTab" data-value="5" href="#2b" data-toggle="tab">5 sellers</a>
+                        </li>
+                        <li>
+                            <a class="bestSellersByTotalSalesMoneyTab" data-value="7" href="#3b" data-toggle="tab">7 sellers</a>
+                        </li>
+                        <li>
+                            <a class="bestSellersByTotalSalesMoneyTab" data-value="10" href="#4b" data-toggle="tab">10 sellers</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <canvas id="bestSellersByTotalSalesMoneyCanvas" style="height: 100%; width: 100%; display: inline-block"></canvas>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
 
 
 
@@ -54,6 +90,7 @@
 
 @section scripts{
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script id="salesPerDayScript" src="~/Scripts/Charts/Admin/salesPerDay.js" data-graph-data="@ViewBag.salesPerDayData"></script>
-    <script id="categoryMoneyValueScript" src="~/Scripts/Charts/Admin/categoryMoneyValue.js" data-chart-data="@ViewBag.columnGraphData"></script>
+    <script id="salesPerDayScript" src="~/Scripts/Charts/Admin/salesPerDay.js" data-chart-data="@ViewBag.salesPerDayData"></script>
+    <script id="categoryMoneyValueScript" src="~/Scripts/Charts/Admin/categoryMoneyValue.js" data-chart-data="@ViewBag.categoryMoneyValueData"></script>
+    <script id="bestSellersByTotalSalesMoneyScript" src="~/Scripts/Charts/Admin/bestSellersByTotalSalesMoney.js" data-chart-data="@ViewBag.bestSellersByTotalSalesMoney"></script>
 }

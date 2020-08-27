@@ -304,6 +304,7 @@
     <Content Include="assets\webfonts\fa-solid-900.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\canvas_Signature.js" />
+    <Content Include="Scripts\Charts\Admin\bestSellersByTotalSalesMoney.js" />
     <Content Include="Scripts\Charts\Admin\categoryMoneyValue.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

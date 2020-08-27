@@ -1,16 +1,16 @@
 ﻿// sales per day graph
 function categoryMoneyValueAdminGraph() {
-    var jsonObject = JSON.parse($('#salesPerDayScript').attr('data-graph-data'));
-    var labelsContent = jsonObject.label;
+    var jsonObject = JSON.parse($('#categoryMoneyValueScript').attr('data-chart-data'));
+    var labelsContent = jsonObject.labels;
     var dataContent = jsonObject.data;
     var ctx = $('#categoryMoneyValueCanvas').get(0).getContext('2d');
     var chart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['Cars', 'Sports', 'Furniture', 'Kids', 'Games', 'Phones', 'Electronics', 'Other'],
+            labels: labelsContent,
             datasets: [{
                 label: '# of Tomatoes',
-                data: [12, 19, 3, 5, 7, 12, 10, 6],
+                data: dataContent,
                 backgroundColor: [
                     'rgba(255, 236, 33, 0.5)',
                     'rgba(55, 138, 255, 0.5)',
@@ -35,7 +35,7 @@ function categoryMoneyValueAdminGraph() {
             }]
         },
         options: {
-            //cutoutPercentage: 40,
+            cutoutPercentage: 45,
             responsive: false,
 
         }

@@ -1,7 +1,7 @@
 ﻿// sales per day graph
 function salesPerDayAdminGraph() {
-    var jsonObject = JSON.parse($('#salesPerDayScript').attr('data-graph-data'));
-    var labelsContent = jsonObject.label;
+    var jsonObject = JSON.parse($('#salesPerDayScript').attr('data-chart-data'));
+    var labelsContent = jsonObject.labels;
     var dataContent = jsonObject.data;
     var ctx = $('#salesPerDayCanvas').get(0).getContext('2d');
     var chart = new Chart(ctx, {
@@ -13,8 +13,8 @@ function salesPerDayAdminGraph() {
             labels: labelsContent,
             datasets: [{
                 label: 'Number of Sales Per Day',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgb(60,186,159, 0.2)',
+                borderColor: 'rgb(60,186,159, 1)',
                 data: dataContent
             }]
         },
@@ -40,9 +40,9 @@ function salesPerDayAdminGraph() {
 function salesPerDayAdminGraphTabs() {
     $('.salesPerDayAdminTab').click(function () {
         $.ajax({
-            url: "/Admins/numberOfSalesPerDay?days=" + $(this).attr('data-value'),
+            url: "/Admins/NumberOfSalesPerDay?days=" + $(this).attr('data-value'),
             success: function (data) {
-                $('#salesPerDayScript').attr('data-graph-data', data);
+                $('#salesPerDayScript').attr('data-chart-data', data);
                 let canvasParent = $('#salesPerDayCanvas').parent();
                 let canvasHTML = canvasParent.html();
                 $('#salesPerDayCanvas').remove();
