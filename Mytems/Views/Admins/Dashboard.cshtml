@@ -10,12 +10,6 @@
         padding: 5px 15px;
     }
 
-    /*.optTabs .tab-content {
-        color: white;
-        background-color: #428bca;
-        padding: 5px 15px;
-    }*/
-
     .optTabs .active > a {
         color: white;
         background-color: #428bca;
@@ -43,28 +37,13 @@
             </li>
         </ul>
     </div>
-    <canvas id="salesPerDayCanvas" style="height: 100%; width: 50%; display: inline-block"></canvas>
+    <div>
+        <canvas id="salesPerDayCanvas" style="height: 100%; width: 50%; display: inline-block"></canvas>
+    </div>
 </div>
 
-<!-- category money value pie chart -->
+<!-- Category by money value pie chart -->
 <div>
-    <div class="container"><h4>Choose the number of days in the graph</h4></div>
-    <div class="container optTabs">
-        <ul class="nav nav-pills">
-            <li class="active">
-                <a class="categoryMoneyValueTab" data-value="7" href="#1b" data-toggle="tab">7 days</a>
-            </li>
-            <li>
-                <a class="categoryMoneyValueTab" data-value="14" href="#2b" data-toggle="tab">14 days</a>
-            </li>
-            <li>
-                <a class="categoryMoneyValueTab" data-value="21" href="#3b" data-toggle="tab">21 days</a>
-            </li>
-            <li>
-                <a class="categoryMoneyValueTab" data-value="28" href="#4b" data-toggle="tab">28 days</a>
-            </li>
-        </ul>
-    </div>
     <canvas id="categoryMoneyValueCanvas" style="height: 100%; width: 50%; display: inline-block"></canvas>
 </div>
 
@@ -75,5 +54,6 @@
 
 @section scripts{
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script id="salesPerDayScript" src="~/Scripts/AdminCharts.js" data-graph-data="@ViewBag.columnGraphData"></script>
+    <script id="salesPerDayScript" src="~/Scripts/Charts/Admin/salesPerDay.js" data-graph-data="@ViewBag.salesPerDayData"></script>
+    <script id="categoryMoneyValueScript" src="~/Scripts/Charts/Admin/categoryMoneyValue.js" data-chart-data="@ViewBag.columnGraphData"></script>
 }

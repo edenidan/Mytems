@@ -37,7 +37,7 @@ namespace Mytems.Controllers
         {
             if (!(Session["User"] is Admin))
                 return View("~/Views/Errors/Unauthorized.cshtml");
-            ViewBag.columnGraphData = numberOfSalesPerDay(7);
+            ViewBag.salesPerDayData = numberOfSalesPerDay(7);
             return View();
         }
 
@@ -61,6 +61,34 @@ namespace Mytems.Controllers
                 jarr.Add((from prod in db.Products.ToList()
                            where prod.SoldAt.HasValue && (DateTime.Now - prod.SoldAt).Value.Days == i
                            select prod.ProductID).Count().ToString());
+            }
+            jobj.Add("data", jarr);
+
+            return jobj.ToString();
+        }
+
+        public string categoryMoneyValue()
+        {
+            int days = 1;
+            if (days < 0) days = 7;
+
+            JObject jobj = new JObject();
+            JArray jarr = new JArray();
+
+
+            for (int i = days - 1; i >= 0; i--)
+            {
+                jarr.Add(DateTime.Today.AddDays(-i).Day + "." + DateTime.Today.AddDays(-i).Month);
+            }
+            jobj.Add("label", jarr);
+
+            jarr = new JArray();
+
+            for (int i = days - 1; i >= 0; i--)
+            {
+                jarr.Add((from prod in db.Products.ToList()
+                          where prod.SoldAt.HasValue && (DateTime.Now - prod.SoldAt).Value.Days == i
+                          select prod.ProductID).Count().ToString());
             }
             jobj.Add("data", jarr);
 

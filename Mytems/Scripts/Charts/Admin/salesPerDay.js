@@ -43,6 +43,10 @@ function salesPerDayAdminGraphTabs() {
             url: "/Admins/numberOfSalesPerDay?days=" + $(this).attr('data-value'),
             success: function (data) {
                 $('#salesPerDayScript').attr('data-graph-data', data);
+                let canvasParent = $('#salesPerDayCanvas').parent();
+                let canvasHTML = canvasParent.html();
+                $('#salesPerDayCanvas').remove();
+                canvasParent.append(canvasHTML);
                 salesPerDayAdminGraph();
             }
         });
@@ -52,8 +56,6 @@ function salesPerDayAdminGraphTabs() {
 
 
 
-
-// Painting charts
 $(document).ready(function () {
     salesPerDayAdminGraph();
     salesPerDayAdminGraphTabs();
