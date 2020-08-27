@@ -45,9 +45,6 @@ namespace Mytems.Controllers
 
         public string NumberOfSalesPerDay(int days)
         {
-            if (!(Session["User"] is Admin))
-                return "Access Denied";
-
             if (days < 0) days = 7;
 
             JObject jobj = new JObject();
@@ -75,9 +72,6 @@ namespace Mytems.Controllers
 
         public string CategoryMoneyValue()
         {
-            if (!(Session["User"] is Admin))
-                return "Access Denied";
-
             JObject jsonObj = new JObject();
             JArray jsonArrCategories = new JArray();
             JArray jsonArrSums = new JArray();
@@ -113,9 +107,6 @@ namespace Mytems.Controllers
 
         public string BestSellersByTotalSalesMoney(int numOfSellers)
         {
-            if (!(Session["User"] is Admin))
-                return "Access Denied";
-
             if (numOfSellers < 0) numOfSellers = 3;
 
             JObject jobj = new JObject();

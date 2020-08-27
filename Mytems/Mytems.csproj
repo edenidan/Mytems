@@ -306,9 +306,6 @@
     <Content Include="Scripts\canvas_Signature.js" />
     <Content Include="Scripts\Charts\Admin\bestSellersByTotalSalesMoney.js" />
     <Content Include="Scripts\Charts\Admin\categoryMoneyValue.js" />
-    <Content Include="Scripts\Charts\Seller\bestSellersByTotalSalesMoney.js" />
-    <Content Include="Scripts\Charts\Seller\categoryMoneyValue.js" />
-    <Content Include="Scripts\Charts\Seller\salesPerDay.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
