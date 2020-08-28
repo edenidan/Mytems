@@ -4,31 +4,29 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Admin Details</h2>
 
 <div>
-    <h4>Admin</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
-    </dl>
+    <div class="card w-50">
+        <div class="card-body">
+            <h5 class="card-title">Username</h5>
+            <hr />
+            <p class="card-text">@Html.DisplayFor(model => model.Username)</p>
+        </div>
+    </div>
+    <div class="card w-50">
+        <div class="card-body">
+             <h5 class="card-title">Password</h5>
+             <hr />
+             <p class="card-text">@Html.DisplayFor(model => model.Password)</p>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div style="display: block; margin:30px auto; padding-left: 40%; padding-right: 40%">
+    <a style="display: block; margin:10px auto;" class="btn btn-primary" href="/Sellers/edit/@Model.UserID">Edit</a>
+    <a style="display: block; margin:0 auto;" class="btn btn-primary" href="/Sellers/index">Back to List</a>
+</div>
+<div style="display: block; margin:30px auto; padding-left: 40%; padding-right: 40%">
+    <a style="display: block; margin:0 auto;" class="btn btn-primary" href="/Sellers/edit/@Model.UserID">Edit</a>
+</div>
