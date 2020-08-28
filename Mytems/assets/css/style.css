@@ -207,12 +207,12 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Playfair Display", serif;
-  color: #0b1c39;
-  margin-top: 0px;
-  font-style: normal;
-  font-weight: 500;
-  text-transform: normal;
+    font-family: Bahnschrift;
+    color: #0b1c39;
+    margin-top: 0px;
+    font-style: normal;
+    font-weight: 500;
+    text-transform: normal;
 }
 
 /* line 27, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */

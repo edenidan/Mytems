@@ -85,7 +85,7 @@ namespace Mytems.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Customer customer = db.Customers.Find(id);
+            Customer customer = db.Users.Find(id) as Customer;
             if (customer == null)
                 return HttpNotFound();
 
@@ -149,7 +149,7 @@ namespace Mytems.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Customer customer = db.Customers.Find(id);
+            Customer customer = db.Users.Find(id) as Customer;
             if (customer == null)
                 return HttpNotFound();
 

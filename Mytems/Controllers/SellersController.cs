@@ -158,7 +158,7 @@ namespace Mytems.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Seller seller = db.Sellers.Find(id);
+            Seller seller = db.Users.Find(id) as Seller;
             if (seller == null)
                 return HttpNotFound();
 
@@ -220,7 +220,7 @@ namespace Mytems.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Seller seller = db.Sellers.Find(id);
+            Seller seller = db.Users.Find(id) as Seller;
             if (seller == null)
                 return HttpNotFound();
 
