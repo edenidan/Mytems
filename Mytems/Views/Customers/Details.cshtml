@@ -57,14 +57,14 @@
     if (user is Admin)
     {
         <div style="display: block; margin:30px auto; padding-left: 40%; padding-right: 40%">
-            <a style="display: block; margin:10px auto;" class="btn btn-primary" href="/Sellers/edit/@Model.UserID">Edit</a>
-            <a style="display: block; margin:0 auto;" class="btn btn-primary" href="/Sellers/index">Back to List</a>
+            <a style="display: block; margin:10px auto;" class="btn btn-primary" href="/customers/edit/@Model.UserID">Edit</a>
+            <a style="display: block; margin:0 auto;" class="btn btn-primary" href="/customers/index">Back to List</a>
         </div>
     }
     else if (user?.UserID == Model.UserID)
     {
         <div style="display: block; margin:30px auto; padding-left: 40%; padding-right: 40%">
-            <a style="display: block; margin:0 auto;" class="btn btn-primary" href="/Sellers/edit/@Model.UserID">Edit</a>
+            <a style="display: block; margin:0 auto;" class="btn btn-primary" href="/customers/edit/@Model.UserID">Edit</a>
         </div>
     }
 }
