@@ -66,6 +66,11 @@
                                             <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
                                             <li>@Html.ActionLink("Admins", "Index", "Admins")</li>
                                         }
+                                        @if (Session["User"] is Mytems.Models.Seller)
+                                        {
+                                            string sellerName = (Session["User"] as Mytems.Models.Seller).Username;
+                                            <a href="/Products?SellerUsername=@sellerName">My Products</a>
+                                        }
                                     </ul>
                                 </div>
                                 <div class="header-info-right">
