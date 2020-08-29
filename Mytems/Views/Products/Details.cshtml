@@ -8,94 +8,30 @@
     <h1 class="display-1 text-center" style="margin-left:0%;font-family:Bahnschrift;">Product Details</h1>
 </div>
 
-<div class="container emp-profile">
-    <form method="post">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="@Model.ImagePath" alt="" style="width: 100%"/>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                    <h1 class="display-1">
-                        @Model.Name
-                    </h1>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-work">
-                    <p>Seller Name: &nbsp; &nbsp; @Html.DisplayFor(model => model.SellerUsername)</p>
-                    @if (Model.CanBeEditedBy((Session["User"] as User)))
-                    {
-                        @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID })
-                    }
-                    @Html.ActionLink("Back to List", "Index")
-                    <br />
-                    <a href="/sellers/details/@ViewData["sellerID"]">Go to seller</a>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Price</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>
-                                    <div class="price-display">
-                                        @Html.DisplayFor(model => model.Price)
-                                    </div>
-                                </p>
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Category</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>@Html.DisplayFor(model => model.Category)</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Sold</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>@Html.DisplayFor(model => model.Sold)</p>
-                            </div>
-                        </div>
-                        @if (Model.SoldAt != null)
-                        {
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Sold at</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>@Html.DisplayFor(model => model.SoldAt)</p>
-                                </div>
-                            </div>
-                        }
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Description</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>@Html.DisplayFor(model => model.Description)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="col-md-2" style="display:block;margin:0 auto;width:100%;font-size:200%">
+    <div class="card mb-4 shadow-sm">
+        <img class="card-img-top" src="@Model.ImagePath" alt="Card image cap">
+        <div class="card-body">
+            <h1 card-title">@Model.Name</h1>
+            <p class="card-text" style="font-size:20px;">
+                <b>Price:</b> <span class="price-display">$@Model.Price</span>
+                <br />
+                <b>Category:</b> @Model.Category
+                <br />
+                <b>Seller name:</b>  <a href="/sellers/details/@ViewData["sellerID"]">@Model.SellerUsername</a>
+                <br />
+                <b>Sold: @Model.Sold</b>
+                <br />
+                <b>Description:</b><br />
+                @Model.Description
+            </p>
         </div>
-    </form>
+    </div>
+    <a style="display: block; margin:0 auto;" class="btn btn-primary" href="/products/index">Back to List</a>
+
 </div>
 
-<p>
 
-</p>
+
