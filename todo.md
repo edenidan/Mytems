@@ -26,4 +26,4 @@
     - [x] Facebook or Twitter API
 
 ## DO
-    - [ ] decorate edit and delete pages
+- [ ] decorate edit and delete pages
