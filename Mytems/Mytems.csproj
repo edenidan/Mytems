@@ -101,6 +101,7 @@
     <Content Include="assets\css\all.css" />
     <Content Include="assets\css\animate.min.css" />
     <Content Include="assets\css\aos.css" />
+    <Content Include="assets\css\bootstrap-social.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\flaticon.css" />
     <Content Include="assets\css\fontawesome-all.min.css" />
