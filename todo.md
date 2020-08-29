@@ -25,5 +25,5 @@
     - [x] Map (show seller's address on a map)
     - [x] Facebook or Twitter API
 
-##DO
+## DO
     - [ ] decorate edit and delete pages
