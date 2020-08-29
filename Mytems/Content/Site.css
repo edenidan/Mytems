@@ -22,11 +22,11 @@ a {
     color: #4D90FE;
 }
 
-a:hover {
-    color: #4D90FE;
-    background-color: transparent;
-    text-decoration: underline;
-}
+    a:hover {
+        color: #4D90FE;
+        background-color: transparent;
+        text-decoration: underline;
+    }
 
 .categories-wrapper img {
     object-fit: contain;
@@ -43,6 +43,19 @@ a:hover {
     margin-left: 1rem;
 }
 
-#currencies option {
-    color: black;
+    #currencies option {
+        color: black;
+    }
+
+.navbar-links a,
+.navbar-links td {
+    color: #999;
+    padding: 10px;
+    padding-top:20px;
+    font-size:larger;
+}
+
+.navbar-links a:hover{
+    color:white;
+    text-decoration:none;
 }

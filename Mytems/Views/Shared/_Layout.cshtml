@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="@Url.Content("/assets/css/slick.css")">
     <link rel="stylesheet" href="@Url.Content("/assets/css/nice-select.css")">
     <link rel="stylesheet" href="@Url.Content("/assets/css/style.css")">
+    <link rel="stylesheet" href="@Url.Content("/assets/css/bootstrap-social.css")">
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -47,6 +48,7 @@
                     <div class="container-fluid">
                         <div class="col-xl-12">
                             <div class="row d-flex justify-content-between align-items-center">
+
                                 <div class="header-info-left d-flex">
                                     <div class="flag">
                                         <img src="@Url.Content("/assets/img/icon/phone_icon.jpg")" alt="" style="display: block; max-width: 27px; height: auto;">
@@ -58,20 +60,44 @@
                                         <option value="USD">Dollar - $</option>
                                         <option value="EUR">Euro - €</option>
                                     </select>
-                                    <ul class="contact-now">
-                                        <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                                        @if (Session["User"] is Mytems.Models.Admin)
-                                        {
-                                            <li>@Html.ActionLink("Sellers", "Index", "Sellers")</li>
-                                            <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
-                                            <li>@Html.ActionLink("Admins", "Index", "Admins")</li>
-                                        }
-                                        @if (Session["User"] is Mytems.Models.Seller)
-                                        {
-                                            string sellerName = (Session["User"] as Mytems.Models.Seller).Username;
-                                            <a href="/Products?SellerUsername=@sellerName">My Products</a>
-                                        }
-                                    </ul>
+
+
+                                    <table class="navbar-links">
+                                        <tr>
+                                            <td>
+                                                @Html.ActionLink("Products", "Index", "Products")
+                                            </td>
+                                            @if (Session["User"] is Mytems.Models.Admin)
+                                            {
+                                                <td>@Html.ActionLink("Sellers", "Index", "Sellers")</td>
+                                                <td>@Html.ActionLink("Customers", "Index", "Customers")</td>
+                                                <td>@Html.ActionLink("Admins", "Index", "Admins")</td>
+                                            }
+                                            @if (Session["User"] is Mytems.Models.Seller)
+                                            {
+                                                string sellerName = (Session["User"] as Mytems.Models.Seller).Username;
+                                                <td><a href="/Products?SellerUsername=@sellerName">My Products</a></td>
+                                            }
+                                        </tr>
+                                    </table>
+
+
+
+                                    @*<ul class="navbar-links contact-now">
+                                            <li>@Html.ActionLink("Products", "Index", "Products")</li>
+                                            @if (Session["User"] is Mytems.Models.Admin)
+                                            {
+                                                <li>@Html.ActionLink("Sellers", "Index", "Sellers")</li>
+                                                <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
+                                                <li>@Html.ActionLink("Admins", "Index", "Admins")</li>
+                                            }
+                                            @if (Session["User"] is Mytems.Models.Seller)
+                                            {
+                                                string sellerName = (Session["User"] as Mytems.Models.Seller).Username;
+                                                <a href="/Products?SellerUsername=@sellerName">My Products</a>
+                                            }
+                                        </ul>*@
+
                                 </div>
                                 <div class="header-info-right">
                                     <ul>
