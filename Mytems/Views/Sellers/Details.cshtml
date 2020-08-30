@@ -29,6 +29,16 @@
             <p class="card-text">@Html.DisplayFor(model => model.Username)</p>
         </div>
     </div>
+
+    <div class="card w-50">
+        <div class="card-body">
+            <h5 class="card-title">Revenue</h5>
+            <hr />
+            <p class="card-text"><span class="price-display">$@ViewData["revenue"]</span></p>
+        </div>
+    </div>
+
+
     @{
         User user = Session["User"] as User;
         if (user is Admin || user?.UserID == Model.UserID)
