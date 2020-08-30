@@ -172,6 +172,7 @@
     <Content Include="assets\img\logo\logo.png" />
     <Content Include="assets\img\logo\logo2_footer.png" />
     <Content Include="assets\img\logo\logo_black.png" />
+    <Content Include="assets\img\logo\logo_transparent.png" />
     <Content Include="assets\img\logo\select-items-icon.jpg" />
     <Content Include="assets\img\time_line_1.png" />
     <Content Include="assets\js\animated.headline.js" />
