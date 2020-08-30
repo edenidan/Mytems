@@ -131,7 +131,7 @@ namespace Mytems.Controllers
                 return View("~/Views/Errors/Unauthorized.cshtml");
 
             ViewBag.ImagePath = product.ImagePath;
-            ViewBag.SellerID = new SelectList(db.Sellers, "UserID", "Username");
+            ViewBag.SellerID = new SelectList(db.Sellers, "UserID", "Username", product.SellerID);
             return View(new EditProduct(product));
         }
 
