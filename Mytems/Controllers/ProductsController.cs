@@ -42,6 +42,7 @@ namespace Mytems.Controllers
             if (Session["User"] is Customer customer)
                 customer.IncrementViewsFor(product.Category);
             product.NumberOfViews++;
+            db.SaveChanges();
 
             if(product.NumberOfViews == 100)
             {
