@@ -75,7 +75,7 @@
         @foreach (Product product in ViewBag.SuggestedProducts)
         {
             <div class="col-md-3">
-                <div class="card mb-4 shadow-sm">
+                <div class="card mb-4 shadow-sm" style="height:500px">
                     <img class="card-img-top" src="@product.ImagePath" alt="Card image cap" width="200" height="200">
                     <div class="card-body">
                         <h5 class="card-title">@product.Name</h5>
@@ -85,7 +85,7 @@
                             Description:<br />
                             @product.Description
                         </p>
-                        <a href="/Products/Details/@product.ProductID" class="btn btn-primary">View</a>
+                        <a href="/Products/Details/@product.ProductID" style="bottom:25px;position:absolute;" class="btn btn-primary">View</a>
                     </div>
                 </div>
             </div>
