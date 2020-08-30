@@ -192,7 +192,8 @@ namespace Mytems.Controllers
 
                 db.Admins.Add(admin);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Index", "Admins");
             }
 
             return View(admin);
