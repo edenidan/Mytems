@@ -35,28 +35,6 @@ function salesPerDayAdminGraph() {
 }
 
 
-
-// sells per day graph tabs
-function salesPerDayAdminGraphTabs() {
-    $('.salesPerDayAdminTab').click(function () {
-        $.ajax({
-            url: "/Admins/NumberOfSalesPerDay?days=" + $(this).attr('data-value'),
-            success: function (data) {
-                $('#salesPerDayScript').attr('data-chart-data', data);
-                let canvasParent = $('#salesPerDayCanvas').parent();
-                let canvasHTML = canvasParent.html();
-                $('#salesPerDayCanvas').remove();
-                canvasParent.append(canvasHTML);
-                salesPerDayAdminGraph();
-            }
-        });
-    });
-}
-
-
-
-
 $(document).ready(function () {
     salesPerDayAdminGraph();
-    salesPerDayAdminGraphTabs();
 })

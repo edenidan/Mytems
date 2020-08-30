@@ -47,27 +47,6 @@ function bestSellersByTotalSalesMoney() {
 }
 
 
-// sells per day graph tabs
-function bestSellersByTotalSalesMoneyTabs() {
-    $('.bestSellersByTotalSalesMoneyTab').click(function () {
-        $.ajax({
-            url: "/Admins/BestSellersByTotalSalesMoney?numOfSellers=" + $(this).attr('data-value'),
-            success: function (data) {
-                $('#bestSellersByTotalSalesMoneyScript').attr('data-chart-data', data);
-                let canvasParent = $('#bestSellersByTotalSalesMoneyCanvas').parent();
-                let canvasHTML = canvasParent.html();
-                $('#bestSellersByTotalSalesMoneyCanvas').remove();
-                canvasParent.append(canvasHTML);
-                bestSellersByTotalSalesMoney();
-            }
-        });
-    });
-}
-
-
-
-
 $(document).ready(function () {
     bestSellersByTotalSalesMoney();
-    bestSellersByTotalSalesMoneyTabs();
 })

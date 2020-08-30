@@ -37,9 +37,9 @@ namespace Mytems.Controllers
         {
             if (!(Session["User"] is Admin))
                 return View("~/Views/Errors/Unauthorized.cshtml");
-            ViewBag.salesPerDayData = NumberOfSalesPerDay(7);
+            ViewBag.salesPerDayData = NumberOfSalesPerDay(14);
             ViewBag.categoryMoneyValueData = CategoryMoneyValue();
-            ViewBag.bestSellersByTotalSalesMoney = BestSellersByTotalSalesMoney(3);
+            ViewBag.bestSellersByTotalSalesMoney = BestSellersByTotalSalesMoney(5);
             return View();
         }
 

@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="@Url.Content("/assets/img/favicon.ico")">
+    <link rel="shortcut icon" type="image/x-icon" href="@Url.Content("/assets/img/logo/logo_transparent.png")">
 
     <!-- CSS here -->
     <link rel="stylesheet" href="@Url.Content("/assets/css/bootstrap.min.css")">
@@ -51,7 +51,6 @@
 
                                 <div class="header-info-left d-flex">
                                     <div class="flag">
-                                        <img src="@Url.Content("/assets/img/icon/phone_icon.jpg")" alt="" style="display: block; max-width: 27px; height: auto;">
                                         <a href="/Home/Index" class="navbar-left"><img src="@Url.Content("/assets/img/logo/logo_black.png")" alt="" style="display: block; max-width: 100px; height: auto;"></a>
 
                                     </div>
@@ -80,23 +79,6 @@
                                             }
                                         </tr>
                                     </table>
-
-
-
-                                    @*<ul class="navbar-links contact-now">
-                                            <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                                            @if (Session["User"] is Mytems.Models.Admin)
-                                            {
-                                                <li>@Html.ActionLink("Sellers", "Index", "Sellers")</li>
-                                                <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
-                                                <li>@Html.ActionLink("Admins", "Index", "Admins")</li>
-                                            }
-                                            @if (Session["User"] is Mytems.Models.Seller)
-                                            {
-                                                string sellerName = (Session["User"] as Mytems.Models.Seller).Username;
-                                                <a href="/Products?SellerUsername=@sellerName">My Products</a>
-                                            }
-                                        </ul>*@
 
                                 </div>
                                 <div class="header-info-right">

@@ -5,18 +5,6 @@
 <div class="jumbotron">
     <h1 class="display-1 text-center" style="margin-left:0%;font-family:Bahnschrift;">Dashboard</h1>
 </div>
-<style>
-    .optTabs .nav-pills > li > a {
-        border-radius: 4px 4px 0 0;
-        padding: 5px 15px;
-    }
-
-    .optTabs .active > a {
-        color: white;
-        background-color: #428bca;
-        padding: 5px 15px;
-    }
-</style>
 
 
 <div style="padding:5%;">
@@ -26,25 +14,7 @@
                 <!-- Sales per day graph -->
                 <div>
                     <div class="container"><h4 style="font-family:Bahnschrift;">Sales Per Day</h4></div>
-                    <div class="container optTabs">
-                        <ul class="nav nav-pills">
-                            <li class="active">
-                                <a class="salesPerDayTab" data-value="7" href="#1b" data-toggle="tab">7 days</a>
-                            </li>
-                            <li>
-                                <a class="salesPerDayTab" data-value="14" href="#2b" data-toggle="tab">14 days</a>
-                            </li>
-                            <li>
-                                <a class="salesPerDayTab" data-value="21" href="#3b" data-toggle="tab">21 days</a>
-                            </li>
-                            <li>
-                                <a class="salesPerDayTab" data-value="28" href="#4b" data-toggle="tab">28 days</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <canvas id="salesPerDayCanvas" style="height: 100%; width: 80%; display: inline-block"></canvas>
-                    </div>
+                    <canvas id="salesPerDayCanvas" style="height: 100%; width: 80%; display: inline-block"></canvas>
                 </div>
             </td>
             <td>
@@ -61,23 +31,8 @@
                 <!-- Best sellers by total sales money bar chart -->
                 <div>
                     <div class="container" style="margin-top:100px;"><h4 style="font-family:Bahnschrift;">Best Sellers By Total Sales Money (in dollars)</h4></div>
-                    <div class="container optTabs">
-                        <ul class="nav nav-pills">
-                            <li class="active">
-                                <a class="bestSellersByTotalSalesMoneyTab" data-value="3" href="#1b" data-toggle="tab">3 sellers</a>
-                            </li>
-                            <li>
-                                <a class="bestSellersByTotalSalesMoneyTab" data-value="5" href="#2b" data-toggle="tab">5 sellers</a>
-                            </li>
-                            <li>
-                                <a class="bestSellersByTotalSalesMoneyTab" data-value="7" href="#3b" data-toggle="tab">7 sellers</a>
-                            </li>
-                        </ul>
-                    </div>
                     <br />
-                    <div>
-                        <canvas id="bestSellersByTotalSalesMoneyCanvas" style="height: 100%; width: 80%; display: inline-block"></canvas>
-                    </div>
+                    <canvas id="bestSellersByTotalSalesMoneyCanvas" style="height: 100%; width: 80%; display: inline-block"></canvas>
                 </div>
             </td>
         </tr>
