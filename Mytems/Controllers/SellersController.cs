@@ -28,6 +28,12 @@ namespace Mytems.Controllers
                 .ApplyOn(db.Sellers)
                 .ToList();
 
+            foreach (Seller s in searchedSellers)
+            {
+                decimal revenue = db.Products.Where(p => p.Sold && p.SellerID == s.UserID).Select(p => p.Price).DefaultIfEmpty(0).Sum();
+                ViewData[s.UserID.ToString()] = revenue;
+            }
+
             ViewData["SearchOptions"] = searchOptions;
             return View(searchedSellers);
         }
@@ -139,7 +145,7 @@ namespace Mytems.Controllers
                     jsonArrSellerTotalSalesMoney.Add(element.sum);
                     i++;
                 }
-                if(element.sellerID == (Session["User"] as User).UserID)
+                if (element.sellerID == (Session["User"] as User).UserID)
                 {
                     jsonArrSellerNames.AddFirst(element.sellerName.FirstOrDefault() + " (you)");
                     jsonArrSellerTotalSalesMoney.AddFirst(element.sum);
@@ -161,6 +167,8 @@ namespace Mytems.Controllers
             Seller seller = db.Users.Find(id) as Seller;
             if (seller == null)
                 return HttpNotFound();
+
+            ViewData["revenue"] = db.Products.Where(p => p.Sold && p.SellerID == seller.UserID).Select(p => p.Price).DefaultIfEmpty(0).Sum();
 
             return View(seller);
         }
