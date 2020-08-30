@@ -13,7 +13,18 @@ namespace Mytems.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            var productsArr =
+            (from prod in db.Products
+            orderby prod.NumberOfViews descending
+            select prod).ToArray();
+
+            List<Product> prodList = new List<Product>();
+            for (int i = 0; i < productsArr.Count() && i < 6; i++)
+            {
+                prodList.Add(productsArr[i]);
+            }
+
+            return View(prodList.ToArray());
         }
 
         public ActionResult Login()

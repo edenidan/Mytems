@@ -1,30 +1,99 @@
-﻿
+﻿@model Mytems.Models.Product[]
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2 style="display: block; text-shadow: 2px 2px 5px #345; width: 100%; text-align: center;">Welcome to Mytems!</h2><br /><br />
 
-<div class="row">
-    <div class="col-sm-12">
-        <h4 style="text-align: center">About us</h4>
-        <section class="container" style="display: block; column-count: 3;">
+<h4 style="text-align: center">About us</h4>
+<section class="container" style="display: block; column-count: 3;">
 
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vivamus arcu felis bibendum ut tristique. Nulla pharetra diam sit amet nisl suscipit. Sit amet nisl purus in mollis nunc sed id. Nec ultrices dui sapien eget mi proin sed. Nullam eget felis eget nunc lobortis. Vitae et leo duis ut diam quam nulla porttitor massa. Mattis rhoncus urna neque viverra justo nec. Laoreet sit amet cursus sit amet dictum sit amet justo. Quisque id diam vel quam elementum pulvinar etiam. Tortor at risus viverra adipiscing at. Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut. Fermentum iaculis eu non diam phasellus vestibulum lorem. Volutpat lacus laoreet non curabitur gravida arcu ac tortor. Eu nisl nunc mi ipsum faucibus vitae. Adipiscing tristique risus nec feugiat in fermentum. At elementum eu facilisis sed odio morbi quis. Felis imperdiet proin fermentum leo vel orci. Turpis massa tincidunt dui ut ornare lectus. Gravida arcu ac tortor dignissim convallis aenean et tortor.
-            </p>
-        </section>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vivamus arcu felis bibendum ut tristique. Nulla pharetra diam sit amet nisl suscipit. Sit amet nisl purus in mollis nunc sed id. Nec ultrices dui sapien eget mi proin sed. Nullam eget felis eget nunc lobortis. Vitae et leo duis ut diam quam nulla porttitor massa. Mattis rhoncus urna neque viverra justo nec. Laoreet sit amet cursus sit amet dictum sit amet justo. Quisque id diam vel quam elementum pulvinar etiam. Tortor at risus viverra adipiscing at. Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut. Fermentum iaculis eu non diam phasellus vestibulum lorem. Volutpat lacus laoreet non curabitur gravida arcu ac tortor. Eu nisl nunc mi ipsum faucibus vitae. Adipiscing tristique risus nec feugiat in fermentum. At elementum eu facilisis sed odio morbi quis. Felis imperdiet proin fermentum leo vel orci. Turpis massa tincidunt dui ut ornare lectus. Gravida arcu ac tortor dignissim convallis aenean et tortor.
+    </p>
+</section>
+
+<br />
+<br />
+
+<!-- Latest Products Start -->
+<section class="latest-product-area padding-bottom">
+    <div class="container">
+        <div class="row product-btn d-flex">
+            <!-- Section Tittle -->
+            <div class="col-xl-4 col-lg-5 col-md-5">
+                <div class="section-tittle mb-30">
+                    <h2>Latest Products</h2>
+                </div>
+            </div>
+        </div>
+        <!-- Nav Card -->
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="row">
+                    @{
+                        int i = 0;
+                        for (; i < Model.Count() && i < 3; i++)
+                        {
+                            <div class="col-xl-4 col-lg-4 col-md-6">
+                                <div class="single-product mb-60">
+                                    <div class="product-img">
+                                        <img src=@Model[i].ImagePath halt="">
+                                        <div class="new-product">
+                                            <span>New</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-caption">
+                                        <h4><a href="@Model[i].ImagePath">@Model[i].Name</a></h4>
+                                        <div class="price">
+                                            <ul>
+                                                <li>@Model[i].Price</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        for (; i < Model.Count() && i < 6; i++)
+                        {
+                            <div class="col-xl-4 col-lg-4 col-md-6">
+                                <div class="single-product mb-60">
+                                    <div class="product-img">
+                                        <img src=@Model[i].ImagePath halt="">
+                                        <div class="new-product">
+                                            <span>New</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-caption">
+                                        <h4><a href="@Model[i].ImagePath">@Model[i].Name</a></h4>
+                                        <div class="price">
+                                            <ul>
+                                                <li>@Model[i].Price</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="w-100"></div>
-    <aside class="col-sm-1" style="display:block;width:100%; text-align:center;">
-        <a style="transform: rotate(270deg);" class="btn btn-twitter" target="_blank" href="https://twitter.com/intent/tweet?url=www.Mytems.com&text=Hi%20everyone!%20I%20found%20an%20awesome%20online%20thrift%20store!%20check%20it%20out">
-            Share on Twitter
+</section>
+<!-- Latest Products End -->
 
-        </a>
-    </aside>
+<video controls autoplay muted style="display: block; margin: 20px auto" id="vid">
+    <source src="~/assets/videos/about_us_video.mp4" />
+</video>
 
-    <video class="col-sm-9" controls autoplay muted style="display: block; margin: 20px auto" id="vid">
-        <source src="~/assets/videos/about_us_video.mp4" />
-    </video>
+<br />
+<br />
 
+<div class="row">
+    <a style="margin: 0 auto" class="btn btn-twitter" target="_blank" href="https://twitter.com/intent/tweet?url=www.Mytems.com&text=Hi%20everyone!%20I%20found%20an%20awesome%20online%20thrift%20store!%20check%20it%20out">
+        Share on Twitter
+
+    </a>
 </div>
