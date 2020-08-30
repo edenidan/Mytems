@@ -5,123 +5,125 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
-
-@using (Html.BeginForm("Edit", "Products", FormMethod.Post,
-                            new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Product</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ProductID)
-
-        <img src="@ViewBag.ImagePath" style="height:100px;width:100px;" />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input id="DemiPrice" class="form-control text-box single-line" />
-
-                <div style="visibility:hidden;height:0px;width:0px;">
-                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-            </div>
-
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Category, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Sold, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Sold, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Sold, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @if (Session["User"] is Admin)
+<div class="row">
+    <div style="margin: 0 auto;float: none;margin-top:5%;">
+        <h2>Edit</h2>
+        @using (Html.BeginForm("Edit", "Products", FormMethod.Post,
+                                    new { enctype = "multipart/form-data" }))
         {
-            <div class="form-group">
-                @Html.LabelFor(model => model.SellerID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("SellerID", null, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.SellerID, "", new { @class = "text-danger" })
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Product</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ProductID)
+
+                <img src="@ViewBag.ImagePath" style="height:100px;width:100px;" />
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
                 </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input id="DemiPrice" class="form-control text-box single-line" />
+
+                        <div style="visibility:hidden;height:0px;width:0px;">
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EnumDropDownListFor(model => model.Category, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Sold, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Sold, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Sold, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @if (Session["User"] is Admin)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SellerID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("SellerID", null, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SellerID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <label for="file">Upload Image:</label>
+                        <input type="file" name="file" id="file" style="width: 100%;" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10" style="visibility:hidden;">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+            <input type="button" onclick="ConvertNSubmit()" value="Edit" class="btn btn-primary"/>
+            <div>
+                @Html.ActionLink("Back to List", "Index")
             </div>
         }
-
-        <div class="form-group">
-            <div class="col-md-10">
-                <label for="file">Upload Image:</label>
-                <input type="file" name="file" id="file" style="width: 100%;" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10" style="visibility:hidden;">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
-<input type="button" onclick="ConvertNSubmit()" value="Edit" />
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        let newTicker = getCookie("currencyTicker");
-        $.ajax(`https://api.exchangeratesapi.io/latest?symbols=${newTicker}&base=USD`).done(function (data) {
-            let factor = data["rates"][newTicker];
-            $("#DemiPrice").val($("#Price").val() * factor);
-        });
-    })
-    function ConvertNSubmit() {
-        if ($("#DemiPrice").val() === "") {
-            $("form").submit()
-            return;
-        }
-        let newTicker = getCookie("currencyTicker")
-        $.ajax(`https://api.exchangeratesapi.io/latest?symbols=USD&base=${newTicker}`).done(function (data) {
-            let factor = data["rates"]["USD"];
-            console.log(factor)
-            let oldPrice = Number($("#DemiPrice").val().replace(",", ""));
+        <script>
+            $(document).ready(function () {
+                let newTicker = getCookie("currencyTicker");
+                $.ajax(`https://api.exchangeratesapi.io/latest?symbols=${newTicker}&base=USD`).done(function (data) {
+                    let factor = data["rates"][newTicker];
+                    $("#DemiPrice").val($("#Price").val() * factor);
+                });
+            })
+            function ConvertNSubmit() {
+                if ($("#DemiPrice").val() === "") {
+                    $("form").submit()
+                    return;
+                }
+                let newTicker = getCookie("currencyTicker")
+                $.ajax(`https://api.exchangeratesapi.io/latest?symbols=USD&base=${newTicker}`).done(function (data) {
+                    let factor = data["rates"]["USD"];
+                    console.log(factor)
+                    let oldPrice = Number($("#DemiPrice").val().replace(",", ""));
 
-            $("#Price").val((factor * oldPrice).toString())
-            $("form").submit()
-        });
-    }
-</script>   
+                    $("#Price").val((factor * oldPrice).toString())
+                    $("form").submit()
+                });
+            }
+        </script>
