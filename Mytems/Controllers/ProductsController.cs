@@ -44,10 +44,6 @@ namespace Mytems.Controllers
             product.NumberOfViews++;
             db.SaveChanges();
 
-            if(product.NumberOfViews == 100)
-            {
-                //facebook post
-            }
 
             ViewData["sellerID"] = product.SellerID;
             return View(new DetailsProduct(product));

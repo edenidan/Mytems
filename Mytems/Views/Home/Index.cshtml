@@ -18,7 +18,7 @@
 <br />
 
 <!-- Latest Products Start -->
-<section class="latest-product-area padding-bottom">
+<section id="hotestProducts" class="latest-product-area padding-bottom">
     <div class="container">
         <div class="row product-btn d-flex">
             <!-- Section Tittle -->
@@ -38,17 +38,17 @@
                         {
                             <div class="col-xl-4 col-lg-4 col-md-6">
                                 <div class="single-product mb-60">
-                                    <div class="product-img">
+                                    <div class="product-img" style="width: 225px; height: 225px;">
                                         <img src=@Model[i].ImagePath halt="">
                                         <div class="new-product">
-                                            <span>New</span>
+                                            <span>Hot</span>
                                         </div>
                                     </div>
                                     <div class="product-caption">
                                         <h4><a href="@Model[i].ImagePath">@Model[i].Name</a></h4>
                                         <div class="price">
                                             <ul>
-                                                <li>@Model[i].Price</li>
+                                                <li><div class="price-display">$@Model[i].Price</div></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -59,17 +59,17 @@
                         {
                             <div class="col-xl-4 col-lg-4 col-md-6">
                                 <div class="single-product mb-60">
-                                    <div class="product-img">
-                                        <img src=@Model[i].ImagePath halt="">
+                                    <div class="product-img" style="width: 225px; height: 225px;">
+                                        <img src=@Model[i].ImagePath halt="" style="background-size:cover">
                                         <div class="new-product">
-                                            <span>New</span>
+                                            <span>Hot</span>
                                         </div>
                                     </div>
                                     <div class="product-caption">
                                         <h4><a href="@Model[i].ImagePath">@Model[i].Name</a></h4>
                                         <div class="price">
                                             <ul>
-                                                <li>@Model[i].Price</li>
+                                                <li><div class="price-display">$@Model[i].Price</div></li>
                                             </ul>
                                         </div>
                                     </div>

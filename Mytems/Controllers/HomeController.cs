@@ -13,15 +13,16 @@ namespace Mytems.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var productsArr =
+            var productsList =
             (from prod in db.Products
-            orderby prod.NumberOfViews descending
-            select prod).ToArray();
+             where prod.Sold == false
+             orderby prod.NumberOfViews descending
+             select prod).ToList();
 
             List<Product> prodList = new List<Product>();
-            for (int i = 0; i < productsArr.Count() && i < 6; i++)
+            for (int i = 0; i < productsList.Count() && i < 6; i++)
             {
-                prodList.Add(productsArr[i]);
+                prodList.Add(productsList.ElementAt(i));
             }
 
             return View(prodList.ToArray());
@@ -59,7 +60,7 @@ namespace Mytems.Controllers
                 return RedirectToAction("Dashboard", "Sellers");
             else if (user is Admin)
                 return RedirectToAction("Dashboard", "Admins");
-            
+
             return View("Index");
         }
 
