@@ -40,8 +40,9 @@ namespace Mytems.Controllers
                 return HttpNotFound();
 
             if (Session["User"] is Customer customer)
-                customer.IncrementViewsFor(product.Category);
+                (db.Users.Find(customer.UserID) as Customer)?.IncrementViewsFor(product.Category);
             product.NumberOfViews++;
+            db.SaveChanges();
 
             if(product.NumberOfViews == 100)
             {
@@ -130,7 +131,7 @@ namespace Mytems.Controllers
                 return View("~/Views/Errors/Unauthorized.cshtml");
 
             ViewBag.ImagePath = product.ImagePath;
-            ViewBag.SellerID = new SelectList(db.Sellers, "UserID", "Username");
+            ViewBag.SellerID = new SelectList(db.Sellers, "UserID", "Username", product.SellerID);
             return View(new EditProduct(product));
         }
 
