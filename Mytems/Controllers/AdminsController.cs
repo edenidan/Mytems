@@ -93,6 +93,7 @@ namespace Mytems.Controllers
 
             foreach (var element in
                 from prod in db.Products
+                where prod.Sold == true
                 group prod by prod.Category into g
                 orderby g.Key
                 select new { category = g.Key, sum = g.Sum(p => p.Price) })
@@ -192,7 +193,8 @@ namespace Mytems.Controllers
 
                 db.Admins.Add(admin);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Index", "Admins");
             }
 
             return View(admin);

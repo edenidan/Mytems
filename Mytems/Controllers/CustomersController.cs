@@ -124,6 +124,10 @@ namespace Mytems.Controllers
 
                     db.Customers.Add(customer);
                     db.SaveChanges();
+
+                    if (Session["User"] is Admin)
+                        return RedirectToAction("Index", "Customers");
+
                     Session["User"] = customer;
                     return RedirectToAction("Dashboard", "Home");
                 }

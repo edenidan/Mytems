@@ -207,6 +207,10 @@ namespace Mytems.Controllers
 
                     db.Sellers.Add(seller);
                     db.SaveChanges();
+
+                    if(Session["User"] is Admin)
+                        return RedirectToAction("Index", "Sellers");
+
                     Session["User"] = seller;
                     return RedirectToAction("Dashboard", "Home");
                 }

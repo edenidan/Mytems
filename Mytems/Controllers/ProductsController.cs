@@ -40,11 +40,18 @@ namespace Mytems.Controllers
                 return HttpNotFound();
 
             if (Session["User"] is Customer customer)
-                customer.IncrementViewsFor(product.Category);
+            {
+                Customer DBc = db.Users.Find(customer.UserID) as Customer;
+                if (DBc != null)
+                {
+                    DBc.IncrementViewsFor(product.Category);
+                    Session["User"] = DBc;
+                }
+            }
             product.NumberOfViews++;
             db.SaveChanges();
 
-
+         
             ViewData["sellerID"] = product.SellerID;
             return View(new DetailsProduct(product));
         }
@@ -127,7 +134,7 @@ namespace Mytems.Controllers
                 return View("~/Views/Errors/Unauthorized.cshtml");
 
             ViewBag.ImagePath = product.ImagePath;
-            ViewBag.SellerID = new SelectList(db.Sellers, "UserID", "Username");
+            ViewBag.SellerID = new SelectList(db.Sellers, "UserID", "Username", product.SellerID);
             return View(new EditProduct(product));
         }
 
@@ -199,7 +206,7 @@ namespace Mytems.Controllers
             Product product = db.Products.Where(p => p.ProductID == id).Include(p => p.Seller).FirstOrDefault();
             if (product == null)
                 return HttpNotFound();
-            
+
             User user = Session["User"] as User;
             // check for permission
             if (user == null || !user.CanEditAndDeleteProduct(product))
