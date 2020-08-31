@@ -20,7 +20,7 @@ namespace Mytems.Controllers
              select prod).ToList();
 
             List<Product> prodList = new List<Product>();
-            for (int i = 0; i < productsList.Count() && i < 6; i++)
+            for (int i = 0; i < productsList.Count() && i < 8; i++)
             {
                 prodList.Add(productsList.ElementAt(i));
             }
