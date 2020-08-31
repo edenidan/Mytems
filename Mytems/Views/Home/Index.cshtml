@@ -14,70 +14,50 @@
     </p>
 </section>
 
-<br />
-<br />
+<br /><br /><br />
 
-<!-- Latest Products Start -->
-<section id="hotestProducts" class="latest-product-area padding-bottom">
+<!-- Hotest Products Start -->
+<section id="hotProducts" class="latest-product-area padding-bottom">
     <div class="container">
         <div class="row product-btn d-flex">
             <!-- Section Tittle -->
-            <div class="col-xl-4 col-lg-5 col-md-5">
+            <div class="col-xl-5 col-lg-5 col-md-5">
                 <div class="section-tittle mb-30">
-                    <h2>Latest Products</h2>
+                    <h2>Hot Products</h2>
                 </div>
             </div>
         </div>
         <!-- Nav Card -->
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <div class="row">
-                    @{
-                        int i = 0;
-                        for (; i < Model.Count() && i < 3; i++)
-                        {
-                            <div class="col-xl-4 col-lg-4 col-md-6">
-                                <div class="single-product mb-60">
-                                    <div class="product-img" style="width: 225px; height: 225px;">
-                                        <img src=@Model[i].ImagePath halt="">
-                                        <div class="new-product">
-                                            <span>Hot</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-caption">
-                                        <h4><a href="@Model[i].ImagePath">@Model[i].Name</a></h4>
-                                        <div class="price">
-                                            <ul>
-                                                <li><div class="price-display">$@Model[i].Price</div></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+        <div class="container">
+            <div class="row">
+                @foreach (Mytems.Models.Product product in Model)
+                {
+                    <div class="col-md-3">
+                        <div class="card mb-4 shadow-sm" style="height:500px; overflow:hidden;">
+                            <img class="card-img-top" src="@product.ImagePath" alt="Card image cap" width="200" height="200">
+                            <div class="card-body">
+                                <h5 class="card-title">@product.Name</h5>
+                                <p class="card-text">
+                                    Price: <span class="price-display">$@product.Price</span>
+                                    <br />
+                                <p>
+                                    Description:<br />
+                                </p>
+                                <p>@product.Description</p>
+
+                                @if (Session["User"] is Mytems.Models.Customer || Session["User"] is Mytems.Models.Admin)
+                                {
+                                    <a href="/Products/Details/@product.ProductID" style="bottom:25px;position:absolute;" class="btn btn-primary">View</a>
+                                }
+                                else
+                                {
+                                    <p style="font-weight: bold;">Sign up as customer to view</p>
+                                    <a href="/customers/create" style="bottom:15px;position:absolute;" class="btn btn-primary btn-sm">Sign up</a>
+                                }
                             </div>
-                        }
-                        for (; i < Model.Count() && i < 6; i++)
-                        {
-                            <div class="col-xl-4 col-lg-4 col-md-6">
-                                <div class="single-product mb-60">
-                                    <div class="product-img" style="width: 225px; height: 225px;">
-                                        <img src=@Model[i].ImagePath halt="" style="background-size:cover">
-                                        <div class="new-product">
-                                            <span>Hot</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-caption">
-                                        <h4><a href="@Model[i].ImagePath">@Model[i].Name</a></h4>
-                                        <div class="price">
-                                            <ul>
-                                                <li><div class="price-display">$@Model[i].Price</div></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    }
-                </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
