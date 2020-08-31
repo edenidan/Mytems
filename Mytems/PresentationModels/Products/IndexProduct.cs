@@ -17,6 +17,7 @@ namespace Mytems.PresentationModels.Products
         public decimal Price { get; set; }
         [Display(Name = "Seller Username")]
         public string SellerUsername { get; set; }
+        public int SellerID { get; set; }
         public Category Category { get; set; }
         public string Description { get; set; }
 
@@ -30,6 +31,7 @@ namespace Mytems.PresentationModels.Products
             Sold = product.Sold;
             Price = product.Price;
             SellerUsername = product.Seller.Username;
+            SellerID = product.SellerID;
             Category = product.Category;
             Description = product.Description;
             ImagePath = product.ImagePath;

@@ -64,7 +64,7 @@
                 </div>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SellerUsername)
+                <a href="/sellers/details/@item.SellerID">@Html.DisplayFor(modelItem => item.SellerUsername)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Category)
