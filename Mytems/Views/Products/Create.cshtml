@@ -117,8 +117,7 @@
         let newTicker = getCookie("currencyTicker")
         $.ajax(`https://api.exchangeratesapi.io/latest?symbols=USD&base=${newTicker}`).done(function (data) {
             let factor = data["rates"]["USD"];
-            console.log(factor)
-            let oldPrice = Number($("#DemiPrice").val().replace(",", ""));
+            let oldPrice = Number($("#DemiPrice").val().replaceAll(",", ""));
 
             $("#Price").val((factor * oldPrice).toString())
             $("form").submit()
