@@ -74,7 +74,7 @@
                                             }
                                             @if (Session["User"] is Mytems.Models.Seller)
                                             {
-                                            string sellerName = (Session["User"] as Mytems.Models.Seller).Username;
+                                                string sellerName = (Session["User"] as Mytems.Models.Seller).Username;
                                             <td><a href="/Products?SellerUsername=@sellerName">My Products</a></td>
                                             }
                                         </tr>
@@ -83,17 +83,18 @@
                                 </div>
                                 <div class="header-info-right">
                                     <ul>
-                                        @if (Session["User"] != null)
+                                        @{Mytems.Models.User user = Session["User"] as Mytems.Models.User;}
+                                        @if (user != null)
                                         {
-                                        if (Session["User"] is Mytems.Models.Customer)
+                                        if (user is Mytems.Models.Customer)
                                         {
-                                        <li><a href="/Customers/Dashboard">My Dashboard</a></li>}
-                                        else if (Session["User"] is Mytems.Models.Seller)
+                                        <li><a href="/Customers/Dashboard">Customer Dashboard</a></li>}
+                                        else if (user is Mytems.Models.Seller)
                                         {
-                                        <li><a href="/Sellers/Dashboard">My Dashboard</a></li>}
-                                        else if (Session["User"] is Mytems.Models.Admin)
+                                        <li><a href="/Sellers/Dashboard">Seller Dashboard</a></li>}
+                                        else if (user is Mytems.Models.Admin)
                                         {
-                                        <li><a href="/Admins/Dashboard">My Dashboard</a></li>}
+                                        <li><a href="/Admins/Dashboard">Admin Dashboard</a></li>}
                                         <li><a href="/Home/Logout">Log out</a></li>
                                         }
                                         else

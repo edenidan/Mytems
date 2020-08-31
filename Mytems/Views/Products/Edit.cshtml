@@ -91,7 +91,7 @@
                     </div>
                 </div>
             </div>
-            <input type="button" onclick="ConvertNSubmit()" value="Edit" class="btn btn-primary"/>
+            <input type="button" onclick="ConvertNSubmit()" value="Edit" class="btn btn-primary" />
             <div>
                 @Html.ActionLink("Back to List", "Index")
             </div>
@@ -99,31 +99,40 @@
     </div>
 </div>
 
-        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-        <script src="~/Scripts/jquery.validate.min.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-        <script>
-            $(document).ready(function () {
-                let newTicker = getCookie("currencyTicker");
-                $.ajax(`https://api.exchangeratesapi.io/latest?symbols=${newTicker}&base=USD`).done(function (data) {
-                    let factor = data["rates"][newTicker];
-                    $("#DemiPrice").val($("#Price").val() * factor);
-                });
-            })
-            function ConvertNSubmit() {
-                if ($("#DemiPrice").val() === "") {
-                    $("form").submit()
-                    return;
-                }
-                let newTicker = getCookie("currencyTicker")
-                $.ajax(`https://api.exchangeratesapi.io/latest?symbols=USD&base=${newTicker}`).done(function (data) {
-                    let factor = data["rates"]["USD"];
-                    console.log(factor)
-                    let oldPrice = Number($("#DemiPrice").val().replace(",", ""));
-
-                    $("#Price").val((factor * oldPrice).toString())
-                    $("form").submit()
-                });
+<script>
+    $(document).ready(function () {
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
             }
-        </script>
+        });
+    });
+
+    $(document).ready(function () {
+        let newTicker = getCookie("currencyTicker");
+        $.ajax(`https://api.exchangeratesapi.io/latest?symbols=${newTicker}&base=USD`).done(function (data) {
+            let factor = data["rates"][newTicker];
+            $("#DemiPrice").val($("#Price").val() * factor);
+        });
+    })
+    function ConvertNSubmit() {
+        if ($("#DemiPrice").val() === "") {
+            $("form").submit()
+            return;
+        }
+        let newTicker = getCookie("currencyTicker")
+        $.ajax(`https://api.exchangeratesapi.io/latest?symbols=USD&base=${newTicker}`).done(function (data) {
+            let factor = data["rates"]["USD"];
+            console.log(factor)
+            let oldPrice = Number($("#DemiPrice").val().replace(",", ""));
+
+            $("#Price").val((factor * oldPrice).toString())
+            $("form").submit()
+        });
+    }
+</script>

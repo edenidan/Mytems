@@ -6,39 +6,26 @@
     <h1 class="display-1 text-center" style="margin-left:0%;font-family:Bahnschrift;">Dashboard</h1>
 </div>
 
+<div style="text-align:center;margin:0 20%;">
+    <!-- Sales per day graph -->
+    <div style="margin:8% auto;height:300px;">
+        <div class="container"><h2 style="font-family:Bahnschrift;">Sales Per Day</h2></div>
+        <canvas id="salesPerDayCanvas" style="height: 100%; width: 80%; display: inline-block"></canvas>
+    </div>
+    <!-- Category by money value pie chart -->
+    <hr />
+    <div style="margin:8% auto;height:300px;">
+        <h2 style="font-family:Bahnschrift;">Sales money by category (in dollars)</h2>
+        <canvas id="categoryMoneyValueCanvas" style="height: 100%; width: 100%; display: inline-block"></canvas>
+    </div>
+    <hr />
 
-<div style="padding:5%;">
-    <table style="height: 100%; width: 100%;">
-        <tr>
-            <td>
-                <!-- Sales per day graph -->
-                <div>
-                    <div class="container"><h4 style="font-family:Bahnschrift;">Sales Per Day</h4></div>
-                    <canvas id="salesPerDayCanvas" style="height: 100%; width: 80%; display: inline-block"></canvas>
-                </div>
-            </td>
-            <td>
-                <!-- Category by money value pie chart -->
-                <div>
-                    <br />
-                    <h4 style="font-family:Bahnschrift;">Sales money by category (in dollars)</h4>
-                    <canvas id="categoryMoneyValueCanvas" style="height: 100%; width: 100%; display: inline-block"></canvas>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <!-- Best sellers by total sales money bar chart -->
-                <div>
-                    <div class="container" style="margin-top:100px;"><h4 style="font-family:Bahnschrift;">Best Sellers By Total Sales Money (in dollars)</h4></div>
-                    <br />
-                    <canvas id="bestSellersByTotalSalesMoneyCanvas" style="height: 100%; width: 80%; display: inline-block"></canvas>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <!-- Best sellers by total sales money bar chart -->
+    <div style="margin:8% auto;height:300px;">
+        <div class="container" style="margin-top:100px;"><h2 style="font-family:Bahnschrift;">Best Sellers By Total Sales Money (in dollars)</h2></div>
+        <canvas id="bestSellersByTotalSalesMoneyCanvas" style="height: 100%; width: 80%; display: inline-block"></canvas>
+    </div>
 </div>
-
 
 
 @section scripts{
