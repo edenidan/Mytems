@@ -22,8 +22,13 @@
                 <br />
                 <b>Seller name:</b>  <a href="/sellers/details/@ViewData["sellerID"]">@Model.SellerUsername</a>
                 <br />
-                <b>Sold: @Model.Sold</b>
+                <b>Sold:</b> @Model.Sold
                 <br />
+                @if (Model.Sold)
+                {
+                    <b>Sold At:</b> @Model.SoldAt
+                    <br />
+                }
                 <b>Description:</b><br />
                 @Model.Description
             </p>
