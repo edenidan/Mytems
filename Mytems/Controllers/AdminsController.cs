@@ -242,6 +242,8 @@ namespace Mytems.Controllers
                 try
                 {
                     db.SaveChanges();
+                    if ((Session["User"] as User).UserID == adminToUpdate.UserID)
+                        Session["User"] = adminToUpdate;
                     return RedirectToAction("Index");
                 }
                 catch (DbUpdateException)

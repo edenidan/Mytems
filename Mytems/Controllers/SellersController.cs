@@ -72,7 +72,7 @@ namespace Mytems.Controllers
             for (int i = days - 1; i >= 0; i--)
             {
                 jarr.Add((from prod in db.Products.ToList()
-                          where prod.SellerID == (Session["User"] as User).UserID && prod.SoldAt.HasValue && (DateTime.Now - prod.SoldAt).Value.Days == i
+                          where prod.SellerID == (Session["User"] as User).UserID && prod.SoldAt.HasValue && prod.SoldAt.Value.Date == DateTime.Today.AddDays(-i)/*(DateTime.Now - prod.SoldAt).Value.Days == i*/
                           select prod.ProductID).Count().ToString());
             }
             jobj.Add("data", jarr);
